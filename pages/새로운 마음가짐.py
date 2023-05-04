@@ -28,7 +28,5 @@ rain(emoji="🦝",
     animation_length="infinite")
 
 df = pd.read_csv('https://raw.githubusercontent.com/hollyisyoon/streamlit/main/data/df_%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_github.csv', encoding='utf-8')
-df['날짜'] = pd.to_datetime(df['날짜'])
-
 print(df)
 
