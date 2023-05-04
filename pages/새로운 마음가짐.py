@@ -40,8 +40,8 @@ max_date = datetime(2023, 4, 26)
 with col1:
     # 시작 날짜와 끝 날짜를 동시에 입력받음
     start_end_date = st.date_input("시작 날짜 - 끝 날짜",
-                               value=(datetime.today() - timedelta(days=45), datetime.today() - timedelta(days=30)),
-                               min_value=(min_date, min_date),
+                               value=(datetime(2023,4,5), datetime(2023,4,20)),
+                               min_value=(min_date, min_date + timedelta(days=7)),
                                max_value=(max_date - timedelta(days=90), max_date),
                                key="date_range")
     start_date = start_end_date[0]
@@ -52,8 +52,6 @@ with col2:
 
 with col3:
     effect_size = st.slider('영향도 볼륨', 0.0, 1.0, 0.3, 0.01, format_func=lambda x: f"상위 {int((1-x)*100)}%")
-
-
     
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
