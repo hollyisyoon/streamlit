@@ -60,17 +60,15 @@ col1, col2, col3 = st.beta_columns(3)
 min_date = datetime(2022, 7, 25)
 max_date = datetime(2023, 4, 26)
 with col1:
-# 시작 날짜와 끝 날짜를 따로 입력받음
     start_date = st.date_input("시작 날짜",
-                                value=datetime(2023,4,5),
-                                min_value=min_date,
-                                max_value=max_date - timedelta(days=90),
-                                key="start_date")
+                               value=datetime(2023,4,1),
+                               min_value=min_date,
+                               max_value=max_date - timedelta(days=7))
+    # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
     end_date = st.date_input("끝 날짜",
-                                value=datetime(2023,4,20),
-                                min_value=start_date + timedelta(days=7),
-                                max_value=max_date,
-                                key="end_date")
+                             value=datetime(2023,4,15),
+                             min_value=start_date + timedelta(days=7),
+                             max_value=start_date + timedelta(days=90))
     
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
@@ -86,40 +84,41 @@ with col1:
     input_str = st.text_input('제거할 키워드')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
-    #워드클라우드
-    wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
-    wc.generate_from_frequencies(words)
+    st.write('hello')
+    # #워드클라우드
+    # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
+    # wc.generate_from_frequencies(words)
 
-    ###########동적 워드 클라우드####################
-    # 컬러 팔레트 생성
-    word_list=[]
-    freq_list=[]
-    fontsize_list=[]
-    position_list=[]
-    orientation_list=[]
-    color_list=[]
+    # ###########동적 워드 클라우드####################
+    # # 컬러 팔레트 생성
+    # word_list=[]
+    # freq_list=[]
+    # fontsize_list=[]
+    # position_list=[]
+    # orientation_list=[]
+    # color_list=[]
 
-    for (word, freq), fontsize, position, orientation, color in wc.layout_:
-        word_list.append(word)
-        freq_list.append(freq)
-        fontsize_list.append(fontsize)
-        position_list.append(position)
-        orientation_list.append(orientation)
-        color_list.append(color)
+    # for (word, freq), fontsize, position, orientation, color in wc.layout_:
+    #     word_list.append(word)
+    #     freq_list.append(freq)
+    #     fontsize_list.append(fontsize)
+    #     position_list.append(position)
+    #     orientation_list.append(orientation)
+    #     color_list.append(color)
 
-    # get the positions
-    x=[]
-    y=[]
-    for i in position_list:
-        x.append(i[0])
-        y.append(i[1])
+    # # get the positions
+    # x=[]
+    # y=[]
+    # for i in position_list:
+    #     x.append(i[0])
+    #     y.append(i[1])
 
-    # WordCloud 시각화를 위한 Scatter Plot 생성
-    fig = go.Figure(go.Scatter(
-        x=x, y=y, mode="text",
-        text=word_list,
-        textfont=dict(size=fontsize_list, color=color_list),
-    ))
-    fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
-    st.plotly_chart(fig, use_container_width=True)
+    # # WordCloud 시각화를 위한 Scatter Plot 생성
+    # fig = go.Figure(go.Scatter(
+    #     x=x, y=y, mode="text",
+    #     text=word_list,
+    #     textfont=dict(size=fontsize_list, color=color_list),
+    # ))
+    # fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+    #                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
+    # st.plotly_chart(fig, use_container_width=True)
