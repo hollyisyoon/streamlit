@@ -27,7 +27,29 @@ rain(emoji="🦝",
     falling_speed=10,
     animation_length="infinite")
 
+######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf-8')
+def extract_df_by_name_and_time(df, name, start_time, end_time):
+    # start_time, end_time 데이터 프레임 
+    new_df = df[(df['name'] == name) & (df['time'] >= start_time) & (df['time'] <= end_time)]
+    
+    # start_date 날짜  
+    start = datetime.strptime(start_time, '%Y-%m-%d')
+    # end_date 날짜  
+    end = datetime.strptime(end_time, '%Y-%m-%d')
+    
+    # 구간 
+    range_days = (end - start) + timedelta(days = 1)
+    
+    # new_day 는 구간 뺀 
+    new_day = start - range_days
+    
+    # 새 데이터프레임 
+    new_df_2 = df[(df['name'] == name) & (df['time'] >= new_day) & (df['time'] <= start)]
+    
+    
+    return new_df, new_df_2
+
 
 ######################대시보드
 st.title('외부 트렌드 모니터링 대시보드')
@@ -35,17 +57,20 @@ st.title('외부 트렌드 모니터링 대시보드')
 #### 인풋 필터 #####
 col1, col2, col3 = st.beta_columns(3)
 
-min_date = datetime(2022, 7, 25)
-max_date = datetime(2023, 4, 26)
+min_date = date(2022, 7, 25)
+max_date = date(2023, 4, 26)
 with col1:
-    # 시작 날짜와 끝 날짜를 동시에 입력받음
-    start_end_date = st.date_input("시작 날짜 - 끝 날짜",
-                               value=(datetime(2023,4,5), datetime(2023,4,20)),
-                               min_value=(min_date, min_date + timedelta(days=7)),
-                               max_value=(max_date - timedelta(days=90), max_date),
-                               key="date_range")
-    start_date = start_end_date[0]
-    end_date = start_end_date[1]
+# 시작 날짜와 끝 날짜를 따로 입력받음
+    start_date = st.date_input("시작 날짜",
+                                value=date(2023,4,5),
+                                min_value=min_date,
+                                max_value=max_date - timedelta(days=90),
+                                key="start_date")
+    end_date = st.date_input("끝 날짜",
+                                value=date(2023,4,20),
+                                min_value=start_date + timedelta(days=7),
+                                max_value=max_date,
+                                key="end_date")
     
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
