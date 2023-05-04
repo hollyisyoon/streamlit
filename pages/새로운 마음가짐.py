@@ -74,7 +74,7 @@ with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
-    effect_size = st.slider('영향도 볼륨', 0.0, 1.0, 0.3, 0.01, format_func=lambda x: f"상위 {int((1-x)*100)}%")
+    effect_size = st.slider('영향도 볼륨', 0.0, 1.0, 0.3, format_func=lambda x: f"상위 {int((1-x)*100)}%")
     
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
