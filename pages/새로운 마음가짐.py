@@ -26,3 +26,9 @@ rain(emoji="🦝",
     font_size=54,
     falling_speed=10,
     animation_length="infinite")
+
+df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf8')
+df['time'] = pd.to_datetime(df['time'])
+
+print(df)
+
