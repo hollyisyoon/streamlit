@@ -27,6 +27,37 @@ rain(emoji="🦝",
     falling_speed=10,
     animation_length="infinite")
 
-df = pd.read_csv('https://raw.githubusercontent.com/hollyisyoon/streamlit/main/data/df_%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_github.csv', encoding='utf-8')
-print(df)
+df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf-8')
+
+######################대시보드
+st.title('외부 트렌드 모니터링 대시보드')
+
+#### 인풋 필터 #####
+col1, col2, col3 = st.beta_columns(3)
+
+min_date = datetime(2022, 7, 25)
+max_date = datetime(2023, 4, 26)
+with col1:
+    start_date = st.date_input("시작 날짜",
+                               value=datetime.today() - timedelta(days=45),
+                               min_value=min_date,
+                               max_value=max_date)
+with col2:
+    # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
+    end_date = st.date_input("끝 날짜",
+                             value=datetime.today() - timedelta(days=30),
+                             min_value=start_date,
+                             max_value=start_date + timedelta(days=90))
+
+with col3:
+    keyword_no = st.number_input("📌 키워드", value=50, min_value=1, step=1)
+
+col1, col2, col3 = st.beta_columns(3)    
+with col1:
+    type = st.selectbox('기준',('상대 빈도(TF-IDF)','단순 빈도(Countvertize)'))
+with col2:
+    media = st.selectbox('매체',('식물갤러리', '네이버카페'))
+with col3:
+    input_str = st.text_input('제거할 키워드')
+    stopwords = [x.strip() for x in input_str.split(',')]
 
