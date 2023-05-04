@@ -74,14 +74,15 @@ with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
-    effect_size = st.slider('영향도 볼륨', 0.0, 1.0, 0.3, format_func=lambda x: f"상위 {int((1-x)*100)}%")
+    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
+    effect_size = (100-int(temp_effect_size))/100
     
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
 with col1:
     type = st.selectbox('기준',('상대 빈도(TF-IDF)','단순 빈도(Countveterize)'))
     keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
-    input_str = st.text_input('제거할 키워드')
+    input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
     st.write('hello')
