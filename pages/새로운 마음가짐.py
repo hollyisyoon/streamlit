@@ -22,12 +22,10 @@ import networkx as nx
 from gensim.models import Word2Vec
 import time
 
-st.set_page_config(page_title="외부 트렌드 모니터링", page_width=1000, layout="wide")
 rain(emoji="🦝",
     font_size=54,
     falling_speed=10,
     animation_length="infinite")
-
 
 ######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf-8')
