@@ -22,33 +22,25 @@ import networkx as nx
 from gensim.models import Word2Vec
 import time
 
+st.set_page_config(page_title="외부 트렌드 모니터링", page_width=1000, layout="wide")
 rain(emoji="🦝",
     font_size=54,
     falling_speed=10,
     animation_length="infinite")
 
+
 ######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf-8')
-def extract_df_by_name_and_time(df, name, start_time, end_time):
-    # start_time, end_time 데이터 프레임 
-    new_df = df[(df['name'] == name) & (df['time'] >= start_time) & (df['time'] <= end_time)]
-    
-    # start_date 날짜  
+def extract_df(df, media, start_date, end_date, effect_size):
+    standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
+
     start = datetime.strptime(start_time, '%Y-%m-%d')
-    # end_date 날짜  
     end = datetime.strptime(end_time, '%Y-%m-%d')
-    
-    # 구간 
     range_days = (end - start) + timedelta(days = 1)
-    
-    # new_day 는 구간 뺀 
     new_day = start - range_days
+    new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start) & (df['영향도'] >= effect_size)]
     
-    # 새 데이터프레임 
-    new_df_2 = df[(df['name'] == name) & (df['time'] >= new_day) & (df['time'] <= start)]
-    
-    
-    return new_df, new_df_2
+    return standard_df, new_df
 
 
 ######################대시보드
@@ -69,14 +61,18 @@ with col1:
                              value=datetime(2023,4,15),
                              min_value=start_date + timedelta(days=7),
                              max_value=start_date + timedelta(days=90))
-    
+start_date = pd.Timestamp(start_date)
+end_date = pd.Timestamp(end_date)
+
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
     effect_size = (100-int(temp_effect_size))/100
-    
+
+standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
+
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
 with col1:
@@ -85,7 +81,7 @@ with col1:
     input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
-    st.write('hello')
+    pd.DataFrame(standard_df)
     # #워드클라우드
     # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
     # wc.generate_from_frequencies(words)
