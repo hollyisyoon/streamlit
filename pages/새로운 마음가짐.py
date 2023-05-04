@@ -38,21 +38,21 @@ col1, col2, col3 = st.beta_columns(3)
 min_date = datetime(2022, 7, 25)
 max_date = datetime(2023, 4, 26)
 with col1:
-    start_date = st.date_input("시작 날짜",
-                               value=datetime.today() - timedelta(days=45),
-                               min_value=min_date,
-                               max_value=max_date)
-    # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
-    end_date = st.date_input("끝 날짜",
-                             value=datetime.today() - timedelta(days=30),
-                             min_value=start_date,
-                             max_value=start_date + timedelta(days=90))
+    # 시작 날짜와 끝 날짜를 동시에 입력받음
+    start_end_date = st.date_input("시작 날짜 - 끝 날짜",
+                               value=(datetime.today() - timedelta(days=45), datetime.today() - timedelta(days=30)),
+                               min_value=(min_date, min_date),
+                               max_value=(max_date - timedelta(days=90), max_date),
+                               key="date_range")
+    start_date = start_end_date[0]
+    end_date = start_end_date[1]
     
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
-    effect_size = st.slider('영향도 볼륨', 0, 130, 25)
+    effect_size = st.slider('영향도 볼륨', 0.0, 1.0, 0.3, 0.01, format_func=lambda x: f"상위 {int((1-x)*100)}%")
+
 
     
 #####워드 클라우드########
