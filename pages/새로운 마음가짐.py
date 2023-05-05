@@ -72,19 +72,19 @@ standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
 
 #####워드 클라우드########
 ##Count기준###
-def get_tfidf_top_words(df):
+def get_tfidf_top_words(df, keyword_no):
     tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
     tfidf = tfidf_vectorizer.fit_transform(df['제목+내용(nng)'].values)
     tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
-    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(keyword_no).to_dict()
     tfidf_top_words = dict(tfidf_top_words)
     return tfidf_top_words
 
-def get_count_top_words(df):
+def get_count_top_words(df, keyword_no):
     count_vectorizer = CountVectorizer(stop_words=stopwords)
     count = count_vectorizer.fit_transform(df['제목+내용(nng)'].values)
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    count_top_words = count_df.sum().sort_values(ascending=False).head(keyword_no).to_dict()
     return count_top_words
 
 ###시각화####
