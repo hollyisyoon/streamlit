@@ -21,6 +21,7 @@ warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 import networkx as nx
 from gensim.models import Word2Vec
 import time
+import itertools
 
 rain(emoji="🦝",
     font_size=54,
