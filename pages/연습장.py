@@ -5,7 +5,7 @@ import streamlit as st
 from htbuilder import div, a, span  # htbuilder 패키지에서 필요한 함수 가져오기
 from htbuilder.units import px
 from annotated_text import annotated_text, parameters
-import markdownlit as md
+from markdownlit import mdlit
 
 
 # PADDING=(rem(0.25), rem(0.5))
@@ -18,25 +18,12 @@ import markdownlit as md
 import pandas as pd
 df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
 
-
 #link 시도###
 # URL 링크 생성 함수
-def create_link(url, text):
-    return f"[{text}]({url})"
-
-# 링크가 적용된 테이블 생성
-for i, row in df.iterrows():
-    url = row['URL']
-    text = row['평균 영향도']
-    df.at[i, '평균 영향도'] = create_link(url, text)
-annotated_table_md = md.table(df, headers=df.columns)
-
-# Markdown 출력
-st.markdown("# Original Table\n")
-st.markdown(table_md)
-st.markdown("# Annotated Table\n")
-st.markdown(annotated_table_md)
-
+mdlit(
+     """
+    [`윤훈영 | keyword`](https://hollyyoon.oopy.io) [`윤훈영 | keyword`](https://hollyyoon.oopy.io) 
+     """)
 
 # 색깔 포함 #####
     # def format_keyword_score(row):
