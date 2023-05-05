@@ -30,10 +30,11 @@ rain(emoji="🦝",
 ######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', encoding='utf-8')
 def extract_df(df, media, start_date, end_date, effect_size):
+    df['날짜'] = pd.to_datetime(df['날짜'])
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
 
-    start = datetime.strptime(start_time, '%Y-%m-%d')
-    end = datetime.strptime(end_time, '%Y-%m-%d')
+    start = datetime.strptime(start_date, '%Y-%m-%d')
+    end = datetime.strptime(end_date, '%Y-%m-%d')
     range_days = (end - start) + timedelta(days = 1)
     new_day = start - range_days
     new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start) & (df['영향도'] >= effect_size)]
