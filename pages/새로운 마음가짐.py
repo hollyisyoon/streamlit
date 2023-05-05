@@ -36,7 +36,6 @@ df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
 # df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
 
-
 def extract_df(df, media, start_date, end_date, effect_size):
     start_date = pd.Timestamp(start_date)
     end_date = pd.Timestamp(end_date)
@@ -179,24 +178,24 @@ def new_keyword(standard_df, new_df):
             
     # 조회수 높은순으로 정렬        
     result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
-    return result_dict
-    # # 결과 딕셔너리를 데이터프레임으로 변환
-    # keywords = []
-    # avg_views = []
-    # urls = []
+
+    # 결과 딕셔너리를 데이터프레임으로 변환
+    keywords = []
+    avg_views = []
+    urls = []
     
-    # for key, value in result_dict.items():
-    #     keywords.append(key)
-    #     avg_views.append(value['평균 영향도'])
-    #     urls.append('\n'.join(value['URL']))
+    for key, value in result_dict.items():
+        keywords.append(key)
+        avg_views.append(value['평균 영향도'])
+        urls.append('\n'.join(value['URL']))
     
-    # result_df = pd.DataFrame({
-    #     '키워드': keywords,
-    #     '평균 영향도': avg_views,
-    #     'URL': urls
-    # })
+    result_df = pd.DataFrame({
+        '키워드': keywords,
+        '평균 영향도': avg_views,
+        'URL': urls
+    })
     
-    # return result_df
+    return result_df
 
 new_keyword = new_keyword(standard_df, new_df)
 new_keyword
