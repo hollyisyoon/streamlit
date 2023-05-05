@@ -198,6 +198,6 @@ def new_keyword(standard_df, new_df):
     return result_df
 
 new_keyword = new_keyword(standard_df, new_df)
+make_keyword_tag(new_keyword)
 new_keyword
 standard_df, new_df
-# make_keyword_tag(new_keyword)
