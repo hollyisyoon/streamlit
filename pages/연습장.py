@@ -20,12 +20,28 @@ from markdownlit import mdlit
 
 from markdownlit import mdlit
 
-with st.beta_container():
-    st.markdown(mdlit(":::info\nThis is a **callout**\n:::"))
 
-mdlit("""
-[<font color="red">윤훈영 | keyword</font>](https://hollyyoon.oopy.io)
-""")
+# 색상 변수 정의
+keyword_color = 'red'
+
+# markdownlit으로 변환
+mdlit(
+    f"""[`윤훈영 | {keyword_color} keyword`](https://hollyyoon.oopy.io) [`윤훈영 | {keyword_color} keyword`](https://hollyyoon.oopy.io) 
+    Tired from [default links](https://extras.streamlit.app)?
+Me too! Discover Markdownlit's `@()` operator. Just insert a link and it
+will figure a nice icon and label for you!
+Example: @(https://extras.streamlit.app)... better, right? You can
+also @(🍐)(manually set the label if you want)(https://extras.streamlit.app)
+btw, and play with a [red]beautiful[/red] [blue]set[/blue] [orange]of[/orange]
+[violet]colors[/violet]. Another perk is those beautiful arrows -> <-
+
+"""
+)
+
+
+
+
+
 
 
 # 색깔 포함 #####
