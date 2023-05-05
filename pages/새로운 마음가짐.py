@@ -28,12 +28,12 @@ rain(emoji="🦝",
     animation_length="infinite")
 
 ######데이터#########
-def to_list(text):
-    return ast.literal_eval(text)
+# def to_list(text):
+#     return ast.literal_eval(text)
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
-df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
+# df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
 
 
 def extract_df(df, media, start_date, end_date, effect_size):
@@ -106,40 +106,41 @@ with col2:
     else :
         words = get_tfidf_top_words(standard_df, keyword_no)
 
-    #워드클라우드
-    wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
-    wc.generate_from_frequencies(words)
+    st.write(words)
+    # #워드클라우드
+    # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
+    # wc.generate_from_frequencies(words)
 
-    ###########동적 워드 클라우드####################
-    # 컬러 팔레트 생성
-    word_list=[]
-    freq_list=[]
-    fontsize_list=[]
-    position_list=[]
-    orientation_list=[]
-    color_list=[]
+    # ###########동적 워드 클라우드####################
+    # # 컬러 팔레트 생성
+    # word_list=[]
+    # freq_list=[]
+    # fontsize_list=[]
+    # position_list=[]
+    # orientation_list=[]
+    # color_list=[]
 
-    for (word, freq), fontsize, position, orientation, color in wc.layout_:
-        word_list.append(word)
-        freq_list.append(freq)
-        fontsize_list.append(fontsize)
-        position_list.append(position)
-        orientation_list.append(orientation)
-        color_list.append(color)
+    # for (word, freq), fontsize, position, orientation, color in wc.layout_:
+    #     word_list.append(word)
+    #     freq_list.append(freq)
+    #     fontsize_list.append(fontsize)
+    #     position_list.append(position)
+    #     orientation_list.append(orientation)
+    #     color_list.append(color)
 
-    # get the positions
-    x=[]
-    y=[]
-    for i in position_list:
-        x.append(i[0])
-        y.append(i[1])
+    # # get the positions
+    # x=[]
+    # y=[]
+    # for i in position_list:
+    #     x.append(i[0])
+    #     y.append(i[1])
 
-    # WordCloud 시각화를 위한 Scatter Plot 생성
-    fig = go.Figure(go.Scatter(
-        x=x, y=y, mode="text",
-        text=word_list,
-        textfont=dict(size=fontsize_list, color=color_list),
-    ))
-    fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
-    st.plotly_chart(fig, use_container_width=True)
+    # # WordCloud 시각화를 위한 Scatter Plot 생성
+    # fig = go.Figure(go.Scatter(
+    #     x=x, y=y, mode="text",
+    #     text=word_list,
+    #     textfont=dict(size=fontsize_list, color=color_list),
+    # ))
+    # fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+    #                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
+    # st.plotly_chart(fig, use_container_width=True)
