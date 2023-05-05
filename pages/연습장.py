@@ -5,8 +5,8 @@ import streamlit as st
 from annotated_text import annotated_text, parameters
 
 parameters.SHOW_LABEL_SEPARATOR = True
-parameters.BORDER_RADIUS = 20
-parameters.PADDING = "1rem 1rem"
+parameters.BORDER_RADIUS = 50
+parameters.PADDING = "0.5rem 0.5rem"
 
 # 데이터프레임 생성
 import pandas as pd
