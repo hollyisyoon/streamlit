@@ -27,16 +27,19 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 # annotated_text(*texts)
 
 
+
+# 색깔 포함 #####
 def format_keyword_score(row):
     keyword = row['키워드']
     return keyword
 
+# 각 행을 annotated_text로 변환
 texts = []
 for i, row in df.iterrows():
     keyword_score_text = format_keyword_score(row)
     score = row['평균 영향도']
     score = f'{score:.3f}'
-    link = row['URL']
-    texts.append((keyword_score_text, score, link))
+    texts.append((keyword_score_text, score))
 
+# annotated_text 출력
 annotated_text(*texts)
