@@ -33,7 +33,7 @@ df['날짜'] = pd.to_datetime(df['날짜'])
 
 def extract_df(df, media, start_date, end_date, effect_size):
     df = df[df['매체'] == media]
-    standard_df = df[(df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] <= effect_size)]
+    standard_df = df[(df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
     # range_days = (end_date - start_date) + timedelta(days = 1)
     # new_day = start_date - range_days
     # new_day = pd.Timestamp(new_day)
@@ -70,7 +70,7 @@ with col3:
     effect_size = (100-int(temp_effect_size))/100
 
 
-standard_df = extract_df(df, media, start_date, end_date, 1)
+standard_df = extract_df(df, media, start_date, end_date, effect_size)
 
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
