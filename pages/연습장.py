@@ -20,6 +20,9 @@ from markdownlit import mdlit
 
 from markdownlit import mdlit
 
+with st.beta_container():
+    st.markdown(mdlit(":::info\nThis is a **callout**\n:::"))
+
 mdlit(
     """[`윤훈영 | keyword`](https://hollyyoon.oopy.io) [`윤훈영 | keyword`](https://hollyyoon.oopy.io) 
     Tired from [default links](https://extras.streamlit.app)?
@@ -29,6 +32,7 @@ Example: @(https://extras.streamlit.app)... better, right? You can
 also @(🍐)(manually set the label if you want)(https://extras.streamlit.app)
 btw, and play with a [red]beautiful[/red] [blue]set[/blue] [orange]of[/orange]
 [violet]colors[/violet]. Another perk is those beautiful arrows -> <-
+
 """
 )
 
