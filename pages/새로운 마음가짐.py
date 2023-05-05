@@ -26,7 +26,7 @@ from markdownlit import mdlit
 
 rain(emoji="🦝",
     font_size=54,
-    falling_speed=10,
+    falling_speed=5,
     animation_length="infinite")
 
 ######데이터#########
@@ -254,6 +254,9 @@ def rising_keyword(standard_df, new_df):
             keywords.append(word)
             ups.append(f"{data['상승률']}%")
             urls.append(data['URL'])
+        else:
+            st.warning('⚠️ 해당 기간에는 급상승 키워드가 없습니다')  
+
 
     result_df = pd.DataFrame({
         '키워드': keywords,
@@ -270,3 +273,5 @@ make_keyword_tag(new_keyword)
 st.title('🔥 급상승 키워드')
 rising_keyword = rising_keyword(standard_df, new_df)
 make_keyword_tag2(rising_keyword)
+
+########### 키워드 DeepDive ###########
