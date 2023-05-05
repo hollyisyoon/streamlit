@@ -6,7 +6,6 @@ from htbuilder import div, a, span  # htbuilder 패키지에서 필요한 함수
 from htbuilder.units import px
 from annotated_text import annotated_text, parameters
 
-rem = unit.rem
 
 # PADDING=(rem(0.25), rem(0.5))
 # BORDER_RADIUS=rem(1)
