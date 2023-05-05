@@ -29,8 +29,8 @@ rain(emoji="🦝",
     animation_length="infinite")
 
 ######데이터#########
-# def to_list(text):
-#     return ast.literal_eval(text)
+def to_list(text):
+    return ast.literal_eval(text)
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
@@ -161,7 +161,7 @@ def make_keyword_tag(df):
     return mdlit(f"""{markdown_text}""")
 
 def new_keyword(standard_df, new_df):
-    # 각각의 데이터프레임에서 title+content 칼럼을 추출하여 리스트로 변환
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     content_list_1 = []
     content_list_1.extend(list(itertools.chain.from_iterable([eval(i) for i in standard_df['제목+내용(nng)']])))
     content_list_2 = []
@@ -201,5 +201,3 @@ def new_keyword(standard_df, new_df):
 
 # new_keyword = new_keyword(standard_df, new_df)
 # make_keyword_tag(new_keyword)
-standard_df 
-new_df
