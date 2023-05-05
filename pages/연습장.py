@@ -3,6 +3,8 @@
 
 import streamlit as st
 from annotated_text import annotated_text, parameters
+from htbuilder.units import unit
+rem = unit.rem
 
 PADDING=(rem(0.25), rem(0.5))
 BORDER_RADIUS=rem(0.5)
