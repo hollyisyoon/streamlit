@@ -91,16 +91,16 @@ def get_count_top_words(df, keyword_no):
 col1, col2 = st.beta_columns((0.2, 0.8))
 with col1:
     type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
-    if type == '단순 빈도(Countvecterize)' :
-        words = get_count_top_words(standard_df)
-    else :
-        words = get_tfidf_top_words(standard_df)
-
     keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
     input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 
 with col2:
+    if type == '단순 빈도(Countvecterize)' :
+        words = get_count_top_words(standard_df, keyword_no)
+    else :
+        words = get_tfidf_top_words(standard_df, keyword_no)
+
     #워드클라우드
     wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
     wc.generate_from_frequencies(words)
