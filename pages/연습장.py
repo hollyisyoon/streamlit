@@ -2,7 +2,11 @@
 
 
 import streamlit as st
-from annotated_text import annotated_text
+from annotated_text import annotated_text, parameters
+
+parameters.SHOW_LABEL_SEPARATOR = False
+parameters.BORDER_RADIUS = 0
+parameters.PADDING = "0 0.25rem"
 
 # 데이터프레임 생성
 import pandas as pd
@@ -42,4 +46,4 @@ for i, row in df.iterrows():
     texts.append((keyword_score_text, score))
 
 # annotated_text 출력
-annotated_text(*texts, annotation_styles=[{'class': 'score', 'color': 'green', 'font-weight': 'bold', 'text_spacing': 0.1}])
+annotated_text(*texts)
