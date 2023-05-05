@@ -67,7 +67,7 @@ with col1:
                              max_value=start_date + timedelta(days=90))
 
 with col2:
-    media = st.selectbox('매체',('식물갤러리', '식물밴드', '네이버카페', '네이버블로그', '네이버포스트'))
+    media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
@@ -141,7 +141,7 @@ with col2:
             text=word_list,
             textfont=dict(size=fontsize_list, color=color_list),
         ))
-        fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+        fig.update_layout(xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
         st.plotly_chart(fig, use_container_width=True)
 
