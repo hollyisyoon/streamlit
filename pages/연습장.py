@@ -15,7 +15,7 @@ from markdownlit import mdlit
 # LABEL_SPACING=rem(1)
 
 # 데이터프레임 생성
-# import pandas as pd
+import pandas as pd
 
 
 df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
