@@ -21,9 +21,15 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 #link 시도###
 # URL 링크 생성 함수
 mdlit(
-     """
-    [`윤훈영 | keyword`](https://hollyyoon.oopy.io) [`윤훈영 | keyword`](https://hollyyoon.oopy.io) 
-     """)
+    Tired from [default links](https://extras.streamlit.app)?
+Me too! Discover Markdownlit's `@()` operator. Just insert a link and it
+will figure a nice icon and label for you!
+Example: @(https://extras.streamlit.app)... better, right? You can
+also @(🍐)(manually set the label if you want)(https://extras.streamlit.app)
+btw, and play with a [red]beautiful[/red] [blue]set[/blue] [orange]of[/orange]
+[violet]colors[/violet]. Another perk is those beautiful arrows -> <-
+
+)
 
 # 색깔 포함 #####
     # def format_keyword_score(row):
