@@ -110,7 +110,7 @@ with col2:
             st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')
     else:
         #워드클라우드
-        wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
+        wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
         wc.generate_from_frequencies(words)
 
         ###########동적 워드 클라우드####################
