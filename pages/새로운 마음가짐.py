@@ -78,7 +78,7 @@ with col1:
     input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
-    st.write(new_df)
+    st.write(standard_df)
     # #워드클라우드
     # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
     # wc.generate_from_frequencies(words)
