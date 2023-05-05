@@ -58,7 +58,7 @@ min_date = datetime(2022, 7, 25)
 max_date = datetime(2023, 4, 26)
 with col1:
     start_date = st.date_input("시작 날짜",
-                               value=datetime(2023,3,20),
+                               value=datetime(2023,4,1),
                                min_value=min_date,
                                max_value=max_date - timedelta(days=7))
     # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
@@ -193,7 +193,7 @@ def new_keyword(standard_df, new_df):
     avg_views = []
     urls = []
     
-    for key, value in result_dict.items():
+    for key, value in result_dict.items()[:20]:
         keywords.append(key)
         avg_views.append(value['평균 영향도'])
         urls.append('\n'.join(value['URL']))
