@@ -19,8 +19,6 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 
 
 #link 시도###
-# 색깔 포함, 클릭 가능한 링크 추가
-# 색깔 포함
 def format_keyword_score(row):
     keyword = row['키워드']
     return keyword
@@ -32,11 +30,12 @@ for i, row in df.iterrows():
     score = row['평균 영향도'] * 100
     score = f'{score:.0f}'
     url = row['URL']
-    texts.append((f"<a href='{url}'>{keyword_score_text}</a>", score))
+    link = a(href=url, target="_blank")(keyword_score_text)
+    texts.append((link, " (" + score + ") "))
 
 # annotated_text 출력
-html = div(style="padding: 8px; border-radius: 20px;")(annotated_text(*texts).to_html())
-st.markdown(html, unsafe_allow_html=True)
+components = annotated_text(*texts).get_components()
+st.write(div(components), unsafe_allow_html=True)
 
 
 # 색깔 포함 #####
