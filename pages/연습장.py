@@ -24,7 +24,7 @@ def convert_to_markdown(row):
     return f"[`{row['키워드']} | {row['평균 영향도']:.6f}`]({row['URL']})"
 
 markdown_rows = df.apply(convert_to_markdown, axis=1).tolist()
-markdown_text = '  '.join(markdown_rows)
+markdown_text = '    '.join(markdown_rows)
 mdlit(f"""{markdown_text}""")
 
 
