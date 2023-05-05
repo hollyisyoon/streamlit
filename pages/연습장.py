@@ -49,4 +49,4 @@ for i, row in df.iterrows():
 annotation_style = {"padding": "0.25 0.25rem", "border-radius": "20"}
 
 # annotated_text 출력
-annotated_text(*texts, label_separator=" ", annotation_style=annotation_style)
+annotated_text(*texts, annotation_style=annotation_style)
