@@ -169,35 +169,36 @@ def new_keyword(standard_df, new_df):
 
     new_keywords = set(content_list_2) - set(content_list_1)   
     result_dict = {}
-
+    return result_dict
     # 이번달에만 있는 
-    for word in new_keywords:
-        word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
-        if len(word_df) > 0:
-            avg_views = word_df['영향도'].mean()
-            urls = word_df['URL'].tolist()
-            result_dict[word] = {'평균 영향도': float(avg_views), 'URL': urls}
+    # for word in new_keywords:
+    #     word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
+    #     if len(word_df) > 0:
+    #         avg_views = word_df['영향도'].mean()
+    #         urls = word_df['URL'].tolist()
+    #         result_dict[word] = {'평균 영향도': float(avg_views), 'URL': urls}
             
-    # 조회수 높은순으로 정렬        
-    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
+    # # 조회수 높은순으로 정렬        
+    # result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
     
-    # 결과 딕셔너리를 데이터프레임으로 변환
-    keywords = []
-    avg_views = []
-    urls = []
+    # # 결과 딕셔너리를 데이터프레임으로 변환
+    # keywords = []
+    # avg_views = []
+    # urls = []
     
-    for key, value in result_dict.items():
-        keywords.append(key)
-        avg_views.append(value['평균 영향도'])
-        urls.append('\n'.join(value['URL']))
+    # for key, value in result_dict.items():
+    #     keywords.append(key)
+    #     avg_views.append(value['평균 영향도'])
+    #     urls.append('\n'.join(value['URL']))
     
-    result_df = pd.DataFrame({
-        '키워드': keywords,
-        '평균 영향도': avg_views,
-        'URL': urls
-    })
+    # result_df = pd.DataFrame({
+    #     '키워드': keywords,
+    #     '평균 영향도': avg_views,
+    #     'URL': urls
+    # })
     
-    return result_df
+    # return result_df
 
 new_keyword = new_keyword(standard_df, new_df)
-make_keyword_tag(new_keyword)
+new_keyword
+# make_keyword_tag(new_keyword)
