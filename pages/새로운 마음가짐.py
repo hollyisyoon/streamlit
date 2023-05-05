@@ -28,8 +28,13 @@ rain(emoji="🦝",
     animation_length="infinite")
 
 ######데이터#########
+def to_list(text):
+    return ast.literal_eval(text)
+
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
+df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
+
 
 def extract_df(df, media, start_date, end_date, effect_size):
     start_date = pd.Timestamp(start_date)
