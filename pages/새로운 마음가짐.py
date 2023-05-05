@@ -101,12 +101,12 @@ with col1:
     stopwords = [x.strip() for x in input_str.split(',')]
 
 with col2:
-    if type == '단순 빈도(Countvecterize)' :
-        words = get_count_top_words(standard_df, keyword_no)
-    else :
-        words = get_tfidf_top_words(standard_df, keyword_no)
-
     try :
+        if type == '단순 빈도(Countvecterize)' :
+            words = get_count_top_words(standard_df, keyword_no)
+        else :
+            words = get_tfidf_top_words(standard_df, keyword_no)
+
         #워드클라우드
         wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
         wc.generate_from_frequencies(words)
