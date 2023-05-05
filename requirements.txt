@@ -22,3 +22,4 @@ openai
 streamlit_chat
 Pillow
 pyvis
+st-annotated-text
