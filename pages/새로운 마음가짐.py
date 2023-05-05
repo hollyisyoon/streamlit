@@ -35,12 +35,12 @@ def extract_df(df, media, start_date, end_date, effect_size):
     start_date = pd.Timestamp(start_date)
     end_date = pd.Timestamp(end_date)
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
-    # range_days = (end_date - start_date) + timedelta(days = 1)
-    # new_day = start_date - range_days
-    # new_day = pd.Timestamp(new_day)
+    range_days = (end_date - start_date) + timedelta(days = 1)
+    new_day = start_date - range_days
+    new_day = pd.Timestamp(new_day)
     # new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start_date) & (df['영향도'] >= effect_size)]
     
-    return standard_df
+    return new_day
 
 ######################대시보드
 st.title('외부 트렌드 모니터링 대시보드')
