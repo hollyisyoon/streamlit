@@ -5,6 +5,7 @@ import streamlit as st
 from htbuilder import div, a, span  # htbuilder 패키지에서 필요한 함수 가져오기
 from htbuilder.units import px
 from annotated_text import annotated_text, parameters
+import markdownlit as md
 
 
 # PADDING=(rem(0.25), rem(0.5))
@@ -19,23 +20,26 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 
 
 #link 시도###
-def format_keyword_score(row):
-    keyword = row['키워드']
-    return keyword
+# 색깔 포함, 클릭 가능한 링크 추가
+# 테이블 생성
+table_md = md.table(df, headers=df.columns)
 
-# 각 행을 annotated_text로 변환
-texts = []
+# URL 링크 생성 함수
+def create_link(url, text):
+    return f"[{text}]({url})"
+
+# 링크가 적용된 테이블 생성
 for i, row in df.iterrows():
-    keyword_score_text = format_keyword_score(row)
-    score = row['평균 영향도'] * 100
-    score = f'{score:.0f}'
     url = row['URL']
-    link = a(href=url, target="_blank")(keyword_score_text)
-    texts.append((link, " (" + score + ") "))
+    text = row['평균 영향도']
+    df.at[i, '평균 영향도'] = create_link(url, text)
+annotated_table_md = md.table(df, headers=df.columns)
 
-# annotated_text 출력
-components = annotated_text(*texts).get_components()
-st.write(div(components), unsafe_allow_html=True)
+# Markdown 출력
+st.markdown("# Original Table\n")
+st.markdown(table_md)
+st.markdown("# Annotated Table\n")
+st.markdown(annotated_table_md)
 
 
 # 색깔 포함 #####
