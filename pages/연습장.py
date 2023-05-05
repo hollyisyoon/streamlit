@@ -7,10 +7,10 @@ from htbuilder.units import unit
 rem = unit.rem
 
 PADDING=(rem(0.25), rem(0.5))
-BORDER_RADIUS=rem(0.5)
+BORDER_RADIUS=rem(1)
 # LABEL_FONT_SIZE=rem(0.75)
 LABEL_OPACITY=0.5
-LABEL_SPACING=rem(0.5)
+LABEL_SPACING=rem(1)
 
 # 데이터프레임 생성
 import pandas as pd
