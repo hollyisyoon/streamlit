@@ -169,18 +169,17 @@ def new_keyword(standard_df, new_df):
 
     new_keywords = set(content_list_2) - set(content_list_1)   
     result_dict = {}
-    return new_keywords
     # 이번달에만 있는 
-    # for word in new_keywords:
-    #     word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
-    #     if len(word_df) > 0:
-    #         avg_views = word_df['영향도'].mean()
-    #         urls = word_df['URL'].tolist()
-    #         result_dict[word] = {'평균 영향도': float(avg_views), 'URL': urls}
+    for word in new_keywords:
+        word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
+        if len(word_df) > 0:
+            avg_views = word_df['영향도'].mean()
+            urls = word_df['URL'].tolist()
+            result_dict[word] = {'평균 영향도': float(avg_views), 'URL': urls}
             
-    # # 조회수 높은순으로 정렬        
-    # result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
-    
+    # 조회수 높은순으로 정렬        
+    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
+    return result_dict
     # # 결과 딕셔너리를 데이터프레임으로 변환
     # keywords = []
     # avg_views = []
