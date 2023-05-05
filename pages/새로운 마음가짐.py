@@ -230,7 +230,6 @@ def rising_keyword(standard_df, new_df):
 
     # 이번주와 지난주에 모두 언급된 단어를 모은 집합
     common_words = set(this_week_word_counts.keys()) & set(last_week_word_counts.keys())
-
     result = {}
     for word in common_words:
         # 해당 단어가 언급된 모든 URL을 리스트로 모음
@@ -247,16 +246,15 @@ def rising_keyword(standard_df, new_df):
 
     for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
         if data['상승률']>0:
-        keywords.append(word)
-        ups.append(f"{data['상승률']}%")
-        urls.append(data['URL'])
+            keywords.append(word)
+            ups.append(f"{data['상승률']}%")
+            urls.append(data['URL'])
 
     result_df = pd.DataFrame({
         '키워드': keywords,
         '상승률': ups,
         'URL': urls
     })
-
     return result_df
 
 ### 키워드 ###
