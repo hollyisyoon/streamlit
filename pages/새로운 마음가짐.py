@@ -163,6 +163,11 @@ def make_keyword_tag(df):
     markdown_text = '   '.join(markdown_rows)
     return mdlit(f"""{markdown_text}""")
 
+def make_keyword_tag2(df):
+    markdown_rows = df.apply(convert_to_markdown2, axis=1).tolist()
+    markdown_text = '   '.join(markdown_rows)
+    return mdlit(f"""{markdown_text}""")
+
 def new_keyword(standard_df, new_df):
     df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     content_list_1 = []
@@ -264,4 +269,4 @@ make_keyword_tag(new_keyword)
 
 st.title('🔥 급상승 키워드')
 rising_keyword = rising_keyword(standard_df, new_df)
-make_keyword_tag(rising_keyword)
+make_keyword_tag2(rising_keyword)
