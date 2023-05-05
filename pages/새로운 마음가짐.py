@@ -31,8 +31,6 @@ rain(emoji="🦝",
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 
 def extract_df(df, media, start_date, end_date, effect_size):
-    start_date = pd.Timestamp(start_date)
-    end_date = pd.Timestamp(end_date)
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
 
     range_days = (end_date - start_date) + timedelta(days = 1)
@@ -70,7 +68,8 @@ with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
     effect_size = (100-int(temp_effect_size))/100
 
-standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
+
+standard_df, new_df = extract_df(df, media, start_date, end_date, '0.3')
 
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
