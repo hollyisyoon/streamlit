@@ -106,41 +106,43 @@ with col2:
     else :
         words = get_tfidf_top_words(standard_df, keyword_no)
 
-    st.write(words)
-    # #워드클라우드
-    # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
-    # wc.generate_from_frequencies(words)
+    if standard_df is None:
+            st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')
+    else:
+        #워드클라우드
+        wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
+        wc.generate_from_frequencies(words)
 
-    # ###########동적 워드 클라우드####################
-    # # 컬러 팔레트 생성
-    # word_list=[]
-    # freq_list=[]
-    # fontsize_list=[]
-    # position_list=[]
-    # orientation_list=[]
-    # color_list=[]
+        ###########동적 워드 클라우드####################
+        # 컬러 팔레트 생성
+        word_list=[]
+        freq_list=[]
+        fontsize_list=[]
+        position_list=[]
+        orientation_list=[]
+        color_list=[]
 
-    # for (word, freq), fontsize, position, orientation, color in wc.layout_:
-    #     word_list.append(word)
-    #     freq_list.append(freq)
-    #     fontsize_list.append(fontsize)
-    #     position_list.append(position)
-    #     orientation_list.append(orientation)
-    #     color_list.append(color)
+        for (word, freq), fontsize, position, orientation, color in wc.layout_:
+            word_list.append(word)
+            freq_list.append(freq)
+            fontsize_list.append(fontsize)
+            position_list.append(position)
+            orientation_list.append(orientation)
+            color_list.append(color)
 
-    # # get the positions
-    # x=[]
-    # y=[]
-    # for i in position_list:
-    #     x.append(i[0])
-    #     y.append(i[1])
+        # get the positions
+        x=[]
+        y=[]
+        for i in position_list:
+            x.append(i[0])
+            y.append(i[1])
 
-    # # WordCloud 시각화를 위한 Scatter Plot 생성
-    # fig = go.Figure(go.Scatter(
-    #     x=x, y=y, mode="text",
-    #     text=word_list,
-    #     textfont=dict(size=fontsize_list, color=color_list),
-    # ))
-    # fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-    #                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
-    # st.plotly_chart(fig, use_container_width=True)
+        # WordCloud 시각화를 위한 Scatter Plot 생성
+        fig = go.Figure(go.Scatter(
+            x=x, y=y, mode="text",
+            text=word_list,
+            textfont=dict(size=fontsize_list, color=color_list),
+        ))
+        fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
+        st.plotly_chart(fig, use_container_width=True)
