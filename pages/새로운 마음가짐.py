@@ -242,7 +242,7 @@ def rising_keyword(standard_df, new_df):
         # 영향도가 가장 높은 URL을 찾아서 출력
         url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
         increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
-        result[word] = {'상승률': round(increase_rate*100, 2), 'URL': url}
+        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
     
     # 상승률 기준 상위 10개 단어 출력
     keywords = []
