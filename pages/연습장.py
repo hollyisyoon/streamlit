@@ -20,4 +20,4 @@ for i, row in df.iterrows():
     link = row['URL']
     texts.append((keyword_score_text, score, link))
 
-st.write(texts)
+annotated_text(*texts)
