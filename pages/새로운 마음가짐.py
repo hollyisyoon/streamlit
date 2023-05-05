@@ -254,16 +254,18 @@ def rising_keyword(standard_df, new_df):
             keywords.append(word)
             ups.append(f"{data['상승률']}%")
             urls.append(data['URL'])
-        else:
-            st.warning('⚠️ 해당 기간에는 급상승 키워드가 없습니다')  
-
 
     result_df = pd.DataFrame({
         '키워드': keywords,
         '상승률': ups,
         'URL': urls
     })
-    return result_df
+
+    if len(result_df.index) >= 1 :
+        return result_df
+    
+    else:
+        st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
 
 ### 키워드 ###
 st.title('✨ 신규 키워드')
