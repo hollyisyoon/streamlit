@@ -29,18 +29,18 @@ rain(emoji="🦝",
 
 ######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
-df['날짜'] = pd.Timestamp(df['날짜'])
+# df['날짜'] = pd.Timestamp(df['날짜'])
 
 def extract_df(df, media, start_date, end_date, effect_size):
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
-    start_date = pd.Timestamp(start_date)
-    end_date = pd.Timestamp(end_date)
-    range_days = (end_date - start_date) + timedelta(days = 1)
-    new_day = start_date - range_days
-    new_day = pd.Timestamp(new_day)
-    new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start_date) & (df['영향도'] >= effect_size)]
+    # start_date = pd.Timestamp(start_date)
+    # end_date = pd.Timestamp(end_date)
+    # range_days = (end_date - start_date) + timedelta(days = 1)
+    # new_day = start_date - range_days
+    # new_day = pd.Timestamp(new_day)
+    # new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start_date) & (df['영향도'] >= effect_size)]
     
-    return new_df
+    return standard_df
 
 ######################대시보드
 st.title('외부 트렌드 모니터링 대시보드')
@@ -68,7 +68,7 @@ with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
     effect_size = (100-int(temp_effect_size))/100
 
-new_df = extract_df(df, media, start_date, end_date, effect_size)
+standard_df = extract_df(df, media, start_date, end_date, effect_size)
 
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
