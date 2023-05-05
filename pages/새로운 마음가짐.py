@@ -169,7 +169,7 @@ def new_keyword(standard_df, new_df):
 
     new_keywords = set(content_list_2) - set(content_list_1)   
     result_dict = {}
-    return content_list_1
+    return new_keywords
     # 이번달에만 있는 
     # for word in new_keywords:
     #     word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
