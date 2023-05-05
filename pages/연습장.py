@@ -16,9 +16,18 @@ for i, row in df.iterrows():
     keyword_score_text = format_keyword_score(row)
     score = row['평균 영향도']
     score = f'{score:.3f}'
-    url = row['URL']
-    tag = f"<a href='{url}' title='{url}' target='_blank'>{keyword_score_text} ({score})</a>"
-    texts.append(tag)
+    link = row['URL']
+    texts.append((keyword_score_text, score, link))
 
-# annotated_text를 HTML 형식으로 변환하여 출력
-st.write(annotated_text(*texts).to_html(escape=False), unsafe_allow_html=True)
+# annotated_text 출력
+for text in texts:
+    keyword_score_text = text[0] + ' (' + text[1] + ')'
+    link = text[2]
+    annotated_text(
+        (keyword_score_text, None),
+        (f'[{link}]', link),
+        add_spaces=True
+    ).add_style(
+        f'a:hover',
+        cursor='pointer',
+    )
