@@ -37,8 +37,8 @@ def format_keyword_score(row):
 texts = []
 for i, row in df.iterrows():
     keyword_score_text = format_keyword_score(row)
-    score = row['평균 영향도']
-    score = f'{score:.3f}'
+    score = row['평균 영향도'] * 100
+    score = f'{score:.0f}'
     texts.append((keyword_score_text, score))
 
 # annotated_text 출력
