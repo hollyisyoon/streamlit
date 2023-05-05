@@ -4,9 +4,9 @@
 import streamlit as st
 from annotated_text import annotated_text, parameters
 
-parameters.SHOW_LABEL_SEPARATOR = True
-parameters.BORDER_RADIUS = 50
-parameters.PADDING = "0.5rem 0.5rem"
+# parameters.SHOW_LABEL_SEPARATOR = True
+# parameters.BORDER_RADIUS = 50
+# parameters.PADDING = "0.5rem 0.5rem"
 
 # 데이터프레임 생성
 import pandas as pd
@@ -45,5 +45,8 @@ for i, row in df.iterrows():
     score = f'{score:.0f}'
     texts.append((keyword_score_text, score))
 
+# annotation_style 정의
+annotation_style = {"padding": "0.25 0.25rem", "border-radius": "20"}
+
 # annotated_text 출력
-annotated_text(*texts)
+annotated_text(*texts, label_separator=" ", annotation_style=annotation_style)
