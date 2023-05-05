@@ -20,10 +20,6 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 
 
 #link 시도###
-# 색깔 포함, 클릭 가능한 링크 추가
-# 테이블 생성
-table_md = md.table(df, headers=df.columns)
-
 # URL 링크 생성 함수
 def create_link(url, text):
     return f"[{text}]({url})"
