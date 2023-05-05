@@ -25,9 +25,7 @@ def convert_to_markdown(row):
 
 markdown_rows = df.apply(convert_to_markdown, axis=1).tolist()
 markdown_text = '  '.join(markdown_rows)
-mdlit(""" (makrdown_text) """)
-
-
+mdlit(f"""{markdown_text}""")
 
 
 
