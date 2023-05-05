@@ -32,7 +32,7 @@ df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv', enco
 def extract_df(df, media, start_date, end_date, effect_size):
     start_date = pd.Timestamp(start_date)
     end_date = pd.Timestamp(end_date)
-    df.loc[:, '날짜'] = pd.to_datetime(df['날짜'])
+    df['날짜'] = pd.to_datetime(df['날짜'], format='%Y-%m-%d')
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
 
     range_days = (end_date - start_date) + timedelta(days = 1)
