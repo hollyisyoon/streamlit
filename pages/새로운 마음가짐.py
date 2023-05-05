@@ -32,14 +32,13 @@ df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
 
 def extract_df(df, media, start_date, end_date, effect_size):
-    df = df[df['매체'] == media]
-    standard_df = df[(df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
-    # range_days = (end_date - start_date) + timedelta(days = 1)
-    # new_day = start_date - range_days
-    # new_day = pd.Timestamp(new_day)
-    # new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start) & (df['영향도'] >= effect_size)]
+    standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
+    range_days = (end_date - start_date) + timedelta(days = 1)
+    new_day = start_date - range_days
+    new_day = pd.Timestamp(new_day)
+    new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] <= start) & (df['영향도'] >= effect_size)]
     
-    return standard_df
+    return standard_df, new_df
 
 ######################대시보드
 st.title('외부 트렌드 모니터링 대시보드')
@@ -80,7 +79,7 @@ with col1:
     input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
-    st.write(standard_df)
+    st.write(new_df)
     # #워드클라우드
     # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
     # wc.generate_from_frequencies(words)
