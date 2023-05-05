@@ -2,19 +2,57 @@
 
 
 import streamlit as st
+from htbuilder import HtmlElement, div, a
+from htbuilder.units import percent, px
 from annotated_text import annotated_text, parameters
 from htbuilder.units import unit
 rem = unit.rem
 
-PADDING=(rem(0.25), rem(0.5))
-BORDER_RADIUS=rem(1)
-# LABEL_FONT_SIZE=rem(0.75)
-LABEL_OPACITY=0.5
-LABEL_SPACING=rem(1)
+# PADDING=(rem(0.25), rem(0.5))
+# BORDER_RADIUS=rem(1)
+# # LABEL_FONT_SIZE=rem(0.75)
+# LABEL_OPACITY=0.5
+# LABEL_SPACING=rem(1)
 
 # 데이터프레임 생성
 import pandas as pd
 df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
+
+
+#link 시도###
+def format_keyword_score(row):
+    keyword = row['키워드']
+    url = row['URL']
+    return a(href=url, target="_blank")(keyword)
+
+# 각 행을 annotated_text로 변환
+texts = []
+for i, row in df.iterrows():
+    keyword_score_text = format_keyword_score(row)
+    score = row['평균 영향도'] * 100
+    score = f'{score:.0f}'
+    texts.append((keyword_score_text, score))
+
+# annotated_text 출력
+st.markdown(div(style=f"padding: {px(8)};")(annotated_text(*texts).to_html()), unsafe_allow_html=True)
+
+
+# 색깔 포함 #####
+    # def format_keyword_score(row):
+    #     keyword = row['키워드']
+    #     return keyword
+
+    # # 각 행을 annotated_text로 변환
+    # texts = []
+    # for i, row in df.iterrows():
+    #     keyword_score_text = format_keyword_score(row)
+    #     score = row['평균 영향도'] * 100
+    #     score = f'{score:.0f}'
+    #     texts.append((keyword_score_text, score))
+
+    # # annotated_text 출력
+    # annotated_text(*texts)
+
 
 
 ### 글씨만 나옴#####
@@ -35,19 +73,3 @@ df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.4
 # annotated_text(*texts)
 
 
-
-# 색깔 포함 #####
-def format_keyword_score(row):
-    keyword = row['키워드']
-    return keyword
-
-# 각 행을 annotated_text로 변환
-texts = []
-for i, row in df.iterrows():
-    keyword_score_text = format_keyword_score(row)
-    score = row['평균 영향도'] * 100
-    score = f'{score:.0f}'
-    texts.append((keyword_score_text, score))
-
-# annotated_text 출력
-annotated_text(*texts)
