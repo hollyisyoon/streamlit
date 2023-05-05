@@ -22,6 +22,7 @@ import networkx as nx
 from gensim.models import Word2Vec
 import time
 import itertools
+from markdownlit import mdlit
 
 rain(emoji="🦝",
     font_size=54,
@@ -70,7 +71,7 @@ with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
-    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
+    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 80)
     effect_size = (100-int(temp_effect_size))/100
 
 standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
@@ -194,10 +195,8 @@ def new_keyword(standard_df, new_df):
         '평균 영향도': avg_views,
         'URL': urls
     })
-    
+
     return result_df
 
 new_keyword = new_keyword(standard_df, new_df)
 make_keyword_tag(new_keyword)
-new_keyword
-standard_df, new_df

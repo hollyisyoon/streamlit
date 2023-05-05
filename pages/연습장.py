@@ -83,9 +83,6 @@ def new_keyword(standard_df, new_df):
 new_keyword = new_keyword(standard_df, new_df)
 make_keyword_tag(new_keyword)
 
-
-
-
 # 색깔 포함 #####
     # def format_keyword_score(row):
     #     keyword = row['키워드']
