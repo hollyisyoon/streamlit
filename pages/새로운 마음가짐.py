@@ -28,12 +28,12 @@ rain(emoji="🦝",
     animation_length="infinite")
 
 ######데이터#########
-def to_list(text):
-    return ast.literal_eval(text)
+# def to_list(text):
+#     return ast.literal_eval(text)
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
-df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
+# df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
 
 
 def extract_df(df, media, start_date, end_date, effect_size):
@@ -97,7 +97,7 @@ col1, col2 = st.beta_columns((0.2, 0.8))
 with col1:
     type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
     keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
-    input_str = st.text_input('제거할 키워드', value='식물')
+    input_str = st.text_input('제거할 키워드')
     stopwords = [x.strip() for x in input_str.split(',')]
 
 with col2:
