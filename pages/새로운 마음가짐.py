@@ -163,10 +163,11 @@ def new_keyword(standard_df, new_df):
     # 각각의 데이터프레임에서 title+content 칼럼을 추출하여 리스트로 변환
     content_list_1 = []
     content_list_1.extend(list(itertools.chain.from_iterable([eval(i) for i in standard_df['제목+내용(nng)']])))
-    # content_list_2 = []
-    # content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
+    content_list_2 = []
+    content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
 
-    # new_keywords = set(content_list_2) - set(content_list_1)   
+    new_keywords = set(content_list_2) - set(content_list_1)   
+    return new_keywords
     # result_dict = {}
 
     # # 이번달에만 있는 
@@ -196,7 +197,8 @@ def new_keyword(standard_df, new_df):
     #     'URL': urls
     # })
     
-    return result_df
+    # return result_df
 
-# new_keyword = new_keyword(standard_df, new_df)
+new_keyword = new_keyword(standard_df, new_df)
+new_keyword
 # make_keyword_tag(new_keyword)
