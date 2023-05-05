@@ -69,7 +69,7 @@ with col3:
     effect_size = (100-int(temp_effect_size))/100
 
 
-standard_df, new_df = extract_df(df, media, start_date, end_date, '0.3')
+standard_df, new_df = extract_df(df, media, start_date, end_date, 0.3)
 
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
