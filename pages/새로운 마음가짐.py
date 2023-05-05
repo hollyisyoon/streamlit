@@ -193,7 +193,7 @@ def new_keyword(standard_df, new_df):
     avg_views = []
     urls = []
     
-    for key, value in result_dict.items()[:20]:
+    for key, value in result_dict.items():
         keywords.append(key)
         avg_views.append(value['평균 영향도'])
         urls.append('\n'.join(value['URL']))
@@ -204,7 +204,7 @@ def new_keyword(standard_df, new_df):
         'URL': urls
     })
 
-    return result_df
+    return result_df[:20]
 
 def rising_keyword(standard_df, new_df):
     # 데이터 합치기 
