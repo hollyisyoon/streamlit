@@ -42,4 +42,4 @@ for i, row in df.iterrows():
     texts.append((keyword_score_text, score))
 
 # annotated_text 출력
-annotated_text(*texts)
+annotated_text(*texts, annotation_styles=[{'class': 'score', 'color': 'green', 'font-weight': 'bold', 'text_spacing': 0.1}])
