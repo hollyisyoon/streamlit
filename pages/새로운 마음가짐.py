@@ -29,7 +29,7 @@ rain(emoji="🦝",
 
 ######데이터#########
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
-df['날짜'] = pd.to_datetime(df['날짜'])
+df['날짜'] = pd.Timestamp(df['날짜'])
 
 def extract_df(df, media, start_date, end_date, effect_size):
     standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date) & (df['영향도'] >= effect_size)]
