@@ -16,18 +16,16 @@ from markdownlit import mdlit
 
 # 데이터프레임 생성
 # import pandas as pd
-df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
+
 
 from markdownlit import mdlit
-# markdownlit으로 변환하는 함수
+df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
+
 def convert_to_markdown(row):
     return f"[`{row['키워드']} | {row['평균 영향도']:.6f}`]({row['URL']})"
 
-# 각 행을 markdown으로 변환하여 리스트에 추가
 markdown_rows = df.apply(convert_to_markdown, axis=1).tolist()
-
-# 리스트의 모든 항목을 하나의 문자열로 합쳐 출력
-mdlit('\n'.join(markdown_rows))
+mdlit("""'\n'.join(markdown_rows)""")
 
 
 
