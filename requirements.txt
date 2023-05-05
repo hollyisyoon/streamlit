@@ -24,3 +24,4 @@ Pillow
 pyvis
 st-annotated-text
 htbuilder
+markdownlit
