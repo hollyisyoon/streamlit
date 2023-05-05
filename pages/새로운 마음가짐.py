@@ -40,7 +40,7 @@ def extract_df(df, media, start_date, end_date, effect_size):
     new_day = pd.Timestamp(new_day)
     new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] < start_date) & (df['영향도'] >= effect_size)]
     
-    return new_df
+    return standard_df, new_df
 
 ######################대시보드
 st.title('외부 트렌드 모니터링 대시보드')
@@ -68,7 +68,7 @@ with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 30)
     effect_size = (100-int(temp_effect_size))/100
 
-standard_df = extract_df(df, media, start_date, end_date, effect_size)
+standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
 
 #####워드 클라우드########
 col1, col2 = st.beta_columns((0.2, 0.8))
@@ -78,7 +78,7 @@ with col1:
     input_str = st.text_input('제거할 키워드', value='식물')
     stopwords = [x.strip() for x in input_str.split(',')]
 with col2:
-    st.write(standard_df)
+    st.write(standard_df, new_df)
     # #워드클라우드
     # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/busypeople-stramlit/font/NanumBarunGothic.ttf")
     # wc.generate_from_frequencies(words)
