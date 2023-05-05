@@ -106,9 +106,7 @@ with col2:
     else :
         words = get_tfidf_top_words(standard_df, keyword_no)
 
-    if standard_df is None:
-            st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')
-    else:
+    try :
         #워드클라우드
         wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
         wc.generate_from_frequencies(words)
@@ -146,3 +144,6 @@ with col2:
         fig.update_layout(title="WordCloud", xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
         st.plotly_chart(fig, use_container_width=True)
+
+    except :
+        st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
