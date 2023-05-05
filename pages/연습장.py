@@ -18,7 +18,6 @@ from markdownlit import mdlit
 # import pandas as pd
 
 
-from markdownlit import mdlit
 df = pd.DataFrame({'키워드':['참', '걸'], '평균 영향도':[0.559585, 0.476684], 'URL':['https://band.us/band/86294308/post/322', 'https://band.us/band/86294308/post/358']})
 
 def convert_to_markdown(row):
@@ -26,8 +25,7 @@ def convert_to_markdown(row):
 
 markdown_rows = df.apply(convert_to_markdown, axis=1).tolist()
 markdown_text = '  '.join(markdown_rows)
-mdlit(""" makrdown_text """)
-
+mdlit(""" (makrdown_text) """)
 
 
 
