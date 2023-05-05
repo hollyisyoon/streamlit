@@ -150,7 +150,7 @@ with col2:
 
 
 #### 키워드 큐레이팅 #####
-## 신규 키워드 ###
+### 신규 키워드 ###
 def convert_to_markdown(row):
     return f"[`{row['키워드']} | {row['평균 영향도']:.6f}`]({row['URL']})"
 
@@ -199,4 +199,5 @@ def new_keyword(standard_df, new_df):
     return result_df
 
 new_keyword = new_keyword(standard_df, new_df)
-make_keyword_tag(new_keyword)
+new_keyword
+# make_keyword_tag(new_keyword)
