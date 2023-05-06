@@ -36,9 +36,7 @@ def get_TOP_10(df, keyword):
                 band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
                 band_top10 = band_top10.reset_index(drop=True)
                 band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
-                # Apply conditional formatting to highlight top 3 rows
-                band_top10_styled = band_top10.style.apply(lambda _: 'background-color: yellow', subset=pd.IndexSlice[0:3, :])
-                top10_list.append(band_top10_styled)
+                top10_list.append(band_top10)
             except ValueError:
                 df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
                 df_category = df_category.reset_index(drop=True)
@@ -49,13 +47,19 @@ def get_TOP_10(df, keyword):
     else:
         return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
 
-result = get_TOP_10(df2, keyword1)
-if not styled_df.empty:
-    # Convert styled DataFrame to HTML
-    styled_html = styled_df.render()
+def highlight_top_3(df):
+    df_styled = df.copy()
+    for media_category in df['매체'].unique():
+        mask = df['매체'] == media_category
+        top_3_indices = df.loc[mask, '영향도'].nlargest(3).index
+        df_styled.loc[top_3_indices, ['매체', '작성자', '제목', 'URL', '영향도']] = 'background-color: yellow'
+    return df_styled
 
-    # Render HTML in Streamlit using Markdown
-    st.markdown(styled_html, unsafe_allow_html=True)
+result = get_TOP_10(df2, keyword1)
+
+if result is not None:
+    result_styled = highlight_top_3(result)
+    st.dataframe(result_styled, height=500)
 else:
     st.write("No results found.")
 
