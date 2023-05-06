@@ -367,7 +367,7 @@ def get_TOP_10(df, keyword):
 
 deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
 deepdive_lineplot(deepdive_df, deepdive_keywords)
-get_Top_10(df, keyword1)
+pd.DataFrame(get_Top_10(df, keyword1))
 
 
 # col1, col2 = st.beta_columns((0.2, 0.8))
