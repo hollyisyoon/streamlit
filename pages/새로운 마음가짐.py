@@ -214,6 +214,7 @@ def new_keyword(standard_df, new_df):
 def rising_keyword(standard_df, new_df):
     # 데이터 합치기 
     df = pd.concat([standard_df, new_df])
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     
     # 날짜 구하기
     이번주마지막날 = df['날짜'].max()
