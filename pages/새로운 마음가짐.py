@@ -305,13 +305,13 @@ def get_df(df, word1, args):
     result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
     keywords = [word1] + list(args)
 
-    result['제목+내용(nng)'] = result['제목+내용(nng)'].map(to_list)
+    for arg in keywords:
+        if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
+            return f"'{arg}'는 한 번도 언급되지 않은 키워드입니다. 다시 입력해주세요."
     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
     return result
     # # 입력한 단어 중 하나라도 포함되어 있지 않은 경우 오류 메시지를 반환
-    # for arg in keywords:
-    #     if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
-    #         return f"'{arg}'는 한 번도 언급되지 않은 키워드입니다. 다시 입력해주세요."
+
     
     # return result, keywords
 
