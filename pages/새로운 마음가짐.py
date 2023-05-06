@@ -300,6 +300,7 @@ keyword2 = st_tags(
 def get_df(df, word1, *args):
     # word1 은 반드시 입력해야 하는 기준
     # 입력한 단어 중 하나 이상이 포함된 행 찾기
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
     result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
     keywords = [word1] + list(args)
