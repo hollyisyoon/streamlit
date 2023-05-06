@@ -292,7 +292,7 @@ html_tags = ''
 
 for url, group in grouped_rising_keyword:
     keywords = ' '.join(group['키워드'])
-    group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
+    # group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
     percent = group['상승률'].iloc[0]
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
     html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
