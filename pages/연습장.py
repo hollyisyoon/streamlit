@@ -174,23 +174,24 @@ try:
 except:
     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
 
-for i in rising_keyword:
-    
+grouped_rising_keyword = rising_keyword.groupby('URL')
 
-st.subheader('🔥 급상승 키워드')
+key_counter = 1
+html_tags = ''
+for url, group in grouped_rising_keyword:
+    keywords = ' '.join(group['키워드'])
+    percent = group['상승률'].iloc[0]
+    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+    html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+
+# Display the generated HTML tags
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown("<div class='callout'>", unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class="callout">
-        <a id="key1" href="https://www.naver.com">키워드1 키워드2</a>
-        <b>(44%🔥)</b>&nbsp;
-        <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
-        <a id="key3" href="https://www.naver.com">키워드3</a>&nbsp;
-    </div>
-    """,
+st.markdown(f"""
+    <h3>급상승 키워드📈</h3>
+    <div class='callout'>
+    {html_tags}
+    </div>""",
     unsafe_allow_html=True
 )
-
 
 
