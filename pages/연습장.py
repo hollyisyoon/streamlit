@@ -36,9 +36,9 @@ def get_TOP_10(df, keyword):
                 band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
                 band_top10 = band_top10.reset_index(drop=True)
                 band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
-                # Highlight top 3 rows
-                band_top10.loc[:2, :] = 'background-color: yellow'
-                top10_list.append(band_top10)
+                # Apply conditional formatting to highlight top 3 rows
+                styler = band_top10.style.apply(lambda _: 'background-color: yellow', subset=pd.IndexSlice[0:3, :])
+                top10_list.append(styler)
             except ValueError:
                 df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
                 df_category = df_category.reset_index(drop=True)
@@ -48,6 +48,7 @@ def get_TOP_10(df, keyword):
         return pd.concat(top10_list, ignore_index=False)
     else:
         return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
+
 
 
 result = get_TOP_10(df2, keyword1)
