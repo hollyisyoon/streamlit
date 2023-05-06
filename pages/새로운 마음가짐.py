@@ -288,8 +288,8 @@ except:
 ########### 키워드 DeepDive ###########
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
-keyword1 = st.text_input('궁금한 키워드', value='해충제')
-keyword2 = st_tags(
+deep_keyword1 = st.text_input('궁금한 키워드', value='해충제')
+deep_keyword2 = st_tags(
     label = '비교할 키워드',
     text = '직접 입력해보세요(최대 5개)',
     value = ['식물영양제', '뿌리영양제'],
@@ -306,10 +306,6 @@ def get_df(df, word1, args):
     keywords = [word1] + (args)
     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
     return result
-    # # 입력한 단어 중 하나라도 포함되어 있지 않은 경우 오류 메시지를 반환
-
-    
-    # return result, keywords
 
 def plot_keyword_impact_grey(df, keywords):
     # 키워드별로 데이터프레임을 분리합니다.
@@ -339,7 +335,6 @@ def plot_keyword_impact_grey(df, keywords):
     fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
-
-hello = get_df(df, keyword1, keyword2)
+hello = get_df(df, deep_keyword1, deep_keyword2)
 hello
 # plot_keyword_impact_grey(deepdive_df, keyword_list)
