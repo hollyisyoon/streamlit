@@ -10,8 +10,6 @@ components.html(yellow_background + html_content)
 
 
 
-
-
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
 # df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
