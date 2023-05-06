@@ -12,7 +12,7 @@ STYLE = """
 }
 
 .callout a {
-    color: #000;
+    color: #b8b8b8;
     text-decoration: underline;
     text-decoration-color: light gray;
 }
