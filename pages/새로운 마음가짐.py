@@ -32,6 +32,41 @@ from collections import Counter
 from wordcloud import WordCloud
 
 
+#####Custom CSS styles#####
+STYLE = """
+.callout {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: #F8F8F8;
+    border-left: 4px solid #f74040;
+    margin-bottom: 1em;
+    color: black;
+}
+
+.callout a#key1 {
+    color: #000;
+    background-color: #FAF3DD;
+    text-decoration: none;
+}
+
+.callout a#key2 {
+    color: #000;
+    background-color: #E9F3F7;
+    text-decoration: none;
+}
+
+.callout a#key3 {
+    color: #000;
+    background-color: #F6F3F8;
+    text-decoration: none;
+}
+
+.callout a#key4 {
+    color: #000;
+    background-color: #EEF3ED;
+    text-decoration: none;
+}
+"""
 
 # rain(emoji="🦝",
 #     font_size=54,
