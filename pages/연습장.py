@@ -44,7 +44,8 @@ def get_TOP_10(df, keyword):
         return pd.concat(top10_list, ignore_index=False)
     else:
         return None
-pd.DataFrame(get_Top_10(df2, keyword1))
+
+get_Top_10(df2, keyword1)
 
 
 
