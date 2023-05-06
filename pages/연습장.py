@@ -45,9 +45,14 @@ def get_TOP_10(df, keyword):
     if len(top10_list) > 0:
         return pd.concat(top10_list, ignore_index=False)
     else:
-        return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
+        return None
 
-get_TOP_10(df2, keyword1)
+result = get_TOP_10(df2, keyword1)
+
+if result is not None:
+    st.dataframe(result)
+else:
+    st.write("No results found.")
 
 
 
