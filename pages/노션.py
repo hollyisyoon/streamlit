@@ -61,8 +61,12 @@ for url, group in groups:
 
 # Display the generated HTML tags
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown("<div class='callout'>", unsafe_allow_html=True)
-st.markdown(html_tags, unsafe_allow_html=True)
+st.markdown(f"""
+    <div class='callout'>
+    {html_tags}, 
+    </div>""",
+    unsafe_allow_html=True
+)
 
 # st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 # st.markdown(
