@@ -366,12 +366,14 @@ def get_TOP_10(df, keyword):
     if len(top10_list) > 0:
         return pd.concat(top10_list, ignore_index=False)
     else:
-        return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
-
+        return None
+    
 try :
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
-    get_Top_10(df2, keyword1)
+    keyword_result = get_TOP_10(df2, keyword1)
+    st.dataframe(keyword_result)
+
 except :
     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 

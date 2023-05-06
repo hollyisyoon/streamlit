@@ -50,6 +50,7 @@ def get_TOP_10(df, keyword):
 result = get_TOP_10(df2, keyword1)
 
 if result is not None:
+    result = get_TOP_10(df2, keyword1)
     st.dataframe(result)
 else:
     st.write("No results found.")
