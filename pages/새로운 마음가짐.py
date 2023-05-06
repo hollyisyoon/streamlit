@@ -110,7 +110,7 @@ with expander:
     stopwords = st_tags(
         label = '제거할 키워드',
         text = '직접 입력해보세요',
-        values = ['식물', '화분'],
+        value = ['식물', '화분'],
         suggestions = ['식물', '화분'],
         key = '1')
     # input_str = st.text_input('제거할 키워드')
