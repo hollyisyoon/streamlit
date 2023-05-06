@@ -310,10 +310,8 @@ def rising_keyword(standard_df, new_df):
         return result_df
 
 ### 키워드 ###
-st.subheader('✨ 신규 키워드')
 try:
     new_keyword = new_keyword(standard_df, new_df)
-    make_keyword_tag(new_keyword)
 except:
     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
@@ -321,23 +319,42 @@ try:
     rising_keyword = rising_keyword(standard_df, new_df)
 except:
     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+
+##신규 키워드##
+grouped_new_keyword = new_keyword.groupby('URL')
+key_counter = 1
+new_html_tags = ''
+for url, group in grouped_new_keyword:
+    keywords = ' '.join(group['키워드'])
+    # group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
+    percent = group['평균 영향도'].iloc[0]
+    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+    new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+
+##급상승 키워드##    
 grouped_rising_keyword = rising_keyword.groupby('URL')
 key_counter = 1
-html_tags = ''
-
+rising_html_tags = ''
 for url, group in grouped_rising_keyword:
     keywords = ' '.join(group['키워드'])
     # group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
     percent = group['상승률'].iloc[0]
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
-    html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+    rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
 
-# Display the generated HTML tags
+#HTML
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown(f"""
+    <h3>신규 키워드⭐️</h3>
+    <div class='callout'>
+    {new_html_tags}
+    </div>""",
+    unsafe_allow_html=True
+)
 st.markdown(f"""
     <h3>급상승 키워드📈</h3>
     <div class='callout'>
-    {html_tags}
+    {rising_html_tags}
     </div>""",
     unsafe_allow_html=True
 )
