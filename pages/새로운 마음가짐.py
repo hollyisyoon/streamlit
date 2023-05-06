@@ -249,7 +249,7 @@ def new_keyword(standard_df, new_df):
         'URL': urls
     })
 
-    return result_df[:20]
+    return result_df
 
 def rising_keyword(standard_df, new_df):
     # 데이터 합치기 
@@ -325,11 +325,10 @@ grouped_new_keyword = new_keyword.groupby('URL')
 key_counter = 1
 new_html_tags = ''
 for url, group in grouped_new_keyword:
-    keywords = ' '.join(group['키워드'])
-    # group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
+    keywords = ' | '.join(group['키워드'])
     percent = group['평균 영향도'].iloc[0]
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
-    new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+    new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}💫)</b>&nbsp;"
 
 ##급상승 키워드##    
 grouped_rising_keyword = rising_keyword.groupby('URL')
@@ -337,7 +336,6 @@ key_counter = 1
 rising_html_tags = ''
 for url, group in grouped_rising_keyword:
     keywords = ' '.join(group['키워드'])
-    # group['상승률'] = group['상승률'].apply(lambda x: "{:.1%}".format(x))
     percent = group['상승률'].iloc[0]
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
