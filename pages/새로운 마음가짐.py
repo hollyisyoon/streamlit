@@ -310,13 +310,13 @@ def get_df(df, word1, args):
     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
     for arg in keywords:
         if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
-            return f"'{arg}'는 한 번도 언급되지 않은 키워드입니다. 다시 입력해주세요."
-  
+            st.warning(f"'{arg}'는 한 번도 언급되지 않은 키워드입니다. 다시 입력해주세요.")
+            return None, None
     return result, keywords
+
 
 hello, bye = get_df(df2, keyword1, keyword2)
 hello, bye
-
 
 
 
