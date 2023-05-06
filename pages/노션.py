@@ -40,8 +40,6 @@ st.code(
     language="html"
 )
 
-
-
 # Apply custom CSS styles
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 
