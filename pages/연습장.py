@@ -54,7 +54,7 @@ result = get_TOP_10(df2, keyword1)
 
 if result is not None:
     styled_df = result.style.apply(highlight_top3, axis=0)
-    st.dataframe(df.style.apply(styled_df, axis=1))
+    st.dataframe(styled_df)
 else:
     st.write("No results found.")
 
