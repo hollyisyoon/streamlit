@@ -343,6 +343,7 @@ def plot_keyword_impact_grey(df, keywords):
     fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
-keyword2
-get_df(df, keyword1, keyword2)
+
+hello = get_df(df, keyword1, keyword2)
+hello
 # plot_keyword_impact_grey(deepdive_df, keyword_list)
