@@ -28,7 +28,7 @@ def 네트워크(network_keywords):
         network_keyword = [w for w in keyword if len(w) > 1]
         networks.append(network_keyword)
 
-    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
 
     G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
@@ -48,7 +48,7 @@ def 네트워크(network_keywords):
     # 노드 크기 설정
     node_size = []
     for node in G.nodes():
-        if node in 키워드:
+        if node in keyword_all:
             node_size.append(5000)
         else:
             node_size.append(1000)
