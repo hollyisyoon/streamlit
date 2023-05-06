@@ -36,20 +36,47 @@ STYLE = """
 }
 """
 
-# Apply custom CSS styles
+import pandas as pd
+
+df = pd.DataFrame({
+    '키워드': ['아이', '헬로', '바이', '안녕', '그냥', '오늘'],
+    '상승률': ['44%', '50%', '50%', '22%', '22%', '10%'],
+    'URL': ['https://www.naver.com', 'https://www.google.com', 'https://www.google.com',
+            'https://www.daum.net', 'https://www.kakao.com', 'https://www.ul.com']
+})
+
+# Group by URL
+groups = df.groupby('URL')
+
+# Initialize key counter
+key_counter = 1
+
+# Generate HTML tags
+html_tags = ''
+for url, group in groups:
+    keywords = ' '.join(group['키워드'])
+    percent = group['상승률'].iloc[0]
+    html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+    key_counter += 1
+
+# Display the generated HTML tags
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown("<div class='callout'>", unsafe_allow_html=True)
+st.markdown(html_tags, unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <div class="callout">
-        <a id="key1" href="https://www.naver.com">키워드1</a>&nbsp<a id="key1" href="https://www.naver.com">키워드2</a>&nbsp<b>(44%🔥)</b>&nbsp;
-        <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
-        <a id="key3" href="https://www.naver.com">키워드3</a>&nbsp;
+# st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+# st.markdown(
+#     """
+#     <div class="callout">
+#         <a id="key1" href="https://www.naver.com">키워드1 키워드2</a>
+#         <b>(44%🔥)</b>&nbsp;
+#         <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
+#         <a id="key3" href="https://www.naver.com">키워드3</a>&nbsp;
 
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+#     </div>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 
 st.markdown(

@@ -30,6 +30,41 @@ import time
 import itertools
 from markdownlit import mdlit
 
+#####Custom CSS styles#####
+STYLE = """
+.callout {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: #F8F8F8;
+    border-left: 4px solid #f74040;
+    margin-bottom: 1em;
+    color: black;
+}
+
+.callout a#key1 {
+    color: #000;
+    background-color: #FAF3DD;
+    text-decoration: none;
+}
+
+.callout a#key2 {
+    color: #000;
+    background-color: #E9F3F7;
+    text-decoration: none;
+}
+
+.callout a#key3 {
+    color: #000;
+    background-color: #F6F3F8;
+    text-decoration: none;
+}
+
+.callout a#key4 {
+    color: #000;
+    background-color: #EEF3ED;
+    text-decoration: none;
+}
+"""
 
 st.title("Yellow component")
 
@@ -132,10 +167,30 @@ def rising_keyword(standard_df, new_df):
 
     if len(result_df.index) >= 1 :
         return result_df
-    
-st.subheader('🔥 급상승 키워드')
+
 try:
     rising_keyword = rising_keyword(standard_df, new_df)
     rising_keyword
 except:
     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+
+for i in rising_keyword:
+    
+
+st.subheader('🔥 급상승 키워드')
+st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown("<div class='callout'>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="callout">
+        <a id="key1" href="https://www.naver.com">키워드1 키워드2</a>
+        <b>(44%🔥)</b>&nbsp;
+        <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
+        <a id="key3" href="https://www.naver.com">키워드3</a>&nbsp;
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
