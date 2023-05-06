@@ -100,20 +100,20 @@ def get_count_top_words(df, keyword_no):
 
 ###시각화####
 expander = st.expander('워드 클라우드 세부필터')
-    with expander:
-        col1, col2, col3 = st.beta_columns(3)    
-        with col1:
-            type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
-        with col2:
-            keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
-        with col3:
-            stopwords = st_tags(
-                label = '제거할 키워드',
-                text = '직접 입력해보세요',
-                suggestions = ['식물', '화분'],
-                key = '1')
-            # input_str = st.text_input('제거할 키워드')
-            # stopwords = [x.strip() for x in input_str.split(',')]
+with expander:
+    col1, col2, col3 = st.beta_columns(3)    
+    with col1:
+        type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
+    with col2:
+        keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
+    with col3:
+        stopwords = st_tags(
+            label = '제거할 키워드',
+            text = '직접 입력해보세요',
+            suggestions = ['식물', '화분'],
+            key = '1')
+        # input_str = st.text_input('제거할 키워드')
+        # stopwords = [x.strip() for x in input_str.split(',')]
 
 try :
     if type == '단순 빈도(Countvecterize)' :
