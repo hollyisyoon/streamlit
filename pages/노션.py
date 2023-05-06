@@ -11,15 +11,41 @@ STYLE = """
     color: black;
 }
 
-.callout a {
-    color: #b8b8b8;
+.callout a #key1 {
+    color: #5c5c5c;
     text-decoration: underline;
-    text-decoration-color: light gray;
+    text-decoration-color: gray;
+    background-color: #ff7d7d;
+}
+
+.callout a #key2 {
+    color: #5c5c5c;
+    text-decoration: underline;
+    text-decoration-color: gray;
+    background-color: #ff9696;
+}
+
+.callout a #key3 {
+    color: #5c5c5c;
+    text-decoration: underline;
+    text-decoration-color: gray;
+    background-color: #ffbaba;
 }
 """
 
 # Apply custom CSS styles
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div class="callout">
+        <a id="key1" href="https://www.naver.com">키워드1</a>
+        <a id="key2" href="https://www.naver.com">키워드2</a>
+        <a id="key3" href="https://www.naver.com">키워드3</a>
+    </div>
+    """
+)
+
 
 st.markdown(
     """
