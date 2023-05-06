@@ -303,7 +303,7 @@ def get_df(df, word1, args):
     df['날짜'] = pd.to_datetime(df['날짜'])
     result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
     result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
-    keywords = [word1] + list(args)
+    keywords = [word1] + (args)
 
     for arg in keywords:
         if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
