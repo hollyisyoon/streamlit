@@ -10,7 +10,6 @@ STYLE = """
     margin-bottom: 1em;
     color: black;
 }
-
 """
 
 # Apply custom CSS styles
@@ -43,7 +42,7 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        <pre><code>&lt;a href="https://www.naver.com"&gt;키워드&lt;/a&gt; 키워드 키워드 안녕하세요 오오오잉ㅇ</code></pre>
+        <code>&lt;a href="https://www.naver.com"&gt;키워드&lt;/a&gt; 키워드 키워드 안녕하세요 오오오잉ㅇ</code>
     </div>
     """,
     unsafe_allow_html=True
