@@ -1,8 +1,8 @@
 import streamlit as st
 from gensim.models import Word2Vec
 import networkx as nx
-import gensim
 from pyvis.network import Network
+import gensim
 from wordcloud import WordCloud
 from datetime import datetime, timedelta
 import pandas as pd
@@ -22,7 +22,6 @@ keyword2 = st_tags(
     key = '2')
 
 keyword_all = [keyword1]+keyword2
-
 network_keywords = [eval(i) for i in df['제목+내용(nng)']]
 def 네트워크(network_keywords):
     networks = []
@@ -72,7 +71,7 @@ def 네트워크(network_keywords):
     # 선의 길이를 변경 pos
     # plt.figure(figsize=(15,15))
     pos = nx.spring_layout(G, seed=42, k=0.15)
-    nx.draw(G, pos, font_family='NanumGothic', with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
+    nx.draw(G, pos, font_path='/app/streamlit/font/Pretendard-Bold.otf', with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
             font_size=9, font_color="black", font_weight="medium", edge_color="grey", width=edge_weights)
 
 
@@ -94,7 +93,7 @@ def 네트워크(network_keywords):
 
     return [net, similar_words]
 
-네트워크 = 네트워크(reviews)
+네트워크 = 네트워크(network_keywords)
 
 
 with col3_2:
