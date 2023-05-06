@@ -16,15 +16,15 @@ from markdownlit import mdlit
 
 # 데이터프레임 생성
 import pandas as pd
-import itertools
-
+import streamlit as st
 
 df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
 
 keyword1 = st.text_input('궁금한 키워드', value='해충제')
+
 def get_TOP_10(df, keyword):
-    temp_df = df[df['제목'].str.contains(keyword)]
+    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
     top10_list = []
     for media_category in temp_df['매체'].unique():
         df_category = temp_df[temp_df['매체'] == media_category]
@@ -43,9 +43,15 @@ def get_TOP_10(df, keyword):
     if len(top10_list) > 0:
         return pd.concat(top10_list, ignore_index=False)
     else:
-        return None
+        return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
 
-get_Top_10(df2, keyword1)
+result = get_TOP_10(df2, keyword1)
+if result is not None:
+    st.dataframe(result)
+else:
+    st.write("No results found.")
+
+pd.DataFrame(get_Top_10(df2, keyword1))
 
 
 
