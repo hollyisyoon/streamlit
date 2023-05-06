@@ -14,7 +14,7 @@ STYLE = """
 .callout a {
     color: #000;
     text-decoration: underline;
-    text-decoration-color: gray;
+    text-decoration-color: light gray;
 }
 """
 
