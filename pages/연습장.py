@@ -47,19 +47,23 @@ def get_TOP_10(df, keyword):
     else:
         return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
 
-def highlight_top_3(df):
-    df_styled = df.copy()
-    for media_category in df['매체'].unique():
-        mask = df['매체'] == media_category
-        top_3_indices = df.loc[mask, '영향도'].nlargest(3).index
-        df_styled.loc[top_3_indices, ['매체', '작성자', '제목', 'URL', '영향도']] = 'background-color: yellow'
-    return df_styled
+def highlight_top3(s):
+    return ['background-color: yellow' if i < 3 else '' for i in range(len(s))]
 
 result = get_TOP_10(df2, keyword1)
 
 if result is not None:
-    result_styled = highlight_top_3(result)
-    st.dataframe(result_styled, height=500)
+    styled_df = result.style.apply(highlight_top3, axis=0)
+    st.dataframe(styled_df)
+else:
+    st.write("No results found.")
+
+
+result = get_TOP_10(df2, keyword1)
+
+if result is not None:
+    styled_df = result.style.apply(highlight_top3, axis=0)
+    st.dataframe(styled_df)
 else:
     st.write("No results found.")
 
