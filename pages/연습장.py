@@ -121,7 +121,7 @@ def rising_keyword(standard_df, new_df):
     for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
         if data['상승률']>0:
             keywords.append(word)
-            ups.append(f"{data['상승률']}%")
+            ups.append(f"{data['상승률']*100}%")
             urls.append(data['URL'])
 
     result_df = pd.DataFrame({
