@@ -112,31 +112,30 @@ def rising_keyword(standard_df, new_df):
         url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
         increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
         result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
-    
-    return result
-    # # 상승률 기준 상위 10개 단어 출력
-    # keywords = []
-    # ups = []
-    # urls = []
 
-    # for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
-    #     if data['상승률']>0:
-    #         keywords.append(word)
-    #         ups.append(f"{data['상승률']}%")
-    #         urls.append(data['URL'])
+    # 상승률 기준 상위 10개 단어 출력
+    keywords = []
+    ups = []
+    urls = []
 
-    # result_df = pd.DataFrame({
-    #     '키워드': keywords,
-    #     '상승률': ups,
-    #     'URL': urls
-    # })
+    for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
+        if data['상승률']>0:
+            keywords.append(word)
+            ups.append(f"{data['상승률']}%")
+            urls.append(data['URL'])
 
-    # if len(result_df.index) >= 1 :
-    #     return result_df
+    result_df = pd.DataFrame({
+        '키워드': keywords,
+        '상승률': ups,
+        'URL': urls
+    })
+
+    if len(result_df.index) >= 1 :
+        return result_df
     
 st.subheader('🔥 급상승 키워드')
-rising_keyword = rising_keyword(standard_df, new_df)
-rising_keyword
-#     make_keyword_tag2(rising_keyword)
-# except:
-#     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+try:
+    rising_keyword = rising_keyword(standard_df, new_df)
+    rising_keyword
+except:
+    st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
