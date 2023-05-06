@@ -1,15 +1,20 @@
 import pandas as pd
+
+#시각화
 import koreanize_matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from matplotlib.colors import to_rgba
 import plotly.graph_objects as go
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import ast
 import time
 
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
+from streamlit_tags import st_tags
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
@@ -54,18 +59,18 @@ st.title('외부 트렌드 모니터링 대시보드')
 #### 인풋 필터 #####
 col1, col2, col3 = st.beta_columns(3)
 
-min_date = datetime(2022, 7, 25)
+min_date = datetime(2022, 6, 1)
 max_date = datetime(2023, 4, 26)
 with col1:
     start_date = st.date_input("시작 날짜",
-                               value=datetime(2023,4,1),
+                               value=datetime(2022,6,1),
                                min_value=min_date,
                                max_value=max_date - timedelta(days=7))
     # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
     end_date = st.date_input("끝 날짜",
-                             value=datetime(2023,4,15),
+                             value=datetime(2022,6,15),
                              min_value=start_date + timedelta(days=7),
-                             max_value=start_date + timedelta(days=90))
+                             max_value=start_date + timedelta(days=60))
 
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'))
@@ -264,16 +269,69 @@ def rising_keyword(standard_df, new_df):
     if len(result_df.index) >= 1 :
         return result_df
     
-    else:
-        st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
-
 ### 키워드 ###
-st.title('✨ 신규 키워드')
-new_keyword = new_keyword(standard_df, new_df)
-make_keyword_tag(new_keyword)
+st.subheader('✨ 신규 키워드')
+try:
+    new_keyword = new_keyword(standard_df, new_df)
+    make_keyword_tag(new_keyword)
+except:
+    st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
-st.title('🔥 급상승 키워드')
-rising_keyword = rising_keyword(standard_df, new_df)
-make_keyword_tag2(rising_keyword)
+st.subheader('🔥 급상승 키워드')
+try:
+    rising_keyword = rising_keyword(standard_df, new_df)
+    make_keyword_tag2(rising_keyword)
+except:
+    st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
 
 ########### 키워드 DeepDive ###########
+st.title('🔎 키워드 DeepDive')
+col1, col2 = st.beta_columns((0.2, 0.8))
+keyword1 = st.text_input('궁금한 키워드', value='해충제')
+keyword2 = st_tags(‘비교할 키워드:’, ‘(최대 5개)’, [‘식물영양제’, ‘뿌리영양제’])
+
+def get_df(df, word1, *args):
+    # word1 은 반드시 입력해야 하는 기준
+    # 입력한 단어 중 하나 이상이 포함된 행 찾기
+    result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
+    result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
+    keywords = [word1] + list(args)
+    result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
+    
+    # 입력한 단어 중 하나라도 포함되어 있지 않은 경우 오류 메시지를 반환
+    for arg in keywords:
+        if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
+            return f"'{arg}'는 한 번도 언급되지 않은 키워드입니다. 다시 입력해주세요."
+    
+    return result, keywords
+
+def plot_keyword_impact_grey(df, keywords):
+    # 키워드별로 데이터프레임을 분리합니다.
+    
+    keywords = keywords[::-1]
+    keyword_dfs = {}
+    for keyword in keywords:
+        keyword_dfs[keyword] = df[df['제목+내용(nng)'].str.contains(keyword)].copy()
+    
+    # 날짜별로 그룹핑하고 영향도 평균을 구합니다.
+    impact_by_week = {}
+    for keyword, keyword_df in keyword_dfs.items():
+        keyword_df['날짜'] = pd.to_datetime(keyword_df['날짜'])
+        keyword_df.set_index('날짜', inplace=True)
+        impact_by_week[keyword] = keyword_df.resample('W')['영향도'].mean()
+
+    # 라인 그래프를 그립니다.
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
+    colors = ["grey"] * (len(keywords) - 1) + ["blue"]
+
+    
+    for i, (keyword, impact) in enumerate(impact_by_week.items()):
+        fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
+        
+    fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
+    st.plotly_chart(fig, use_container_width=True)
+
+deepdive_df, keyword_list = get_df(df, keyword1, keyword2)
+plot_keyword_impact_grey(deepdive_df, keyword_list)
