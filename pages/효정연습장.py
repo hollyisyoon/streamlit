@@ -29,7 +29,7 @@ import time
 import itertools
 from markdownlit import mdlit
 
-rain(emoji="🦝",
+rain(emoji="🌼",
     font_size=54,
     falling_speed=5,
     animation_length="infinite")
