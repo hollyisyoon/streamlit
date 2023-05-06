@@ -300,12 +300,11 @@ df2['날짜'] = pd.to_datetime(df2['날짜'])
 
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
-keyword1 = st.text_input('궁금한 키워드', value='해충제')
+keyword1 = st.text_input('궁금한 키워드', value='제라늄')
 keyword2 = st_tags(
     label = '비교할 키워드',
     text = '직접 입력해보세요(최대 5개)',
     value = ['식물영양제', '뿌리영양제'],
-    suggestions = ['해충제', '제라늄'],
     maxtags = 5,
     key = '2')
 
@@ -346,8 +345,6 @@ def deepdive_lineplot(df, keywords):
         
     fig.update_layout(title_text="시간별 키워드 영향도", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
-
-import pandas as pd
 
 def get_TOP_10(df, keyword):
     temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
