@@ -21,7 +21,7 @@ import streamlit as st
 df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
 
-keyword1 = st.text_input('궁금한 키워드', value='해충제')
+keyword1 = st.text_input('궁금한 키워드', value='제라늄')
 
 import pandas as pd
 
