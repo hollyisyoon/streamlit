@@ -8,6 +8,7 @@ STYLE = """
     background-color: #F8F8F8;
     border-left: 4px solid #FF9800;
     margin-bottom: 1em;
+    color: black;
 }
 """
 
@@ -18,8 +19,7 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        This is a callout-like component.
-        You can customize the content and styling as per your needs.
+        [키워드](https://www.naver.com) 키워드 키워드 안녕하세요 오오오잉ㅇ
     </div>
     """,
     unsafe_allow_html=True
