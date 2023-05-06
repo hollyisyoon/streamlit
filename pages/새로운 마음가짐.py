@@ -286,6 +286,9 @@ except:
 #     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
 
 ########### 키워드 DeepDive ###########
+df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
+df2['날짜'] = pd.to_datetime(df2['날짜'])
+
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
 keyword1 = st.text_input('궁금한 키워드', value='해충제')
@@ -307,7 +310,7 @@ def get_df(df, word1, args):
     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
     return result
 
-hello = get_df(df, keyword1, keyword2)
+hello = get_df(df2, keyword1, keyword2)
 hello
 
 
