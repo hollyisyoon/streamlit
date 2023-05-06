@@ -321,8 +321,6 @@ def get_df(df, word1, args):
             return None, None
     return result, keywords
 
-deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
-
 def deepdive_lineplot(df, keywords):
     # 키워드별로 데이터프레임을 분리합니다.
     keywords = keywords[::-1]
@@ -349,7 +347,27 @@ def deepdive_lineplot(df, keywords):
     fig.update_layout(title_text="시간별 키워드 영향도", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
+def get_TOP_10(df, keyword):
+    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
+    top10_list = []
+    for media_category in temp_df['매체'].unique():
+        df_category = temp_df[temp_df['매체'] == media_category]
+        if 'nlargest' in dir(df_category):
+            band_top10 = df_category.nlargest(10, '영향도')
+            band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
+            band_top10 = band_top10.reset_index(drop=True)
+            band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
+            top10_list.append(band_top10)
+        elif len(df_category) > 0:
+            df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
+            df_category = df_category.reset_index(drop=True)
+            df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
+            top10_list.append(df_category)
+    return pd.concat(top10_list, ignore_index=False)
+
+deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
 deepdive_lineplot(deepdive_df, deepdive_keywords)
+get_Top_10(df2, keyword1)
 
 
 # col1, col2 = st.beta_columns((0.2, 0.8))
