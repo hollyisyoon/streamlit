@@ -36,7 +36,7 @@ def 네트워크(network_keywords):
     for keyword in keyword_all:
         G.add_node(keyword)
         # 주어진 키워드와 가장 유사한 20개의 단어 추출
-        similar_words = model.wv.most_similar(keyword, topn=20)
+        similar_words = model.wv.most_similar(keyword, topn=10)
         # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
         for word, score in similar_words:
             G.add_node(word)
