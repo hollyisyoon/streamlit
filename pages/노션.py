@@ -42,7 +42,7 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        <a id="key1" href="https://www.naver.com">키워드1 키워드2 키워드3</a>&nbsp<b>(44%🔥)</b>&nbsp;
+        <a id="key1" href="https://www.naver.com">키워드1</a>&nbsp<a id="key1" href="https://www.naver.com">키워드2</a>&nbsp<b>(44%🔥)</b>&nbsp;
         <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
         <a id="key3" href="https://www.naver.com">키워드3</a>&nbsp;
 
