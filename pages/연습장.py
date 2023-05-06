@@ -21,9 +21,10 @@ import itertools
 
 df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
+
 keyword1 = st.text_input('궁금한 키워드', value='해충제')
 def get_TOP_10(df, keyword):
-    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
+    temp_df = df[df['제목'].str.contains(keyword)]
     top10_list = []
     for media_category in temp_df['매체'].unique():
         df_category = temp_df[temp_df['매체'] == media_category]
