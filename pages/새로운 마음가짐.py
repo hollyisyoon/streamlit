@@ -29,10 +29,10 @@ import time
 import itertools
 from markdownlit import mdlit
 
-rain(emoji="🦝",
-    font_size=54,
-    falling_speed=5,
-    animation_length="infinite")
+# rain(emoji="🦝",
+#     font_size=54,
+#     falling_speed=5,
+#     animation_length="infinite")
 
 ######데이터#########
 def to_list(text):
