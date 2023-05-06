@@ -49,7 +49,6 @@ def extract_df(df, media, start_date, end_date, effect_size):
     new_day = start_date - range_days
     new_day = pd.Timestamp(new_day)
     new_df = df[(df['매체'] == media) & (df['날짜'] >= new_day) & (df['날짜'] < start_date) & (df['영향도'] >= effect_size)]
-    
     return standard_df, new_df
 
 col1, col2, col3 = st.beta_columns(3)
@@ -79,8 +78,7 @@ standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
 def rising_keyword(standard_df, new_df):
     # 데이터 합치기 
     df = pd.concat([standard_df, new_df])
-    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
-    
+
     # 날짜 구하기
     이번주마지막날 = df['날짜'].max()
     이번주첫날 = (df['날짜'].max() - timedelta(days=7))
