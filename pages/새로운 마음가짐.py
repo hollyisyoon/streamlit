@@ -115,7 +115,7 @@ with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'))
 
 with col3:
-    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 80)
+    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 83)
     effect_size = (100-int(temp_effect_size))/100
 
 standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
@@ -341,7 +341,7 @@ for url, group in grouped_rising_keyword:
     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
 
 #HTML
-st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+# st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
     <h3>신규 키워드⭐️</h3>
     <div class='callout'>
