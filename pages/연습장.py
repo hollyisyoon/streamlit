@@ -23,6 +23,8 @@ df2['날짜'] = pd.to_datetime(df2['날짜'])
 
 keyword1 = st.text_input('궁금한 키워드', value='해충제')
 
+import pandas as pd
+
 def get_TOP_10(df, keyword):
     temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
     top10_list = []
@@ -34,6 +36,8 @@ def get_TOP_10(df, keyword):
                 band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
                 band_top10 = band_top10.reset_index(drop=True)
                 band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
+                # Highlight top 3 rows
+                band_top10.loc[:2, :] = 'background-color: yellow'
                 top10_list.append(band_top10)
             except ValueError:
                 df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
@@ -45,13 +49,13 @@ def get_TOP_10(df, keyword):
     else:
         return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
 
+
 result = get_TOP_10(df2, keyword1)
 if result is not None:
     st.dataframe(result)
 else:
     st.write("No results found.")
 
-pd.DataFrame(get_Top_10(df2, keyword1))
 
 
 
