@@ -160,18 +160,18 @@ with col2:
 def convert_to_markdown(row):
     return f"[`{row['키워드']} | {row['평균 영향도']*100:.0f}`]({row['URL']})"
 
-def convert_to_markdown2(row):
-    return f"[`{row['키워드']} | {row['상승률']*100:.0f}`]({row['URL']})"
+# def convert_to_markdown2(row):
+#     return f"[`{row['키워드']} | {row['상승률']*100:.0f}`]({row['URL']})"
 
 def make_keyword_tag(df):
     markdown_rows = df.apply(convert_to_markdown, axis=1).tolist()
     markdown_text = '   '.join(markdown_rows)
     return mdlit(f"""{markdown_text}""")
 
-def make_keyword_tag2(df):
-    markdown_rows = df.apply(convert_to_markdown2, axis=1).tolist()
-    markdown_text = '   '.join(markdown_rows)
-    return mdlit(f"""{markdown_text}""")
+# def make_keyword_tag2(df):
+#     markdown_rows = df.apply(convert_to_markdown2, axis=1).tolist()
+#     markdown_text = '   '.join(markdown_rows)
+#     return mdlit(f"""{markdown_text}""")
 
 def new_keyword(standard_df, new_df):
     df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
