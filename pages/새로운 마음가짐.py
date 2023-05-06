@@ -287,9 +287,8 @@ except:
 
 ########### 키워드 DeepDive ###########
 st.title('🔎 키워드 DeepDive')
-col1, col2 = st.beta_columns((0.2, 0.8))
-deep_keyword1 = st.text_input('궁금한 키워드', value='해충제')
-deep_keyword2 = st_tags(
+keyword1 = st.text_input('궁금한 키워드', value='해충제')
+keyword2 = st_tags(
     label = '비교할 키워드',
     text = '직접 입력해보세요(최대 5개)',
     value = ['식물영양제', '뿌리영양제'],
@@ -307,34 +306,62 @@ def get_df(df, word1, args):
     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
     return result
 
-def plot_keyword_impact_grey(df, keywords):
-    # 키워드별로 데이터프레임을 분리합니다.
-    
-    keywords = keywords[::-1]
-    keyword_dfs = {}
-    for keyword in keywords:
-        keyword_dfs[keyword] = df[df['제목+내용(nng)'].str.contains(keyword)].copy()
-    
-    # 날짜별로 그룹핑하고 영향도 평균을 구합니다.
-    impact_by_week = {}
-    for keyword, keyword_df in keyword_dfs.items():
-        keyword_df['날짜'] = pd.to_datetime(keyword_df['날짜'])
-        keyword_df.set_index('날짜', inplace=True)
-        impact_by_week[keyword] = keyword_df.resample('W')['영향도'].mean()
-
-    # 라인 그래프를 그립니다.
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    
-    # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
-    colors = ["grey"] * (len(keywords) - 1) + ["blue"]
-
-    
-    for i, (keyword, impact) in enumerate(impact_by_week.items()):
-        fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
-        
-    fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
-    st.plotly_chart(fig, use_container_width=True)
-
-hello = get_df(df, deep_keyword1, deep_keyword2)
+hello = get_df(df, keyword1, keyword2)
 hello
-# plot_keyword_impact_grey(deepdive_df, keyword_list)
+
+
+
+
+
+
+# col1, col2 = st.beta_columns((0.2, 0.8))
+# deep_keyword1 = st.text_input('궁금한 키워드', value='해충제')
+# deep_keyword2 = st_tags(
+#     label = '비교할 키워드',
+#     text = '직접 입력해보세요(최대 5개)',
+#     value = ['식물영양제', '뿌리영양제'],
+#     suggestions = ['해충제', '제라늄'],
+#     maxtags = 5,
+#     key = '1')
+
+# def get_df(df, word1, args):
+#     # word1 은 반드시 입력해야 하는 기준
+#     # 입력한 단어 중 하나 이상이 포함된 행 찾기
+#     df['날짜'] = pd.to_datetime(df['날짜'])
+#     result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
+#     result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
+#     keywords = [word1] + (args)
+#     result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
+#     return result
+
+# def plot_keyword_impact_grey(df, keywords):
+#     # 키워드별로 데이터프레임을 분리합니다.
+    
+#     keywords = keywords[::-1]
+#     keyword_dfs = {}
+#     for keyword in keywords:
+#         keyword_dfs[keyword] = df[df['제목+내용(nng)'].str.contains(keyword)].copy()
+    
+#     # 날짜별로 그룹핑하고 영향도 평균을 구합니다.
+#     impact_by_week = {}
+#     for keyword, keyword_df in keyword_dfs.items():
+#         keyword_df['날짜'] = pd.to_datetime(keyword_df['날짜'])
+#         keyword_df.set_index('날짜', inplace=True)
+#         impact_by_week[keyword] = keyword_df.resample('W')['영향도'].mean()
+
+#     # 라인 그래프를 그립니다.
+#     fig = make_subplots(specs=[[{"secondary_y": True}]])
+    
+#     # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
+#     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
+
+    
+#     for i, (keyword, impact) in enumerate(impact_by_week.items()):
+#         fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
+        
+#     fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
+#     st.plotly_chart(fig, use_container_width=True)
+
+# hello = get_df(df, deep_keyword1, deep_keyword2)
+# hello
+# # plot_keyword_impact_grey(deepdive_df, keyword_list)
