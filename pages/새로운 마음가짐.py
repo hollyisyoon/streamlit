@@ -307,7 +307,7 @@ keyword2 = st_tags(
     value = ['식물영양제', '뿌리영양제'],
     suggestions = ['해충제', '제라늄'],
     maxtags = 5,
-    key = '1')
+    key = '2')
 
 def get_df(df, word1, args):
     df['날짜'] = pd.to_datetime(df['날짜'])
