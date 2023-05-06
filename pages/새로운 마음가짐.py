@@ -99,60 +99,68 @@ def get_count_top_words(df, keyword_no):
     return count_top_words
 
 ###시각화####
-col1, col2 = st.beta_columns((0.2, 0.8))
-with col1:
-    type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
-    keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
-    input_str = st.text_input('제거할 키워드')
-    stopwords = [x.strip() for x in input_str.split(',')]
+expander = st.expander('워드 클라우드 세부필터')
+    with expander:
+        col1, col2, col3 = st.beta_columns(3)    
+        with col1:
+            type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
+        with col2:
+            keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)
+        with col3:
+            stopwords = st_tags(
+                label = '제거할 키워드',
+                text = '직접 입력해보세요',
+                suggestions = ['식물', '화분'],
+                key = '1')
+            # input_str = st.text_input('제거할 키워드')
+            # stopwords = [x.strip() for x in input_str.split(',')]
 
-with col2:
-    try :
-        if type == '단순 빈도(Countvecterize)' :
-            words = get_count_top_words(standard_df, keyword_no)
-        else :
-            words = get_tfidf_top_words(standard_df, keyword_no)
+try :
+    if type == '단순 빈도(Countvecterize)' :
+        words = get_count_top_words(standard_df, keyword_no)
+    else :
+        words = get_tfidf_top_words(standard_df, keyword_no)
 
-        #워드클라우드
-        wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
-        wc.generate_from_frequencies(words)
+    #워드클라우드
+    wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
+    wc.generate_from_frequencies(words)
 
-        ###########동적 워드 클라우드####################
-        # 컬러 팔레트 생성
-        word_list=[]
-        freq_list=[]
-        fontsize_list=[]
-        position_list=[]
-        orientation_list=[]
-        color_list=[]
+    ###########동적 워드 클라우드####################
+    # 컬러 팔레트 생성
+    word_list=[]
+    freq_list=[]
+    fontsize_list=[]
+    position_list=[]
+    orientation_list=[]
+    color_list=[]
 
-        for (word, freq), fontsize, position, orientation, color in wc.layout_:
-            word_list.append(word)
-            freq_list.append(freq)
-            fontsize_list.append(fontsize)
-            position_list.append(position)
-            orientation_list.append(orientation)
-            color_list.append(color)
+    for (word, freq), fontsize, position, orientation, color in wc.layout_:
+        word_list.append(word)
+        freq_list.append(freq)
+        fontsize_list.append(fontsize)
+        position_list.append(position)
+        orientation_list.append(orientation)
+        color_list.append(color)
 
-        # get the positions
-        x=[]
-        y=[]
-        for i in position_list:
-            x.append(i[0])
-            y.append(i[1])
+    # get the positions
+    x=[]
+    y=[]
+    for i in position_list:
+        x.append(i[0])
+        y.append(i[1])
 
-        # WordCloud 시각화를 위한 Scatter Plot 생성
-        fig = go.Figure(go.Scatter(
-            x=x, y=y, mode="text",
-            text=word_list,
-            textfont=dict(size=fontsize_list, color=color_list),
-        ))
-        fig.update_layout(xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
-        st.plotly_chart(fig, use_container_width=True)
+    # WordCloud 시각화를 위한 Scatter Plot 생성
+    fig = go.Figure(go.Scatter(
+        x=x, y=y, mode="text",
+        text=word_list,
+        textfont=dict(size=fontsize_list, color=color_list),
+    ))
+    fig.update_layout(xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False), hovermode='closest')
+    st.plotly_chart(fig, use_container_width=True)
 
-    except :
-        st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
+except :
+    st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
 
 
 #### 키워드 큐레이팅 #####
@@ -337,7 +345,7 @@ def deepdive_lineplot(df, keywords):
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
         fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
         
-    fig.update_layout(title_text="시간별 키워드 영향도", xaxis_title="날짜", yaxis_title="평균 영향도")
+    fig.update_layout(title_text="시간별 키워드 영향도", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
 deepdive_lineplot(deepdive_df, deepdive_keywords)
