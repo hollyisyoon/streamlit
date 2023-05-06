@@ -6,6 +6,7 @@ from pyvis.network import Network
 from wordcloud import WordCloud
 from datetime import datetime, timedelta
 import pandas as pd
+from streamlit_tags import st_tags
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
