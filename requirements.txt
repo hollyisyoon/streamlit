@@ -25,3 +25,4 @@ pyvis
 st-annotated-text
 htbuilder
 markdownlit
+streamlit-tags
