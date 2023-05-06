@@ -130,7 +130,7 @@ def rising_keyword(standard_df, new_df):
         '키워드': keywords,
         '상승률': ups,
         'URL': urls,
-        'title': titles
+        '제목': titles
     })
 
     if len(result_df.index) >= 1 :

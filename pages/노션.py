@@ -5,8 +5,8 @@ STYLE = """
 .callout {
     padding: 1em;
     border-radius: 0.5em;
-    background-color: #f74040;
-    border-left: 4px solid #FF9800;
+    background-color: #F8F8F8;
+    border-left: 4px solid #f74040;
     margin-bottom: 1em;
     color: black;
 }
