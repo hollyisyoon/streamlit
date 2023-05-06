@@ -228,7 +228,7 @@ def new_keyword(standard_df, new_df):
         if len(word_df) > 0:
             avg_views = word_df['영향도'].mean()
             urls = word_df['URL'].tolist()
-            result_dict[word] = {'평균 영향도': float(avg_views), 'URL': urls}
+            result_dict[word] = {'평균 영향도': round(float(avg_views), 2), 'URL': urls}
             
     # 조회수 높은순으로 정렬        
     result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
@@ -335,7 +335,7 @@ grouped_rising_keyword = rising_keyword.groupby('URL')
 key_counter = 1
 rising_html_tags = ''
 for url, group in grouped_rising_keyword:
-    keywords = ' '.join(group['키워드'])
+    keywords = ' | '.join(group['키워드'])
     percent = group['상승률'].iloc[0]
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
