@@ -287,6 +287,7 @@ except:
 
 ########### 키워드 DeepDive ###########
 st.title('🔎 키워드 DeepDive')
+col1, col2 = st.beta_columns((0.2, 0.8))
 keyword1 = st.text_input('궁금한 키워드', value='해충제')
 keyword2 = st_tags(
     label = '비교할 키워드',
