@@ -18,7 +18,7 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        <a href="https://www.naver.com">키워드</a> 키워드 키워드 안녕하세요 오오오잉ㅇ
+        안녕하세요 이것은 제목이고요 | 키워드1 키워드2 키워드3 키워드4 <a href="https://www.naver.com">자세히 보기</a>
     </div>
     """,
     unsafe_allow_html=True
