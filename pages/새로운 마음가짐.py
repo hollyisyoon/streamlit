@@ -347,28 +347,36 @@ def deepdive_lineplot(df, keywords):
     fig.update_layout(title_text="시간별 키워드 영향도", yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
+import pandas as pd
+
 def get_TOP_10(df, keyword):
     temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
     top10_list = []
     for media_category in temp_df['매체'].unique():
         df_category = temp_df[temp_df['매체'] == media_category]
-        if 'nlargest' in dir(df_category):
-            band_top10 = df_category.nlargest(10, '영향도')
-            band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
-            band_top10 = band_top10.reset_index(drop=True)
-            band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
-            top10_list.append(band_top10)
-        elif len(df_category) > 0:
-            df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
-            df_category = df_category.reset_index(drop=True)
-            df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
-            top10_list.append(df_category)
-    return pd.concat(top10_list, ignore_index=False)
+        if len(df_category) > 0:
+            try:
+                band_top10 = df_category.nlargest(10, '영향도')
+                band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
+                band_top10 = band_top10.reset_index(drop=True)
+                band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
+                top10_list.append(band_top10)
+            except ValueError:
+                df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
+                df_category = df_category.reset_index(drop=True)
+                df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
+                top10_list.append(df_category)
+    if len(top10_list) > 0:
+        return pd.concat(top10_list, ignore_index=False)
+    else:
+        return None
 
-deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
-deepdive_lineplot(deepdive_df, deepdive_keywords)
-pd.DataFrame(get_Top_10(df, keyword1))
-
+try :
+    deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
+    deepdive_lineplot(deepdive_df, deepdive_keywords)
+    pd.DataFrame(get_Top_10(df, keyword1))
+except :
+    return st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 # col1, col2 = st.beta_columns((0.2, 0.8))
 # deep_keyword1 = st.text_input('궁금한 키워드', value='해충제')
