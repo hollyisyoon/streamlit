@@ -341,7 +341,7 @@ for url, group in grouped_rising_keyword:
     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
 
 #HTML
-# st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
     <h3>신규 키워드⭐️</h3>
     <div class='callout'>
