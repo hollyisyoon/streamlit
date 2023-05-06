@@ -47,16 +47,7 @@ def get_TOP_10(df, keyword):
     else:
         return pd.DataFrame(columns=['매체', '작성자', '제목', 'URL', '영향도'])
 
-def highlight_top3(s):
-    return ['background-color: yellow' if i < 3 else '' for i in range(len(s))]
-
-result = get_TOP_10(df2, keyword1)
-
-if result is not None:
-    styled_df = result.style.apply(highlight_top3, axis=0)
-    st.dataframe(styled_df)
-else:
-    st.write("No results found.")
+get_TOP_10(df2, keyword1)
 
 
 
