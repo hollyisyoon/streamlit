@@ -56,13 +56,14 @@ html_tags = ''
 for url, group in groups:
     keywords = ' '.join(group['키워드'])
     percent = group['상승률'].iloc[0]
+    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
     html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
-    key_counter += 1
 
 # Display the generated HTML tags
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
     <div class='callout'>
+    <t1>급상승 키워드📈</t1>
     {html_tags}, 
     </div>""",
     unsafe_allow_html=True
