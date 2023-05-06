@@ -87,18 +87,15 @@ def 네트워크(network_keywords):
 
 
     net = Network(notebook=True, cdn_resources='in_line')
-
     net.from_nx(G)
-
     return [net, similar_words]
 
 network_result = 네트워크(network_keywords)
 
-with col3_2:
-    try:
-        net = 네트워크[0]
-        net.save_graph(f'/app/streamlit/pyvis_graph.html')
-        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        components.html(HtmlFile.read(), height=435)
-    except:
-        st.write('존재하지 않는 키워드예요.')
+try:
+    net = network_result[0]
+    net.save_graph(f'/app/streamlit/pyvis_graph.html')
+    HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+    components.html(HtmlFile.read())
+except:
+    st.write('존재하지 않는 키워드예요.')
