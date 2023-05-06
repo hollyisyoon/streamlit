@@ -1,4 +1,5 @@
 import streamlit as st
+from markdownlit import mdlit
 
 # Custom CSS styles
 STYLE = """
@@ -19,7 +20,7 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        [키워드](https://www.naver.com) 키워드 키워드 안녕하세요 오오오잉ㅇ
+        mdlit("""[키워드](https://www.naver.com) 키워드 키워드 안녕하세요 오오오잉ㅇ""")
     </div>
     """,
     unsafe_allow_html=True
