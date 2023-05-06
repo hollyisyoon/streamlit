@@ -11,21 +11,21 @@ STYLE = """
     color: black;
 }
 
-.callout a #key1 {
+.callout a#key1 {
     color: #5c5c5c;
     text-decoration: underline;
     text-decoration-color: gray;
     background-color: #ff7d7d;
 }
 
-.callout a #key2 {
+.callout a#key2 {
     color: #5c5c5c;
     text-decoration: underline;
     text-decoration-color: gray;
     background-color: #ff9696;
 }
 
-.callout a #key3 {
+.callout a#key3 {
     color: #5c5c5c;
     text-decoration: underline;
     text-decoration-color: gray;
