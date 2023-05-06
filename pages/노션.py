@@ -43,7 +43,8 @@ st.markdown(
         <a id="key2" href="https://www.naver.com">키워드2</a>
         <a id="key3" href="https://www.naver.com">키워드3</a>
     </div>
-    """
+    """,
+    unsafe_allow_html=True
 )
 
 
