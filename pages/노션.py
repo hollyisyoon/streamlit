@@ -13,25 +13,21 @@ STYLE = """
 
 .callout a#key1 {
     color: #000;
-    text-decoration: underline;
     background-color: #FAF3DD;
 }
 
 .callout a#key2 {
     color: #000;
-    text-decoration: underline;
     background-color: #E9F3F7;
 }
 
 .callout a#key3 {
     color: #000;
-    text-decoration: underline;
     background-color: #F6F3F8;
 }
 
 .callout a#key4 {
     color: #000;
-    text-decoration: underline;
     background-color: #EEF3ED;
 }
 """
