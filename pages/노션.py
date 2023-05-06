@@ -14,22 +14,19 @@ STYLE = """
 .callout a#key1 {
     color: #000;
     text-decoration: underline;
-    text-decoration-color: gray;
-    background-color: #ff7d7d;
+    background-color: #ffbbb8;
 }
 
 .callout a#key2 {
     color: #000;
     text-decoration: underline;
-    text-decoration-color: gray;
-    background-color: #ff9696;
+    background-color: #b8f1ff;
 }
 
 .callout a#key3 {
     color: #000;
     text-decoration: underline;
-    text-decoration-color: gray;
-    background-color: #ffbaba;
+    background-color: #b8c8ff;
 }
 """
 
@@ -39,9 +36,9 @@ st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="callout">
-        <a id="key1" href="https://www.naver.com"> 키워드1 </a>
-        <a id="key2" href="https://www.naver.com"> 키워드2 </a>
-        <a id="key3" href="https://www.naver.com"> 키워드3 </a>
+        <a id="key1" href="https://www.naver.com">키워드1</a>&nbsp;
+        <a id="key2" href="https://www.naver.com">키워드2</a>&nbsp;
+        <a id="key3" href="https://www.naver.com">키워드3</a>
     </div>
     """,
     unsafe_allow_html=True
