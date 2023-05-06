@@ -8,8 +8,6 @@ html_content = "<div>Hello world</div>"
 yellow_background = "<style>:root {background-color: yellow;}</style>"
 components.html(yellow_background + html_content)
 
-
-
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df['날짜'] = pd.to_datetime(df['날짜'])
 # df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
@@ -110,9 +108,8 @@ def rising_keyword(standard_df, new_df):
     #     return result_df
     
 st.subheader('🔥 급상승 키워드')
-try:
-    rising_keyword = rising_keyword(standard_df, new_df)
-    rising_keyword
+rising_keyword = rising_keyword(standard_df, new_df)
+rising_keyword
 #     make_keyword_tag2(rising_keyword)
 # except:
 #     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
