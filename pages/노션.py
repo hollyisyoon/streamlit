@@ -63,8 +63,8 @@ for url, group in groups:
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
     <div class='callout'>
-    <t1>급상승 키워드📈</t1>
-    {html_tags}, 
+    <h1>급상승 키워드📈</h1>
+    {html_tags}
     </div>""",
     unsafe_allow_html=True
 )
