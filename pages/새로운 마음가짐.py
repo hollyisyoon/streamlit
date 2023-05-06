@@ -374,7 +374,7 @@ def get_TOP_10(df, keyword):
 try :
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
-    pd.DataFrame(get_Top_10(df, keyword1))
+    pd.DataFrame(get_Top_10(df2, keyword1))
 except :
     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
