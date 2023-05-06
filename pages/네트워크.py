@@ -9,7 +9,6 @@ import pandas as pd
 from streamlit_tags import st_tags
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
-df['날짜'] = pd.to_datetime(df['날짜'])
 
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
@@ -93,8 +92,7 @@ def 네트워크(network_keywords):
 
     return [net, similar_words]
 
-네트워크 = 네트워크(network_keywords)
-
+network_result = 네트워크(network_keywords)
 
 with col3_2:
     try:
