@@ -2,6 +2,35 @@ import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
 
+import koreanize_matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib.colors import to_rgba
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import ast
+import time
+
+import streamlit as st
+from streamlit_extras.let_it_rain import rain
+from streamlit_tags import st_tags
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from collections import Counter
+from wordcloud import WordCloud
+from datetime import datetime, timedelta
+
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
+import networkx as nx
+from gensim.models import Word2Vec
+import time
+import itertools
+from markdownlit import mdlit
+
+
 st.title("Yellow component")
 
 html_content = "<div>Hello world</div>"
