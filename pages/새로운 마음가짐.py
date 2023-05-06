@@ -376,7 +376,7 @@ try :
     deepdive_lineplot(deepdive_df, deepdive_keywords)
     pd.DataFrame(get_Top_10(df, keyword1))
 except :
-    return st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
+    st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 # col1, col2 = st.beta_columns((0.2, 0.8))
 # deep_keyword1 = st.text_input('궁금한 키워드', value='해충제')
