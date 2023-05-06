@@ -24,11 +24,12 @@ keyword_all = [keyword1]+keyword2
 network_keywords = [eval(i) for i in df['제목+내용(nng)']]
 network_keywords
 
-# def 네트워크(network_keywords):
-#     networks = []
-#     for keyword in network_keywords:
-#         network_keyword = [w for w in keyword if len(w) > 1]
-#         networks.append(network_keyword)
+def 네트워크(network_keywords):
+    networks = []
+    for keyword in network_keywords:
+        network_keyword = [w for w in keyword if len(w) > 1]
+        networks.append(network_keyword)
+    return networks
 
 #     model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
 
@@ -92,7 +93,8 @@ network_keywords
 #     net.from_nx(G)
 #     return [net, similar_words]
 
-# network_result = 네트워크(network_keywords)
+network_result = 네트워크(network_keywords)
+network_result
 
 # try:
 #     net = network_result[0]
