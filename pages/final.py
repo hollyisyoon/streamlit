@@ -50,7 +50,7 @@ STYLE = """
     padding: 1em;
     border-radius: 0.5em;
     background-color: #F8F8F8;
-    border-left: 4px solid #f74040;
+    border-left: 4px solid #195ef7;
     margin-bottom: 1em;
     color: black;
 }
@@ -229,8 +229,6 @@ except :
 
 #########Section2 - 키워드 큐레이팅############
 st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
-st.write("여기에 서브타이틀 2의 내용을 작성합니다.")
-
 def new_keyword(standard_df, new_df):
     df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     content_list_1 = []
