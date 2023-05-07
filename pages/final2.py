@@ -239,9 +239,12 @@ def 네트워크(network_list, all_keywords):
     return [net, similar_words]
 
 #연관분석
+
 expander = st.expander('연관분석 세부필터')
 with expander:
     col1, col2= st.beta_columns(2)    
+    min_date = datetime(2022, 6, 1)
+    max_date = datetime(2023, 4, 26)
     with col1:
         start_date = st.date_input("시작 날짜",
                                 value=datetime(2022,6,1),
