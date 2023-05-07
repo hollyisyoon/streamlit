@@ -453,10 +453,10 @@ def get_TOP_10(df, keyword):
     
 try :
     st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-    st.markdown("<h3>키워드별 영향도 그래프</h3>")
+    st.markdown("<h3>키워드별 영향도 그래프</h3>", unsafe_allow_html=True)
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
-    st.markdown("<h3>매체별 Top10 게시글</h3>")
+    st.markdown("<h3>매체별 Top10 게시글</h3>", unsafe_allow_html=True)
     keyword_result = get_TOP_10(df2, keyword1)
     st.dataframe(keyword_result)
 
