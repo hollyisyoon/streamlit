@@ -83,14 +83,17 @@ def deepdive_lineplot(df, keywords):
     # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
 
+
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
+        # 영향도 데이터를 보간합니다.
+        impact = impact.interpolate()
         fig.add_trace(
             go.Scatter(
                 x=impact.index,
                 y=impact.values,
                 name=keyword,
                 line_color=colors[i],
-                line=dict(dash='dot' if pd.NaT in impact.values else 'solid')
+                line=dict(dash='dot') if i < len(keywords) - 1 else None
             ),
             secondary_y=False
         )
