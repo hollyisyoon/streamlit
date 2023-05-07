@@ -4,12 +4,15 @@ import streamlit.components.v1 as components
 # JavaScript 함수 정의 (클릭 이벤트 처리)
 js_code = """
 <script>
-    function scrollToContent(sectionId) {
-        const element = document.getElementById(sectionId);
-        element.scrollIntoView({ behavior: 'smooth' });
+    window.onload = function() {
+        function scrollToContent(sectionId) {
+            const element = document.getElementById(sectionId);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 </script>
 """
+
 
 # 컴포넌트로 HTML 코드 추가
 components.html(js_code)
