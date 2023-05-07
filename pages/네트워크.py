@@ -30,6 +30,57 @@ import gensim
 from pyvis.network import Network
 from wordcloud import WordCloud
 
+css_code = """
+<style>
+    .custom-sidebar {
+        padding: 20px;
+        background-color: #f2f2f2;
+        font-size: 18px;
+        color: #333;
+    }
+    
+    .custom-sidebar a {
+        color: #333;
+        text-decoration: none;
+    }
+</style>
+"""
+
+STYLE = """
+.callout {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: #F8F8F8;
+    border-left: 4px solid #195ef7;
+    margin-bottom: 1em;
+    color: black;
+}
+
+.callout a#key1 {
+    color: #000;
+    background-color: #FAF3DD;
+    text-decoration: none;
+}
+
+.callout a#key2 {
+    color: #000;
+    background-color: #E9F3F7;
+    text-decoration: none;
+}
+
+.callout a#key3 {
+    color: #000;
+    background-color: #F6F3F8;
+    text-decoration: none;
+}
+
+.callout a#key4 {
+    color: #000;
+    background-color: #EEF3ED;
+    text-decoration: none;
+}
+"""
+
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 
 st.title('🔎 키워드 DeepDive')
@@ -42,6 +93,13 @@ keyword2 = st_tags(
     maxtags = 5,
     key = '2')
 
+#########Section4 - 키워드 deepdive(네트워크 분석)############
+st.markdown("---")
+st.markdown("<h2 id='section4'>키워드 연관탐색</h2>", unsafe_allow_html=True)
+
+all_keywords = [keyword1]+keyword2
+st.text(f'🔮 {all_keywords}에 대한 연관분석을 시작합니다')
+
 expander = st.expander('연관분석 세부필터')
 with expander:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
@@ -50,7 +108,6 @@ def extract_df(df, media):
     standard_df = df[(df['매체'] == media)]
     return standard_df
 
-all_keywords = [keyword1]+keyword2
 df2 = extract_df(df, media)
 network_list = [eval(i) for i in df2['제목+내용(nng)']]
 
