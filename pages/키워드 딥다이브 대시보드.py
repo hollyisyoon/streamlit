@@ -163,7 +163,50 @@ try:
 except :
     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
-#########Section4 - 키워드 deepdive(네트워크 분석)############
+#########Section4 - 키워드 deepdive(상위 게시글)############
+
+def get_TOP_10(df, media, keyword):
+    df = df[df['매체'] == media]
+    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
+    top10_list = []
+    for media_category in temp_df['매체'].unique():
+        df_category = temp_df[temp_df['매체'] == media_category]
+        if len(df_category) > 0:
+            try:
+                band_top10 = df_category.nlargest(10, '영향도')
+                band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
+                band_top10 = band_top10.reset_index(drop=True)
+                band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
+                top10_list.append(band_top10)
+            except ValueError:
+                df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
+                df_category = df_category.reset_index(drop=True)
+                df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
+                top10_list.append(df_category)
+    if len(top10_list) > 0:
+        return pd.concat(top10_list, ignore_index=False)
+    else:
+        return None
+
+tabs = ["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트']
+active_tab = st_tags(
+    options=tabs,
+    selected=[tabs[0]],
+    key="tabs",
+)
+
+if "식물갤러리" in active_tab:
+    get_TOP_10(df, "식물갤러리", keyword1)
+elif "식물병원" in active_tab:
+    get_TOP_10(df, "식물병원", keyword1)
+elif "네이버카페" in active_tab:
+    get_TOP_10(df, "네이버카페", keyword1)
+elif "네이버블로그" in active_tab:
+    get_TOP_10(df, "네이버블로그", keyword1)
+elif "네이버포스트" in active_tab:
+    get_TOP_10(df, "네이버포스트", keyword1)
+
+#########Section5 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
 st.markdown("<h2 id='section4'>키워드 연관분석</h2>", unsafe_allow_html=True)
 
