@@ -2,9 +2,9 @@ import streamlit as st
 
 html_code = '''
 <div class="team-member">
-  <img src="profile_image.jpg" alt="Profile Image" class="profile-image">
-  <h3 class="name">John Doe</h3>
-  <p class="introduction">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae libero velit. Proin commodo vestibulum arcu. Nullam eu est nulla.</p>
+  <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
+  <h3 class="name">윤훈영</h3>
+  <p class="introduction">안녕하세요오오옹.</p>
 </div>
 
 <div class="team-member">
