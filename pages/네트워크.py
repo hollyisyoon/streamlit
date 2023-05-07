@@ -86,9 +86,6 @@ df['날짜'] = pd.to_datetime(df['날짜'])
 st.title('🔎 키워드 DeepDive')
 
 #########Section3 - 키워드 deepdive(시계열)############
-st.markdown("---")
-st.markdown("<h2 id='section3'>⏳ 시기별 키워드 영향도</h2>", unsafe_allow_html=True)
-
 col1, col2 = st.beta_columns((0.2, 0.8))
 with col1:
     keyword1 = st.text_input('궁금한 키워드', value='제라늄')
@@ -96,81 +93,9 @@ with col2:
     keyword2 = st_tags(
         label = '비교할 키워드',
         text = '직접 입력해보세요(최대 5개)',
-        value = ['총채벌레'],
+        value = ['총채벌레','뿌리파리'],
         maxtags = 5,
         key = '2')
-
-def get_df(df, word1, args):
-    df['날짜'] = pd.to_datetime(df['날짜'])
-    result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
-    result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
-    keywords = [word1] + (args)
-    result = result[result['제목+내용(nng)'].str.contains('|'.join(keywords))]
-    for arg in keywords:
-        if arg not in ' '.join(result['제목+내용(nng)'].tolist()):
-            st.warning(f"'다음 언급되지 않은 키워드입니다. 다시 입력해주세요. {arg}'")
-            return None, None
-    return result, keywords
-
-def deepdive_lineplot(df, keywords):
-    # 키워드별로 데이터프레임을 분리합니다.
-    keywords = keywords[::-1]
-    keyword_dfs = {}
-    for keyword in keywords:
-        keyword_dfs[keyword] = df[df['제목+내용(nng)'].str.contains(keyword)].copy()
-    
-    # 날짜별로 그룹핑하고 영향도 평균을 구합니다.
-    impact_by_week = {}
-    for keyword, keyword_df in keyword_dfs.items():
-        keyword_df['날짜'] = pd.to_datetime(keyword_df['날짜'])
-        keyword_df.set_index('날짜', inplace=True)
-        impact_by_week[keyword] = keyword_df.resample('W')['영향도'].mean()
-
-    # 라인 그래프를 그립니다.
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    
-    # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
-    colors = ["grey"] * (len(keywords) - 1) + ["blue"]
-
-    for i, (keyword, impact) in enumerate(impact_by_week.items()):
-        fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
-        
-    fig.update_layout(yaxis_title="평균 영향도")
-    st.plotly_chart(fig, use_container_width=True)
-
-def get_TOP_10(df, keyword):
-    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
-    top10_list = []
-    for media_category in temp_df['매체'].unique():
-        df_category = temp_df[temp_df['매체'] == media_category]
-        if len(df_category) > 0:
-            try:
-                band_top10 = df_category.nlargest(10, '영향도')
-                band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
-                band_top10 = band_top10.reset_index(drop=True)
-                band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
-                top10_list.append(band_top10)
-            except ValueError:
-                df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
-                df_category = df_category.reset_index(drop=True)
-                df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
-                top10_list.append(df_category)
-    if len(top10_list) > 0:
-        return pd.concat(top10_list, ignore_index=False)
-    else:
-        return None
-    
-try :
-    st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-    st.markdown("<h3>키워드별 영향도 그래프</h3>", unsafe_allow_html=True)
-    deepdive_df, deepdive_keywords = get_df(df, keyword1, keyword2)
-    deepdive_lineplot(deepdive_df, deepdive_keywords)
-    st.markdown("<h3>매체별 Top10 게시글</h3>", unsafe_allow_html=True)
-    keyword_result = get_TOP_10(df, keyword1)
-    st.dataframe(keyword_result)
-
-except :
-    st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 #########Section4 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
