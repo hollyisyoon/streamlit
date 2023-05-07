@@ -15,7 +15,7 @@ css_code = """
 """
 
 # 컴포넌트로 CSS 코드 추가
-st.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
+st.sidebar.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
 
 # 사이드바에 HTML을 추가하여 서브타이틀 클릭 이벤트 처리
 st.sidebar.markdown("""
