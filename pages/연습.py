@@ -1,19 +1,46 @@
 import streamlit as st
 
-# Define tabs
-tabs = ["식물갤러리", "식물병원", "네이버카페", "네이버블로그", "네이버포스트"]
+html_code = '''
+<div class="team-member">
+  <img src="profile_image.jpg" alt="Profile Image" class="profile-image">
+  <h3 class="name">John Doe</h3>
+  <p class="introduction">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae libero velit. Proin commodo vestibulum arcu. Nullam eu est nulla.</p>
+</div>
 
-# Create a sidebar with tab selection
-selected_tab = st.sidebar.radio("Tabs", tabs)
+<div class="team-member">
+  <img src="profile_image.jpg" alt="Profile Image" class="profile-image">
+  <h3 class="name">Jane Smith</h3>
+  <p class="introduction">Praesent accumsan ligula nec mauris tincidunt, ac volutpat ex condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+</div>
+'''
 
-# Render content based on selected tab
-if selected_tab == "식물갤러리":
-    st.write("This is the content of 식물갤러리.")
-elif selected_tab == "식물병원":
-    st.write("This is the content of 식물병원.")
-elif selected_tab == "네이버카페":
-    st.write("This is the content of 네이버카페.")
-elif selected_tab == "네이버블로그":
-    st.write("This is the content of 네이버블로그.")
-elif selected_tab == "네이버포스트":
-    st.write("This is the content of 네이버포스트.")
+css_code = '''
+<style>
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.introduction {
+  margin-top: 10px;
+  font-size: 16px;
+}
+</style>
+'''
+
+st.markdown(css_code, unsafe_allow_html=True)
+st.markdown(html_code, unsafe_allow_html=True)
