@@ -260,9 +260,9 @@ with expander:
                                 max_value=max_date - timedelta(days=7))
         # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
         end_date = st.date_input("끝 날짜",
-                                value=datetime(2022,7,1),
+                                value=datetime(2022,12,1),
                                 min_value=start_date + timedelta(days=7),
-                                max_value=start_date + timedelta(days=60))
+                                max_value=start_date + timedelta(days=200))
     with col2:
         media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 
