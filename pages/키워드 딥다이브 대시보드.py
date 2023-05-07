@@ -185,10 +185,7 @@ def get_TOP_post(df, media, deepdive_keywords):
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
 with tab1:
-    try:
-       get_TOP_post(df, "식물갤러리", deepdive_keywords)
-    except:
-        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
+    get_TOP_post(df, "식물갤러리", deepdive_keywords)
 with tab2:
     try:
         get_TOP_post(df, "식물병원", deepdive_keywords)
