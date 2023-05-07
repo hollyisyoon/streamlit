@@ -88,7 +88,6 @@ try :
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
 
-<<<<<<< HEAD
     this_week_words = list(이번주_df['unique_content'].explode())
     last_week_words = list(지난주_df['unique_content'].explode())
 
