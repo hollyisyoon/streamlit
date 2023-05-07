@@ -1,4 +1,34 @@
+import koreanize_matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib.colors import to_rgba
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import networkx as nx
+from gensim.models import Word2Vec
+
+import pandas as pd
+import ast
+import time
+from datetime import datetime, timedelta
+import itertools
+from markdownlit import mdlit
+
+#스트림잇
 import streamlit as st
+from streamlit_extras.let_it_rain import rain
+from streamlit_tags import st_tags
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
+
+#계산
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from collections import Counter
+from wordcloud import WordCloud
+
+
 
 # CSS 스타일 정의
 css_code = """
