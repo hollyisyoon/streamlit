@@ -157,12 +157,12 @@ def deepdive_lineplot(df, keywords):
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
-try :
-    deepdive_df, deepdive_keywords = get_df(df, keyword1, keyword2)
-    deepdive_lineplot(deepdive_df, deepdive_keywords)
 
-except :
-    st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
+deepdive_df, deepdive_keywords = get_df(df, keyword1, keyword2)
+deepdive_lineplot(deepdive_df, deepdive_keywords)
+
+# except :
+#     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 #########Section4 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
