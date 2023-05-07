@@ -88,7 +88,7 @@ STYLE = """
 st.title("외부 트렌드 모니터링 대시보드")
 
 #########Section1 - wordcloud############
-st.markdown("<h2 id='section1'>🪄 키워트 발굴</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='section1'>🪄 키워드 발굴</h2>", unsafe_allow_html=True)
 
 ##데이터##
 def to_list(text):
@@ -260,13 +260,78 @@ def new_keyword(standard_df, new_df):
     })
     return result_df
 
+def rising_keyword(standard_df, new_df):
+    # 데이터 합치기 
+    df = pd.concat([standard_df, new_df])
+
+    # 날짜 구하기
+    이번주마지막날 = df['날짜'].max()
+    이번주첫날 = (df['날짜'].max() - timedelta(days=7))
+    지난주첫날 = 이번주첫날 - timedelta(days=7)
+    
+    이번주_df = df[(df['날짜'] > 이번주첫날) & (df['날짜'] <= 이번주마지막날)]
+    지난주_df = df[(df['날짜'] > 지난주첫날) & (df['날짜'] <= 이번주첫날)]
+        
+    # 중복값 제거한 새로운 열 추가
+    이번주_df = 이번주_df.copy()
+    이번주_df['unique_content'] = 이번주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
+    이번주_df['unique_content'] = 이번주_df['unique_content'].apply(lambda x: list(set(x)))
+
+    지난주_df = 지난주_df.copy()
+    지난주_df['unique_content'] = 지난주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
+    지난주_df['unique_content'] = 지난주_df['unique_content'].apply(lambda x: list(set(x)))
+
+    this_week_words = list(이번주_df['unique_content'].explode())
+    last_week_words = list(지난주_df['unique_content'].explode())
+
+    this_week_word_counts = Counter(this_week_words)
+    last_week_word_counts = Counter(last_week_words)
+
+    # 이번주와 지난주에 모두 언급된 단어를 모은 집합
+    common_words = set(this_week_word_counts.keys()) & set(last_week_word_counts.keys())
+    result = {}
+    for word in common_words:
+        # 해당 단어가 언급된 모든 URL을 리스트로 모음
+        url_list = list(이번주_df.loc[이번주_df['unique_content'].apply(lambda x: word in x)]['URL'])
+        # 영향도가 가장 높은 URL을 찾아서 출력
+        url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
+        increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
+        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
+
+    # 상승률 기준 상위 10개 단어 출력
+    keywords = []
+    ups = []
+    urls = []
+
+    for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
+        if data['상승률']>0:
+            keywords.append(word)
+            ups.append(f"{data['상승률']*100}%")
+            urls.append(data['URL'])
+
+    result_df = pd.DataFrame({
+        '상승률': ups,
+        '키워드': keywords,
+        'URL': urls
+    })
+
+    if len(result_df.index) >= 1 :
+        return result_df
+
 ##키워드##
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown(f"""<h3>신규 키워드⭐️</h3>""")
+st.markdown("""<h3>신규 키워드⭐️</h3>""")
 new_keyword = new_keyword(standard_df, new_df)
 grouped_new_keyword = new_keyword.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
 grouped_new_keyword = grouped_new_keyword[['평균 영향도', '키워드', 'URL']].sort_values(by='평균 영향도', ascending=False)
 st.dataframe(grouped_new_keyword)
+
+st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown("""<h3>신규 키워드⭐️</h3>""")
+rising_keyword = rising_keyword(standard_df, new_df)
+grouped_rising_keyword = rising_keyword.groupby('URL').agg({'키워드': list, '상승률': 'first'}).reset_index()
+grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False)
+st.dataframe(grouped_rising_keyword)
 
 # except:
 #     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
