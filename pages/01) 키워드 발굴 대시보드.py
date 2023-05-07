@@ -254,104 +254,47 @@ def new_keyword(standard_df, new_df):
         urls.append('\n'.join(value['URL']))
     
     result_df = pd.DataFrame({
-        '키워드': keywords,
         '평균 영향도': avg_views,
+        '키워드': keywords,
         'URL': urls
     })
 
     return result_df
 
-def rising_keyword(standard_df, new_df):
-    # 데이터 합치기 
-    df = pd.concat([standard_df, new_df])
-
-    # 날짜 구하기
-    이번주마지막날 = df['날짜'].max()
-    이번주첫날 = (df['날짜'].max() - timedelta(days=7))
-    지난주첫날 = 이번주첫날 - timedelta(days=7)
-    
-    이번주_df = df[(df['날짜'] > 이번주첫날) & (df['날짜'] <= 이번주마지막날)]
-    지난주_df = df[(df['날짜'] > 지난주첫날) & (df['날짜'] <= 이번주첫날)]
-        
-    # 중복값 제거한 새로운 열 추가
-    이번주_df = 이번주_df.copy()
-    이번주_df['unique_content'] = 이번주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
-    이번주_df['unique_content'] = 이번주_df['unique_content'].apply(lambda x: list(set(x)))
-
-    지난주_df = 지난주_df.copy()
-    지난주_df['unique_content'] = 지난주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
-    지난주_df['unique_content'] = 지난주_df['unique_content'].apply(lambda x: list(set(x)))
-
-    this_week_words = list(이번주_df['unique_content'].explode())
-    last_week_words = list(지난주_df['unique_content'].explode())
-
-    this_week_word_counts = Counter(this_week_words)
-    last_week_word_counts = Counter(last_week_words)
-
-    # 이번주와 지난주에 모두 언급된 단어를 모은 집합
-    common_words = set(this_week_word_counts.keys()) & set(last_week_word_counts.keys())
-    result = {}
-    for word in common_words:
-        # 해당 단어가 언급된 모든 URL을 리스트로 모음
-        url_list = list(이번주_df.loc[이번주_df['unique_content'].apply(lambda x: word in x)]['URL'])
-        # 영향도가 가장 높은 URL을 찾아서 출력
-        url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
-        increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
-        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
-
-    # 상승률 기준 상위 10개 단어 출력
-    keywords = []
-    ups = []
-    urls = []
-
-    for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
-        if data['상승률']>0:
-            keywords.append(word)
-            ups.append(f"{data['상승률']*100}%")
-            urls.append(data['URL'])
-
-    result_df = pd.DataFrame({
-        '키워드': keywords,
-        '상승률': ups,
-        'URL': urls
-    })
-
-    if len(result_df.index) >= 1 :
-        return result_df
-
 ##키워드##
 try:
     new_keyword = new_keyword(standard_df, new_df)
+    pd.DataFrame(new_keyword)
 except:
     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
-try:
-    rising_keyword = rising_keyword(standard_df, new_df)
-except:
-    st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+# try:
+#     rising_keyword = rising_keyword(standard_df, new_df)
+# except:
+#     st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
 
-##신규 키워드##
-grouped_new_keyword = new_keyword.groupby('URL')
-key_counter = 1
-new_html_tags = ''
-for url, group in grouped_new_keyword:
-    keywords = ' | '.join(group['키워드'])
-    percent = group['평균 영향도'].iloc[0]
-    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
-    new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}💫)</b>&nbsp;"
+# ##신규 키워드##
+# grouped_new_keyword = new_keyword.groupby('URL')
+# key_counter = 1
+# new_html_tags = ''
+# for url, group in grouped_new_keyword:
+#     keywords = ' | '.join(group['키워드'])
+#     percent = group['평균 영향도'].iloc[0]
+#     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+#     new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}💫)</b>&nbsp;"
 
-##급상승 키워드##    
-grouped_rising_keyword = rising_keyword.groupby('URL')
-key_counter = 1
-rising_html_tags = ''
-for url, group in grouped_rising_keyword:
-    keywords = ' | '.join(group['키워드'])
-    percent = group['상승률'].iloc[0]
-    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
-    rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+# ##급상승 키워드##    
+# grouped_rising_keyword = rising_keyword.groupby('URL')
+# key_counter = 1
+# rising_html_tags = ''
+# for url, group in grouped_rising_keyword:
+#     keywords = ' | '.join(group['키워드'])
+#     percent = group['상승률'].iloc[0]
+#     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+#     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
 
-pd.DataFrame(new_keyword)
-pd.DataFrame(grouped_new_keyword)
+# pd.DataFrame(new_keyword)
+# pd.DataFrame(grouped_new_keyword)
 
 # #HTML
 # st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
