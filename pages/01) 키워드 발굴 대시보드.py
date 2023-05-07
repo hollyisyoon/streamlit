@@ -341,7 +341,9 @@ def rising_keyword(standard_df, new_df):
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""<h3>📌 영향도 높은 키워드</h3>""", unsafe_allow_html=True)
 top_keywords = get_top_keywords(standard_df)
-st.dataframe(top_keywords)
+grouped_top_keyword = top_keywords.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
+grouped_top_keyword = grouped_top_keyword[['평균 영향도', '키워드', 'URL']].sort_values(by='평균 영향도', ascending=False).reset_index(drop=True)
+st.dataframe(grouped_top_keyword)
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""<h3>⭐️ 신규 키워드</h3>""", unsafe_allow_html=True)
