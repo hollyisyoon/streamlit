@@ -1,34 +1,32 @@
-import streamlit as st
-import streamlit.components.v1 as components
-import pandas as pd
-
 import koreanize_matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from matplotlib.colors import to_rgba
 import plotly.graph_objects as go
 import plotly.express as px
-import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from pyvis.network import Network
+import networkx as nx
+import gensim
+from gensim.models import Word2Vec
+from PIL import Image
+
+import pandas as pd
 import ast
 import time
+from datetime import datetime, timedelta
+import itertools
+from markdownlit import mdlit
 
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
 from wordcloud import WordCloud
-from datetime import datetime, timedelta
-
-import warnings
-warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
-import networkx as nx
-from gensim.models import Word2Vec
-import time
-import itertools
-from markdownlit import mdlit
 
 df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
@@ -83,8 +81,6 @@ def deepdive_lineplot(df, keywords):
     st.plotly_chart(fig, use_container_width=True)
 
 try :
-    st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-    st.markdown("<h3>키워드별 영향도 그래프</h3>", unsafe_allow_html=True)
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
 
