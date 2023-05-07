@@ -469,23 +469,7 @@ st.markdown("---")
 st.markdown("<h2 id='section4'>키워드 연관탐색</h2>", unsafe_allow_html=True)
 
 all_keywords = [keyword1]+keyword2
-st.write(f'{all_keywords}에 대한 연관분석을 시작합니다')
-
-#키워드 존재하는 프레임만 가져오기
-def get_words(df, col, keyword):
-    df[col] = df[col].map(to_list)
-    text_list = []
-    for sublist in df[col]:
-        text_list.append(sublist)
-    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=3, epochs=30)
-    results = []
-    for key in keyword:
-        try:
-            similar_words = model.wv.most_similar(key, topn=10)
-            results.extend([(key, word, score) for word, score in similar_words])
-        except:
-            pass
-    return results
+st.text(f'🔮 {all_keywords}에 대한 연관분석을 시작합니다')
 
 #네트워크 분석결과
 def 네트워크(network_list, all_keywords):
@@ -545,12 +529,7 @@ def 네트워크(network_list, all_keywords):
 #연관분석
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
-        # Define the data
-        data = get_words(df2,'제목+내용(nng)', all_keywords)
-        if data is None:
-            st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄🌸')
-
-        network_list = [eval(i) for i in data['제목+내용(nng)']]
+        network_list = [eval(i) for i in df2['제목+내용(nng)']]
         네트워크 = 네트워크(network_list, all_keywords)
         try:
             net = 네트워크[0]
