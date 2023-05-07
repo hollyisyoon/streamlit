@@ -83,9 +83,10 @@ STYLE = """
 """
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
-st.title('🔎 키워드 DeepDive')
+st.title('🔎 트렌드 키워드 분석')
 
 #########Section3 - 키워드 deepdive(시계열)############
+st.markdown("<h2 id='section4'>키워드 시계열 분석</h2>", unsafe_allow_html=True)
 col1, col2 = st.beta_columns((0.3, 0.7))
 with col1:
     keyword1 = st.text_input('궁금한 키워드', value='제라늄')
@@ -165,7 +166,7 @@ deepdive_lineplot(deepdive_df, deepdive_keywords)
 
 #########Section4 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
-st.markdown("<h2 id='section4'>키워드 연관탐색</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='section4'>연관 키워드 분석</h2>", unsafe_allow_html=True)
 
 all_keywords = [keyword1]+keyword2
 st.text(f'🔮 {all_keywords}에 대한 연관분석을 시작합니다')
