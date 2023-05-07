@@ -309,7 +309,6 @@ st.markdown(f"""<h3>⭐️신규 키워드</h3>""", unsafe_allow_html=True)
 new_keyword = new_keyword(standard_df, new_df)
 grouped_new_keyword = new_keyword.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'})
 grouped_new_keyword = grouped_new_keyword[['평균 영향도', '키워드', 'URL']].sort_values(by='평균 영향도', ascending=False)
-grouped_new_keyword = grouped_new_keyword.reset_index()
 st.dataframe(grouped_new_keyword)
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
@@ -317,7 +316,6 @@ st.markdown(f"""<h3>📈급상승 키워드</h3>""", unsafe_allow_html=True)
 rising_keywords = rising_keywords(standard_df, new_df)
 grouped_rising_keyword = rising_keywords.groupby('URL').agg({'키워드': list, '상승률': 'first'})
 grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False)
-grouped_rising_keyword = grouped_rising_keyword.reset_index()
 st.dataframe(grouped_rising_keyword)
 
 
