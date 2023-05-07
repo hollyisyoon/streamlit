@@ -466,5 +466,96 @@ except :
 
 #########Section4 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
-st.markdown("<h2 id='section4'>서브타이틀 4 내용</h2>", unsafe_allow_html=True)
-st.write("여기에 서브타이틀 4의 내용을 작성합니다.")
+st.markdown("<h2 id='section4'>키워드 연관탐색</h2>", unsafe_allow_html=True)
+
+all_keywords = [keyword1]+keyword2
+st.write(f'{all_keywords}에 대한 연관분석을 시작합니다')
+
+#키워드 존재하는 프레임만 가져오기
+def get_words(df, col, keyword):
+    df[col] = df[col].map(to_list)
+    text_list = []
+    for sublist in df[col]:
+        text_list.append(sublist)
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=3, epochs=30)
+    results = []
+    for key in keyword:
+        try:
+            similar_words = model.wv.most_similar(key, topn=10)
+            results.extend([(key, word, score) for word, score in similar_words])
+        except:
+            pass
+    return results
+
+#네트워크 분석결과
+def 네트워크(network_list, all_keywords):
+    networks = []
+    for review in network_list:
+        network_review = [w for w in review if len(w) > 1]
+        networks.append(network_review)
+
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
+
+    G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
+
+    # 중심 노드들을 노드로 추가
+    for keyword in all_keywords:
+        G.add_node(keyword)
+        # 주어진 키워드와 가장 유사한 20개의 단어 추출
+        similar_words = model.wv.most_similar(keyword, topn=15)
+        # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
+        for word, score in similar_words:
+            G.add_node(word)
+            G.add_edge(keyword, word, weight=score)
+            
+    # 노드 크기 결정
+    size_dict = nx.degree_centrality(G)
+
+    # 노드 크기 설정
+    node_size = []
+    for node in G.nodes():
+        if node in all_keywords:
+            node_size.append(5000)
+        else:
+            node_size.append(1000)
+
+    # 클러스터링
+    clusters = list(nx.algorithms.community.greedy_modularity_communities(G))
+    cluster_labels = {}
+    for i, cluster in enumerate(clusters):
+        for node in cluster:
+            cluster_labels[node] = i
+            
+    # 노드 색상 결정
+    color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
+    node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
+
+    # 노드에 라벨과 연결 강도 값 추가
+    edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
+
+    # 선의 길이를 변경 pos
+    pos = nx.spring_layout(G, seed=42, k=0.15)
+    nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
+            font_size=9, font_color="black", edge_color="grey", width=edge_weights)
+
+    net = Network(notebook=True, cdn_resources='in_line')
+    net.from_nx(G)
+    return [net, similar_words]
+
+#연관분석
+if st.button('분석을 시작하기'):
+    with st.spinner('분석 중입니다...'):
+        # Define the data
+        data = get_words(df2,'제목+내용(nng)', all_keywords)
+        if data is None:
+            st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄🌸')
+
+        network_list = [eval(i) for i in data['제목+내용(nng)']]
+        네트워크 = 네트워크(network_list, all_keywords)
+        try:
+            net = 네트워크[0]
+            net.save_graph(f'/app/streamlit/pyvis_graph.html')
+            HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+            components.html(HtmlFile.read(), height=435)
+        except:
+            st.warning('존재하지 않는 키워드예요.')
