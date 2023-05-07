@@ -115,9 +115,6 @@ net, node_size, node_colors, edge_weights = create_network(network_list, all_key
 net.show_buttons(filter_=["physics"])
 net.save_graph("/app/streamlit/pyvis_graph.html")
 
-# Call the function to create the network
-create_network(network_list, all_keywords)
-
 # Display the graph in Streamlit
 try:
     HtmlFile = open("/app/streamlit/pyvis_graph.html", "r", encoding="utf-8")
