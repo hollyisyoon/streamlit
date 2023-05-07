@@ -97,7 +97,8 @@ def deepdive_lineplot(df, keywords):
             ),
             secondary_y=False
         )
-        
+    fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=color, line=dict(dash='dot')), secondary_y=False)
+    
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
