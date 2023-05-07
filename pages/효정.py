@@ -1,34 +1,32 @@
-import streamlit as st
-import streamlit.components.v1 as components
-import pandas as pd
-
 import koreanize_matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from matplotlib.colors import to_rgba
 import plotly.graph_objects as go
 import plotly.express as px
-import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from pyvis.network import Network
+import networkx as nx
+import gensim
+from gensim.models import Word2Vec
+from PIL import Image
+
+import pandas as pd
 import ast
 import time
+from datetime import datetime, timedelta
+import itertools
+from markdownlit import mdlit
 
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
 from wordcloud import WordCloud
-from datetime import datetime, timedelta
-
-import warnings
-warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
-import networkx as nx
-from gensim.models import Word2Vec
-import time
-import itertools
-from markdownlit import mdlit
 
 df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
@@ -83,52 +81,8 @@ def deepdive_lineplot(df, keywords):
     st.plotly_chart(fig, use_container_width=True)
 
 try :
-    st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-    st.markdown("<h3>키워드별 영향도 그래프</h3>", unsafe_allow_html=True)
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
 
-    this_week_words = list(이번주_df['unique_content'].explode())
-    last_week_words = list(지난주_df['unique_content'].explode())
-
-    this_week_word_counts = Counter(this_week_words)
-    last_week_word_counts = Counter(last_week_words)
-
-    # 이번주와 지난주에 모두 언급된 단어를 모은 집합
-    common_words = set(this_week_word_counts.keys()) & set(last_week_word_counts.keys())
-    result = {}
-    for word in common_words:
-        # 해당 단어가 언급된 모든 URL을 리스트로 모음
-        url_list = list(이번주_df.loc[이번주_df['unique_content'].apply(lambda x: word in x)]['URL'])
-        # 영향도가 가장 높은 URL을 찾아서 출력
-        url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
-        increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
-        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
-
-    # 상승률 기준 상위 10개 단어 출력
-    keywords = []
-    ups = []
-    urls = []
-    title = []
-
-    for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
-        if data['상승률']>0:
-            keywords.append(word)
-            ups.append(f"{data['상승률']*100}%")
-            urls.append(data['URL'])
-            
-    result_df = pd.DataFrame({
-        '키워드': keywords,
-        '상승률': ups,
-        'URL': urls
-    })
-
-    if len(result_df.index) >= 1 :
-        return result_df
-    
-st.subheader('🔥 급상승 키워드')
-try:
-    rising_keyword = rising_keyword(standard_df, new_df)
-    rising_keyword
-except:
-    st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+except :
+    st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
