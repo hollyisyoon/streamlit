@@ -53,7 +53,7 @@ def create_network(network_list, all_keywords):
 
     model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
 
-    G = nx.Graph()
+    G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
     # Add central nodes
     for keyword in all_keywords:
@@ -89,7 +89,6 @@ def create_network(network_list, all_keywords):
                 "font": {
                     "size": 9,
                     "color": "black",
-                    "face": "NanumGothic",
                 },
             },
             "edges": {
