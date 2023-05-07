@@ -210,9 +210,10 @@ st.markdown("---")
 st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
 
 def get_top_keywords(df):
-    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
-    content_list = list(itertools.chain.from_iterable([eval(i) for i in df['제목+내용(nng)']]))
-    
+    content_list = []
+    for values in df['제목+내용(nng)']:
+        content_list.extend(eval(values))
+
     result_dict = {}
     for word in content_list:
         word_df = df[df['제목+내용(nng)'].str.contains(word)]
@@ -237,7 +238,7 @@ def get_top_keywords(df):
         '키워드': keywords,
         'URL': urls
     })
-    
+
     top_keywords = result_df.head(15)
     return top_keywords
 
