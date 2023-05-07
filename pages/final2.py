@@ -276,6 +276,7 @@ df_연관분석 = extract_df(df2, media, start_date, end_date)
 
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
+        all_keywords = [keyword1]+keyword2
         network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
         try:
             네트워크 = 네트워크(network_list, all_keywords)
