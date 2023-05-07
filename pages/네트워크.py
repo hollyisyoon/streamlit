@@ -1,12 +1,33 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
+import plotly.express as px
+import plotly.graph_objects as go
+
+# 기본 라이브러리
+import os
+import ast
+from datetime import datetime
+from datetime import timedelta
+
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
+
+from collections import Counter
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import koreanize_matplotlib
+
+from PIL import Image
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
 from gensim.models import Word2Vec
 import networkx as nx
-from pyvis.network import Network
 import gensim
+from pyvis.network import Network
 from wordcloud import WordCloud
-from datetime import datetime, timedelta
-import pandas as pd
-from streamlit_tags import st_tags
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 
@@ -31,7 +52,7 @@ def 네트워크(network_list, all_keywords):
 
     model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
 
-    G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
+    G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
     # 중심 노드들을 노드로 추가
     for keyword in all_keywords:
