@@ -189,7 +189,7 @@ def 네트워크(network_list, all_keywords):
 
     model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
 
-    G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
+    G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
     # 중심 노드들을 노드로 추가
     for keyword in all_keywords:
@@ -277,12 +277,12 @@ df_연관분석 = extract_df(df2, media, start_date, end_date)
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
         test1 = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-        test1
-        # try:
-        #     네트워크 = 네트워크(test1, test2)
-        #     net = 네트워크[0]
-        #     net.save_graph(f'/app/streamlit/pyvis_graph.html')
-        #     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        #     components.html(HtmlFile.read(), height=600)
-        # except:
-        #     st.warning('존재하지 않는 키워드예요.')
+        test2 = all_keywords
+        try:
+            네트워크 = 네트워크(test1, test2)
+            net = 네트워크[0]
+            net.save_graph(f'/app/streamlit/pyvis_graph.html')
+            HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+            components.html(HtmlFile.read(), height=600)
+        except:
+            st.warning('존재하지 않는 키워드예요.')
