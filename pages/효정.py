@@ -92,6 +92,7 @@ def deepdive_lineplot(df, keywords):
             go.Scatter(
                 x=impact.index,
                 y=impact.values,
+                dash = 'dot',
                 name=keyword,
                 line_color=colors[i],
                 line=dict(dash='dot') if len(interpolated_idx) > 0 else None
