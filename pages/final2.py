@@ -232,17 +232,6 @@ def 네트워크(network_list, all_keywords):
     nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
             font_size=9, font_color="black", font_weight="medium", edge_color="grey", width=edge_weights)
 
-    # # 중심 노드들끼리 겹치는 단어 출력
-    # overlapping_키워드 = set()
-    # for i, keyword1 in enumerate(all_keywords):
-    #     for j, keyword2 in enumerate(all_keywords):
-    #         if i < j and keyword1 in G and keyword2 in G:
-    #             if nx.has_path(G, keyword1, keyword2):
-    #                 overlapping_키워드.add(keyword1)
-    #                 overlapping_키워드.add(keyword2)
-    # if overlapping_키워드:
-    #     print(f"다음 중심 키워드들끼리 연관성이 있어 중복될 가능성이 있습니다: {', '.join(overlapping_키워드)}")
-
     net = Network(notebook=True, cdn_resources='in_line')
     net.from_nx(G)
     return [net, similar_words]
@@ -261,11 +250,10 @@ df_연관분석 = extract_df(df2, media)
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
         df_연관분석_words = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-        try:
-            네트워크 = 네트워크(df_연관분석_words, all_keywords)
-            net = 네트워크[0]
-            net.save_graph(f'/app/streamlit/pyvis_graph.html')
-            HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-            components.html(HtmlFile.read(), height=600)
-        except:
-            st.warning('존재하지 않는 키워드예요.')
+        네트워크 = 네트워크(df_연관분석_words, all_keywords)
+        net = 네트워크[0]
+        net.save_graph(f'/app/streamlit/pyvis_graph.html')
+        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+        components.html(HtmlFile.read(), height=600)
+        # except:
+        #     st.warning('존재하지 않는 키워드예요.')
