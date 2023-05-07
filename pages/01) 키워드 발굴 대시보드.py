@@ -224,11 +224,11 @@ except :
 st.markdown("---")
 st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
 def new_keyword(standard_df, new_df):
-    new_df['제목+내용(nng)'] = new_df['제목+내용(nng)'].map(to_list)
+    new_df['제목+내용(nng)'] = new_df['제목+내용(nng)'].map(ast.literal_eval)
     content_list_1 = []
-    content_list_1.extend(list(itertools.chain.from_iterable([eval(i) for i in standard_df['제목+내용(nng)']])))
+    content_list_1.extend(list(itertools.chain.from_iterable(standard_df['제목+내용(nng)'])))
     content_list_2 = []
-    content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
+    content_list_2.extend(list(itertools.chain.from_iterable(new_df['제목+내용(nng)'])))
 
     new_keywords = set(content_list_2) - set(content_list_1)   
     result_dict = {}
