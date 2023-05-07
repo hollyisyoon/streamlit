@@ -157,19 +157,18 @@ def deepdive_lineplot(df, keywords):
         
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
-
-deepdive_df, deepdive_keywords = get_df(df, keyword1, keyword2)
-deepdive_lineplot(deepdive_df, deepdive_keywords)
-
-# except :
-#     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
+try:
+    deepdive_df, deepdive_keywords = get_df(df, keyword1, keyword2)
+    deepdive_lineplot(deepdive_df, deepdive_keywords)
+except :
+    st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 #########Section4 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
-st.markdown("<h2 id='section4'>연관 키워드 분석</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='section4'>키워드 연관분석</h2>", unsafe_allow_html=True)
 
 all_keywords = [keyword1]+keyword2
-st.text(f'🔮 {all_keywords}에 대한 연관분석을 시작합니다')
+st.text(f'🔮 {all_keywords}에 대한 분석을 시작합니다')
 
 expander = st.expander('연관분석 세부필터')
 with expander:
@@ -237,7 +236,7 @@ def 네트워크(network_list, all_keywords):
     return [net, similar_words]
 
 네트워크 = 네트워크(network_list, all_keywords)
-if st.button('분석을 시작하기'):
+if st.button('분석 시작'):
     with st.spinner('분석 중입니다...'):
         try:
             net = 네트워크[0]
