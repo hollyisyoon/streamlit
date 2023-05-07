@@ -21,8 +21,8 @@ keyword2 = st_tags(
     key = '2')
 
 all_keywords = [keyword1]+keyword2
-all_keywords
-# network_list = [eval(i) for i in df['제목+내용(nng)']]
+network_list = [eval(i) for i in df['제목+내용(nng)']]
+network_list
 
 # def 네트워크(network_list, all_keywords):
 #     networks = []
