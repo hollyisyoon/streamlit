@@ -61,7 +61,7 @@ STYLE = """
 
 h3 {
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: medium;
     padding: 0.3em;
     margin: 0.3em 0em;
     background-color: #f5f5f5;
@@ -208,6 +208,39 @@ except :
 #########Section2 - 키워드 큐레이팅############
 st.markdown("---")
 st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
+
+def get_top_keywords(df):
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
+    content_list = list(itertools.chain.from_iterable([eval(i) for i in df['제목+내용(nng)']]))
+    
+    result_dict = {}
+    for word in content_list:
+        word_df = df[df['제목+내용(nng)'].str.contains(word)]
+        if len(word_df) > 0:
+            avg_views = word_df['영향도'].mean()
+            urls = word_df['URL'].tolist()
+            result_dict[word] = {'평균 영향도': round(float(avg_views), 2), 'URL': urls}
+
+    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))
+
+    keywords = []
+    avg_views = []
+    urls = []
+
+    for key, value in result_dict.items():
+        keywords.append(key)
+        avg_views.append(value['평균 영향도'])
+        urls.append('\n'.join(value['URL']))
+
+    result_df = pd.DataFrame({
+        '평균 영향도': avg_views,
+        '키워드': keywords,
+        'URL': urls
+    })
+    
+    top_keywords = result_df.head(15)
+    return top_keywords
+
 def new_keyword(standard_df, new_df):
     df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     content_list_1 = []
@@ -305,14 +338,19 @@ def rising_keyword(standard_df, new_df):
 
 ##키워드##
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown(f"""<h3>⭐️신규 키워드</h3>""", unsafe_allow_html=True)
+st.markdown(f"""<h3>📌 영향도 높은 키워드</h3>""", unsafe_allow_html=True)
+top_keywords = get_top_keywords(standard_df)
+st.dataframe(top_keywords)
+
+st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown(f"""<h3>⭐️ 신규 키워드</h3>""", unsafe_allow_html=True)
 new_keyword = new_keyword(standard_df, new_df)
 grouped_new_keyword = new_keyword.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
 grouped_new_keyword = grouped_new_keyword[['평균 영향도', '키워드', 'URL']].sort_values(by='평균 영향도', ascending=False).reset_index(drop=True)
 st.dataframe(grouped_new_keyword)
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown(f"""<h3>📈급상승 키워드</h3>""", unsafe_allow_html=True)
+st.markdown(f"""<h3>📈 급상승 키워드</h3>""", unsafe_allow_html=True)
 rising_keyword = rising_keyword(standard_df, new_df)
 grouped_rising_keyword = rising_keyword.groupby('URL').agg({'키워드': list, '상승률': 'first'}).reset_index()
 grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False).reset_index(drop=True)
