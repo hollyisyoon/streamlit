@@ -28,6 +28,7 @@ css_code = '''
 .member-info {
   text-align: left;
   margin-left: 10px;
+  padding: 20px;
 }
 
 .profile-image {
