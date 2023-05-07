@@ -83,6 +83,8 @@ def deepdive_lineplot(df, keywords):
     # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
 
+    # 데이터가 없는 부분은 점선으로 처리합니다.
+    line_dashes = ["dot"] * (len(keywords) - 1) + [None]
 
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
         # 영향도 데이터를 보간합니다.
@@ -93,24 +95,14 @@ def deepdive_lineplot(df, keywords):
                 y=impact.values,
                 name=keyword,
                 line_color=colors[i],
-                line_dash='dot' if i < len(keywords) - 1 else None  # 회색 라인을 점선으로 변경
+                line=dict(dash=line_dashes[i])  # line_dashes 변수를 사용합니다.
             ),
             secondary_y=False
         )
-         fig.add_trace(
-            go.Scatter(
-                x=impact.index,
-                y=impact.values,
-                name=keyword,
-                line_color=colors[i],
-                line_dash='dot' if i < len(keywords) - 1 else 'solid'  # 회색 라인을 점선으로 변경
-            ),
-            secondary_y=False
-        )
-       
         
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
+
 
 try :
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
