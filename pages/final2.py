@@ -252,11 +252,11 @@ expander = st.expander('연관분석 세부필터')
 with expander:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 
-def extract_df(df, media, start_date, end_date):
+def extract_df(df, media):
     standard_df = df[(df['매체'] == media)]
     return standard_df
 
-df_연관분석 = extract_df(df2, media, start_date, end_date)
+df_연관분석 = extract_df(df2, media)
 
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
