@@ -263,7 +263,7 @@ def new_keyword(standard_df, new_df):
 
 ##키워드##
 new_keyword = new_keyword(standard_df, new_df)
-st.DataFrame(new_keyword)
+st.dataframe(new_keyword)
 # except:
 #     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
