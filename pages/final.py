@@ -387,7 +387,7 @@ with col2:
     keyword2 = st_tags(
         label = '비교할 키워드',
         text = '직접 입력해보세요(최대 5개)',
-        value = ['식물영양제', '뿌리영양제'],
+        value = ['응애', '해충제'],
         maxtags = 5,
         key = '2')
 
