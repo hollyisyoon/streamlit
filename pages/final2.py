@@ -265,17 +265,17 @@ def extract_df(df, media, start_date, end_date):
     return standard_df
 
 df_연관분석 = extract_df(df2, media, start_date, end_date)
-df_연관분석
 
-# if st.button('분석을 시작하기'):
-#     with st.spinner('분석 중입니다...'):
-#         network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-#         네트워크 = 네트워크(network_list, all_keywords)
-#         try:
-#             net = 네트워크[0]
-#             net.save_graph('/app/streamlit/pyvis_graph.html')
-#             HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-#             components.html(HtmlFile.read(), height=600)
-#         except:
-#             st.warning('존재하지 않는 키워드예요.')
+if st.button('분석을 시작하기'):
+    with st.spinner('분석 중입니다...'):
+        network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
+        네트워크 = 네트워크(network_list, all_keywords)
+        네트워크
+        # try:
+        #     net = 네트워크[0]
+        #     net.save_graph('/app/streamlit/pyvis_graph.html')
+        #     HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+        #     components.html(HtmlFile.read(), height=600)
+        # except:
+        #     st.warning('존재하지 않는 키워드예요.')
                 
