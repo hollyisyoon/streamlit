@@ -181,13 +181,17 @@ all_keywords = [keyword1]+keyword2
 st.text(f'🔮 {all_keywords}에 대한 연관분석을 시작합니다')
 
 #네트워크 분석결과
+def extract_df(df, media):
+    standard_df = df[(df['매체'] == media)]
+    return standard_df
+
 def 네트워크(network_list, all_keywords):
     networks = []
     for review in network_list:
         network_review = [w for w in review if len(w) > 1]
         networks.append(network_review)
 
-    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
 
     G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
@@ -195,7 +199,7 @@ def 네트워크(network_list, all_keywords):
     for keyword in all_keywords:
         G.add_node(keyword)
         # 주어진 키워드와 가장 유사한 20개의 단어 추출
-        similar_words = model.wv.most_similar(keyword, topn=20)
+        similar_words = model.wv.most_similar(keyword, topn=15)
         # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
         for word, score in similar_words:
             G.add_node(word)
@@ -227,10 +231,9 @@ def 네트워크(network_list, all_keywords):
     edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
 
     # 선의 길이를 변경 pos
-    # plt.figure(figsize=(15,15))
     pos = nx.spring_layout(G, seed=42, k=0.15)
     nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
-            font_size=9, font_color="black", font_weight="medium", edge_color="grey", width=edge_weights)
+            font_size=9, font_color="black", edge_color="grey", width=edge_weights)
 
     net = Network(notebook=True, cdn_resources='in_line')
     net.from_nx(G)
@@ -241,19 +244,15 @@ expander = st.expander('연관분석 세부필터')
 with expander:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 
-def extract_df(df, media):
-    standard_df = df[(df['매체'] == media)]
-    return standard_df
-
 df_연관분석 = extract_df(df2, media)
 
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
-        df_연관분석_words = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-        네트워크 = 네트워크(df_연관분석_words, all_keywords)
+        network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
+        네트워크 = 네트워크(network_list, all_keywords)
         net = 네트워크[0]
         net.save_graph(f'/app/streamlit/pyvis_graph.html')
         HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        components.html(HtmlFile.read(), height=600)
+        components.html(HtmlFile.read(), height=450)
         # except:
         #     st.warning('존재하지 않는 키워드예요.')
