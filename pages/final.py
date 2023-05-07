@@ -45,12 +45,47 @@ css_code = """
 </style>
 """
 
+STYLE = """
+.callout {
+    padding: 1em;
+    border-radius: 0.5em;
+    background-color: #F8F8F8;
+    border-left: 4px solid #f74040;
+    margin-bottom: 1em;
+    color: black;
+}
+
+.callout a#key1 {
+    color: #000;
+    background-color: #FAF3DD;
+    text-decoration: none;
+}
+
+.callout a#key2 {
+    color: #000;
+    background-color: #E9F3F7;
+    text-decoration: none;
+}
+
+.callout a#key3 {
+    color: #000;
+    background-color: #F6F3F8;
+    text-decoration: none;
+}
+
+.callout a#key4 {
+    color: #000;
+    background-color: #EEF3ED;
+    text-decoration: none;
+}
+"""
+
 ############## 사이드바
 st.sidebar.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
 st.sidebar.markdown("""
     <div class="custom-sidebar">
-        <h2><a href="#section1">🪄키워트 발굴</a></h2>
-        <h2><a href="#section2">서브타이틀 2</a></h2>
+        <h2><a href="#section1">🪄 키워트 발굴</a></h2>
+        <h2><a href="#section2">💎 키워드 큐레이션</a></h2>
         <h2><a href="#section3">서브타이틀 3</a></h2>
         <h2><a href="#section4">서브타이틀 4</a></h2>
     </div>
@@ -60,7 +95,7 @@ st.sidebar.markdown("""
 st.title("외부 트렌드 모니터링 대시보드")
 
 #########Section1 - wordcloud############
-st.markdown("<h2 id='section1'>🪄키워트 발굴</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='section1'>🪄 키워트 발굴</h2>", unsafe_allow_html=True)
 
 ##데이터##
 def to_list(text):
@@ -192,9 +227,153 @@ try :
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
 
-#########Section2 - 키워드큐레이팅############
-st.markdown("<h2 id='section2'>서브타이틀 2 내용</h2>", unsafe_allow_html=True)
+#########Section2 - 키워드 큐레이팅############
+st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
 st.write("여기에 서브타이틀 2의 내용을 작성합니다.")
+
+def new_keyword(standard_df, new_df):
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
+    content_list_1 = []
+    content_list_1.extend(list(itertools.chain.from_iterable([eval(i) for i in standard_df['제목+내용(nng)']])))
+    content_list_2 = []
+    content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
+
+    new_keywords = set(content_list_2) - set(content_list_1)   
+    result_dict = {}
+    # 이번달에만 있는 
+    for word in new_keywords:
+        word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
+        if len(word_df) > 0:
+            avg_views = word_df['영향도'].mean()
+            urls = word_df['URL'].tolist()
+            result_dict[word] = {'평균 영향도': round(float(avg_views), 2), 'URL': urls}
+            
+    # 조회수 높은순으로 정렬        
+    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
+
+    # 결과 딕셔너리를 데이터프레임으로 변환
+    keywords = []
+    avg_views = []
+    urls = []
+    
+    for key, value in result_dict.items():
+        keywords.append(key)
+        avg_views.append(value['평균 영향도'])
+        urls.append('\n'.join(value['URL']))
+    
+    result_df = pd.DataFrame({
+        '키워드': keywords,
+        '평균 영향도': avg_views,
+        'URL': urls
+    })
+
+    return result_df
+
+def rising_keyword(standard_df, new_df):
+    # 데이터 합치기 
+    df = pd.concat([standard_df, new_df])
+
+    # 날짜 구하기
+    이번주마지막날 = df['날짜'].max()
+    이번주첫날 = (df['날짜'].max() - timedelta(days=7))
+    지난주첫날 = 이번주첫날 - timedelta(days=7)
+    
+    이번주_df = df[(df['날짜'] > 이번주첫날) & (df['날짜'] <= 이번주마지막날)]
+    지난주_df = df[(df['날짜'] > 지난주첫날) & (df['날짜'] <= 이번주첫날)]
+        
+    # 중복값 제거한 새로운 열 추가
+    이번주_df = 이번주_df.copy()
+    이번주_df['unique_content'] = 이번주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
+    이번주_df['unique_content'] = 이번주_df['unique_content'].apply(lambda x: list(set(x)))
+
+    지난주_df = 지난주_df.copy()
+    지난주_df['unique_content'] = 지난주_df['제목+내용(nng)'].apply(lambda x: ast.literal_eval(x))
+    지난주_df['unique_content'] = 지난주_df['unique_content'].apply(lambda x: list(set(x)))
+
+    this_week_words = list(이번주_df['unique_content'].explode())
+    last_week_words = list(지난주_df['unique_content'].explode())
+
+    this_week_word_counts = Counter(this_week_words)
+    last_week_word_counts = Counter(last_week_words)
+
+    # 이번주와 지난주에 모두 언급된 단어를 모은 집합
+    common_words = set(this_week_word_counts.keys()) & set(last_week_word_counts.keys())
+    result = {}
+    for word in common_words:
+        # 해당 단어가 언급된 모든 URL을 리스트로 모음
+        url_list = list(이번주_df.loc[이번주_df['unique_content'].apply(lambda x: word in x)]['URL'])
+        # 영향도가 가장 높은 URL을 찾아서 출력
+        url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
+        increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
+        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
+
+    # 상승률 기준 상위 10개 단어 출력
+    keywords = []
+    ups = []
+    urls = []
+
+    for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
+        if data['상승률']>0:
+            keywords.append(word)
+            ups.append(f"{data['상승률']*100}%")
+            urls.append(data['URL'])
+
+    result_df = pd.DataFrame({
+        '키워드': keywords,
+        '상승률': ups,
+        'URL': urls
+    })
+
+    if len(result_df.index) >= 1 :
+        return result_df
+
+##키워드##
+try:
+    new_keyword = new_keyword(standard_df, new_df)
+except:
+    st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
+
+try:
+    rising_keyword = rising_keyword(standard_df, new_df)
+except:
+    st.warning("⚠️ 해당 기간 동안 급상승 키워드가 존재하지 않습니다")
+
+##신규 키워드##
+grouped_new_keyword = new_keyword.groupby('URL')
+key_counter = 1
+new_html_tags = ''
+for url, group in grouped_new_keyword:
+    keywords = ' | '.join(group['키워드'])
+    percent = group['평균 영향도'].iloc[0]
+    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+    new_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}💫)</b>&nbsp;"
+
+##급상승 키워드##    
+grouped_rising_keyword = rising_keyword.groupby('URL')
+key_counter = 1
+rising_html_tags = ''
+for url, group in grouped_rising_keyword:
+    keywords = ' | '.join(group['키워드'])
+    percent = group['상승률'].iloc[0]
+    key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
+    rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
+
+#HTML
+st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown(f"""
+    <h3>신규 키워드⭐️</h3>
+    <div class='callout'>
+    {new_html_tags}
+    </div>""",
+    unsafe_allow_html=True
+)
+st.markdown(f"""
+    <h3>급상승 키워드📈</h3>
+    <div class='callout'>
+    {rising_html_tags}
+    </div>""",
+    unsafe_allow_html=True
+)
 
 #########Section3 - 키워드 deepdive(시계열)############
 st.markdown("<h2 id='section3'>서브타이틀 3 내용</h2>", unsafe_allow_html=True)
