@@ -59,28 +59,13 @@ STYLE = """
     color: black;
 }
 
-.callout a#key1 {
-    color: #000;
-    background-color: #FAF3DD;
-    text-decoration: none;
-}
-
-.callout a#key2 {
-    color: #000;
-    background-color: #E9F3F7;
-    text-decoration: none;
-}
-
-.callout a#key3 {
-    color: #000;
-    background-color: #F6F3F8;
-    text-decoration: none;
-}
-
-.callout a#key4 {
-    color: #000;
-    background-color: #EEF3ED;
-    text-decoration: none;
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+    color: #143bff;
+    background-color: #cfd7ff;
 }
 """
 
