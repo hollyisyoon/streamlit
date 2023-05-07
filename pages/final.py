@@ -167,10 +167,16 @@ try :
         y.append(i[1])
 
     # WordCloud 시각화를 위한 Scatter Plot 생성
-    hover_text = [f"{word} ({freq})" for word, freq in zip(word_list, freq_list)]
+    hover_text = word_list  # 키워드만 포함한 텍스트 생성
+
+    # 숫자값을 원하는 형식으로 표시하기 위한 hovertemplate 설정
+    hover_template = "<b>%{text}</b><br>Count: %{customdata[0]}"
+
     fig = go.Figure(go.Scatter(
         x=x, y=y, mode="text",
         text=hover_text,
+        customdata=list(zip(freq_list)),  # 숫자값을 customdata로 전달
+        hovertemplate=hover_template,  # hovertemplate 설정
         textfont=dict(size=fontsize_list, color=color_list),
     ))
 
@@ -181,6 +187,7 @@ try :
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
 
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
