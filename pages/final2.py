@@ -4,7 +4,6 @@ import matplotlib.font_manager as fm
 from matplotlib.colors import to_rgba
 import plotly.graph_objects as go
 import plotly.express as px
-import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from pyvis.network import Network
 import networkx as nx
@@ -19,14 +18,12 @@ from datetime import datetime, timedelta
 import itertools
 from markdownlit import mdlit
 
-#스트림잇
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
 import warnings
 warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
-#계산
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
 from wordcloud import WordCloud
@@ -190,15 +187,15 @@ def 네트워크(network_list, all_keywords):
         network_review = [w for w in review if len(w) > 1]
         networks.append(network_review)
 
-    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
 
-    G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
+    G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
 
     # 중심 노드들을 노드로 추가
     for keyword in all_keywords:
         G.add_node(keyword)
         # 주어진 키워드와 가장 유사한 20개의 단어 추출
-        similar_words = model.wv.most_similar(keyword, topn=15)
+        similar_words = model.wv.most_similar(keyword, topn=20)
         # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
         for word, score in similar_words:
             G.add_node(word)
@@ -230,16 +227,27 @@ def 네트워크(network_list, all_keywords):
     edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
 
     # 선의 길이를 변경 pos
+    # plt.figure(figsize=(15,15))
     pos = nx.spring_layout(G, seed=42, k=0.15)
     nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
-            font_size=9, font_color="black", edge_color="grey", width=edge_weights)
+            font_size=9, font_color="black", font_weight="medium", edge_color="grey", width=edge_weights)
+
+    # 중심 노드들끼리 겹치는 단어 출력
+    overlapping_키워드 = set()
+    for i, keyword1 in enumerate(all_keywords):
+        for j, keyword2 in enumerate(all_keywords):
+            if i < j and keyword1 in G and keyword2 in G:
+                if nx.has_path(G, keyword1, keyword2):
+                    overlapping_키워드.add(keyword1)
+                    overlapping_키워드.add(keyword2)
+    if overlapping_키워드:
+        print(f"다음 중심 키워드들끼리 연관성이 있어 중복될 가능성이 있습니다: {', '.join(overlapping_키워드)}")
 
     net = Network(notebook=True, cdn_resources='in_line')
     net.from_nx(G)
     return [net, similar_words]
 
 #연관분석
-
 expander = st.expander('연관분석 세부필터')
 with expander:
     col1, col2= st.beta_columns(2)    
@@ -252,7 +260,7 @@ with expander:
                                 max_value=max_date - timedelta(days=7))
         # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
         end_date = st.date_input("끝 날짜",
-                                value=datetime(2022,6,15),
+                                value=datetime(2022,7,1),
                                 min_value=start_date + timedelta(days=7),
                                 max_value=start_date + timedelta(days=60))
     with col2:
@@ -269,13 +277,11 @@ df_연관분석 = extract_df(df2, media, start_date, end_date)
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
         network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-        네트워크 = 네트워크(network_list, all_keywords)
-        네트워크
-        # try:
-        #     net = 네트워크[0]
-        #     net.save_graph('/app/streamlit/pyvis_graph.html')
-        #     HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        #     components.html(HtmlFile.read(), height=600)
-        # except:
-        #     st.warning('존재하지 않는 키워드예요.')
-                
+        try:
+            네트워크 = 네트워크(network_list, all_keywords)
+            net = 네트워크[0]
+            net.save_graph('/app/streamlit/pyvis_graph.html')
+            HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+            components.html(HtmlFile.read(), height=600)
+        except:
+            st.warning('존재하지 않는 키워드예요.')
