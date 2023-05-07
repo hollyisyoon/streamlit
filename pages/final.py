@@ -28,8 +28,6 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
 from wordcloud import WordCloud
 
-
-
 # CSS 스타일 정의
 css_code = """
 <style>
@@ -114,7 +112,7 @@ with expander:
         text = '직접 입력해보세요',
         value = ['식물', '화분'],
         suggestions = ['식물', '화분'],
-        key = '1', help="필요하지 않은 단어를 직접 설정하여 제거할 수 있습니다.")
+        key = '1')
 
 ##워드 클라우드##
 def get_tfidf_top_words(df, keyword_no):
