@@ -63,7 +63,7 @@ h3 {
     font-size: 1.5em;
     font-weight: bold;
     padding: 0.3em;
-    margin: 0em 0.3em;
+    margin: 0.3em 0em;
     background-color: #f5f5f5;
     border-radius: 10px;
 }
