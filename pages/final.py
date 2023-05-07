@@ -51,7 +51,7 @@ css_code = """
 st.sidebar.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
 st.sidebar.markdown("""
     <div class="custom-sidebar">
-        <h2><a href="#section1">한 👀에 보는 키워드 트렌드</a></h2>
+        <h2><a href="#section1">🪄키워트 발굴</a></h2>
         <h2><a href="#section2">서브타이틀 2</a></h2>
         <h2><a href="#section3">서브타이틀 3</a></h2>
         <h2><a href="#section4">서브타이틀 4</a></h2>
@@ -62,7 +62,7 @@ st.sidebar.markdown("""
 st.title("외부 트렌드 모니터링 대시보드")
 
 #########Section1 - wordcloud############
-st.markdown("<h2 id='section1'>한 👀에 보는 키워드 트렌드</h2>", unsafe_allow_html=True)
+st.markdown("<h2 id='section1'>🪄키워트 발굴</h2>", unsafe_allow_html=True)
 
 ##데이터##
 def to_list(text):
@@ -95,7 +95,7 @@ with col1:
                              min_value=start_date + timedelta(days=7),
                              max_value=start_date + timedelta(days=60))
 with col2:
-    media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'))
+    media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 with col3:
     temp_effect_size = st.slider('영향도 볼륨', 0, 100, 83, help="영향도 볼륨이란 각 매체별 콘텐츠의 반응도를 점수화한 값입니다. 0에 가까울 수록 영향도가 높습니다.")
     effect_size = (100-int(temp_effect_size))/100
@@ -106,7 +106,7 @@ expander = st.expander('워드 클라우드 세부필터')
 with expander:
     col1, col2= st.beta_columns(2)    
     with col1:
-        type = st.selectbox('기준',('단순 빈도(Countvecterize)','상대 빈도(TF-IDF)'))
+        type = st.selectbox('기준',('단순 빈도(Countvectorizer)','상대 빈도(TF-IDF)'), help="단순빈도란 문서 내 각 단어가 나타난 빈도 즉, 나타난 횟수를 세서 만든 값입니다. 상대빈도는 단어가 문서 내에서 얼마나 중요한지를 나타내는 지표입니다.")
     with col2:
         keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)   
     stopwords = st_tags(
@@ -114,7 +114,7 @@ with expander:
         text = '직접 입력해보세요',
         value = ['식물', '화분'],
         suggestions = ['식물', '화분'],
-        key = '1')
+        key = '1', help="필요하지 않은 단어를 직접 설정하여 제거할 수 있습니다.")
 
 ##워드 클라우드##
 def get_tfidf_top_words(df, keyword_no):
@@ -188,9 +188,8 @@ try :
 
     st.plotly_chart(fig, use_container_width=True)
 
-
 except :
-    st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
+    st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
 
 #########Section2 - 키워드큐레이팅############
 st.markdown("<h2 id='section2'>서브타이틀 2 내용</h2>", unsafe_allow_html=True)
