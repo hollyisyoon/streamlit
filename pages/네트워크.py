@@ -51,14 +51,14 @@ def create_network(network_list, all_keywords):
         network_review = [w for w in review if len(w) > 1]
         networks.append(network_review)
 
-    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
 
     G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
     # Add central nodes
     for keyword in all_keywords:
         G.add_node(keyword)
-        similar_words = model.wv.most_similar(keyword, topn=20)
+        similar_words = model.wv.most_similar(keyword, topn=15)
         for word, score in similar_words:
             G.add_node(word)
             G.add_edge(keyword, word, weight=score)
@@ -76,9 +76,6 @@ def create_network(network_list, all_keywords):
     # Determine node colors
     color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
     node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
-
-    # Determine edge weights
-    edge_weights = [d["weight"] for _, _, d in G.edges(data=True)]
 
     # Create the graph visualization
     net = Network(height="500px", width="100%", font_color="black")
@@ -109,9 +106,9 @@ def create_network(network_list, all_keywords):
             },
         }
     )
-    return net, node_size, node_colors, edge_weights
+    return net
 
-net, node_size, node_colors, edge_weights = create_network(network_list, all_keywords)
+net = create_network(network_list, all_keywords)
 net.show_buttons(filter_=["physics"])
 net.save_graph("/app/streamlit/pyvis_graph.html")
 
