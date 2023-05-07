@@ -4,6 +4,7 @@ from streamlit_tags import st_tags
 import networkx as nx
 from gensim.models import Word2Vec
 from pyvis.network import Network
+import pandas as pd
 
 # Load data
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
