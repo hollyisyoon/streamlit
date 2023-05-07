@@ -22,10 +22,13 @@ css_code = '''
 <style>
 .team-member {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
   margin-bottom: 20px;
+}
+
+.member-info {
+  text-align: left;
+  margin-left: 10px;
 }
 
 .profile-image {
@@ -44,6 +47,7 @@ css_code = '''
   font-size: 16px;
 }
 </style>
+
 '''
 
 st.markdown(css_code, unsafe_allow_html=True)
