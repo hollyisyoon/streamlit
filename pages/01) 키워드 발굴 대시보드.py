@@ -350,7 +350,9 @@ for url, group in grouped_rising_keyword:
     key_counter = (key_counter % 4) + 1  # Reset key counter after reaching 4
     rising_html_tags += f"<a id='key{key_counter}' href='{url}'>{keywords}</a><b>({percent}🔥)</b>&nbsp;"
 
+pd.DataFrame(new_keyword)
 pd.DataFrame(grouped_new_keyword)
+
 # #HTML
 # st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 # st.markdown(f"""
