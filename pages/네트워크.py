@@ -1,30 +1,51 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_tags import st_tags
-import networkx as nx
-from gensim.models import Word2Vec
-from pyvis.network import Network
-import pandas as pd
-from streamlit_tags import st_tags
 
-# Load data
+import plotly.express as px
+import plotly.graph_objects as go
+
+# 기본 라이브러리
+import os
+import ast
+from datetime import datetime
+from datetime import timedelta
+
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
+
+from collections import Counter
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import koreanize_matplotlib
+
+from PIL import Image
+
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+from gensim.models import Word2Vec
+import networkx as nx
+import gensim
+from pyvis.network import Network
+from wordcloud import WordCloud
+
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 
-# Streamlit app title and input fields
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
 keyword1 = st.text_input('궁금한 키워드', value='제라늄')
 keyword2 = st_tags(
-    label='비교할 키워드',
-    text='직접 입력해보세요(최대 5개)',
-    value=['스킨답서스'],
-    maxtags=5,
-    key='2')
+    label = '비교할 키워드',
+    text = '직접 입력해보세요(최대 5개)',
+    value = ['스킨답서스'],
+    maxtags = 5,
+    key = '2')
 
-all_keywords = [keyword1] + keyword2
+all_keywords = [keyword1]+keyword2
 network_list = [eval(i) for i in df['제목+내용(nng)']]
 
-def create_network(network_list, all_keywords):
+def 네트워크(network_list, all_keywords):
     networks = []
     for review in network_list:
         network_review = [w for w in review if len(w) > 1]
@@ -34,70 +55,55 @@ def create_network(network_list, all_keywords):
 
     G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
-    # Add central nodes
+    # 중심 노드들을 노드로 추가
     for keyword in all_keywords:
         G.add_node(keyword)
+        # 주어진 키워드와 가장 유사한 20개의 단어 추출
         similar_words = model.wv.most_similar(keyword, topn=15)
+        # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
         for word, score in similar_words:
             G.add_node(word)
             G.add_edge(keyword, word, weight=score)
+            
+    # 노드 크기 결정
+    size_dict = nx.degree_centrality(G)
 
-    # Determine node sizes
-    node_size = [5000 if node in all_keywords else 1000 for node in G.nodes()]
+    # 노드 크기 설정
+    node_size = []
+    for node in G.nodes():
+        if node in all_keywords:
+            node_size.append(5000)
+        else:
+            node_size.append(1000)
 
-    # Cluster nodes
+    # 클러스터링
     clusters = list(nx.algorithms.community.greedy_modularity_communities(G))
     cluster_labels = {}
     for i, cluster in enumerate(clusters):
         for node in cluster:
             cluster_labels[node] = i
-
-    # Determine node colors
+            
+    # 노드 색상 결정
     color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
     node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
 
-    # Create the graph visualization
-    net = Network(height="500px", width="100%", font_color="black")
+    # 노드에 라벨과 연결 강도 값 추가
+    edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
+
+    # 선의 길이를 변경 pos
+    pos = nx.spring_layout(G, seed=42, k=0.15)
+    nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
+            font_size=9, font_color="black", edge_color="grey", width=edge_weights)
+
+    net = Network(notebook=True, cdn_resources='in_line')
     net.from_nx(G)
-    net.options.update(
-        {
-            "nodes": {
-                "shape": "dot",
-                "size": node_size,
-                "color": node_colors,
-                "font": {
-                    "size": 9,
-                    "color": "black",
-                },
-            },
-            "edges": {
-                "color": "grey",
-                "width": edge_weights,
-            },
-            "physics": {
-                "forceAtlas2Based": {
-                    "gravitationalConstant": -50,
-                    "centralGravity": 0.05,
-                    "springLength": 100,
-                    "springConstant": 0.2,
-                },
-                "minVelocity": 0.75,
-            },
-        }
-    )
-    return net
+    return [net, similar_words]
 
-def create_network_graph(network_list, all_keywords):
-    net = create_network(network_list, all_keywords)
-    net.show_buttons(filter_=["physics"])
-    net.save_graph("/app/streamlit/pyvis_graph.html")
-
-# Create the network graph
-create_network_graph(network_list, all_keywords)
-
-# Display the graph in Streamlit
+네트워크 = 네트워크(network_list, all_keywords)
 try:
-    HtmlFile = open("/app/streamlit/pyvis_graph.html", "r", encoding="utf-8")
+    net = 네트워크[0]
+    net.save_graph(f'/app/streamlit/pyvis_graph.html')
+    HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
     components.html(HtmlFile.read())
 except:
-    st.warning("존재하지 않는 키워드예요.")
+    st.warning('존재하지 않는 키워드예요.')
