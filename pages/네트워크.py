@@ -51,7 +51,7 @@ def create_network(network_list, all_keywords):
         network_review = [w for w in review if len(w) > 1]
         networks.append(network_review)
 
-    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
 
     G = nx.Graph(font_path='/app/streamlit/font/Pretendard-Bold.otf')
 
@@ -78,7 +78,7 @@ def create_network(network_list, all_keywords):
     node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
 
     # Determine edge weights
-    edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
+    edge_weights = [d["weight"] for _, _, d in G.edges(data=True)]
 
     # Create the graph visualization
     net = Network(height="500px", width="100%", font_color="black")
@@ -109,9 +109,9 @@ def create_network(network_list, all_keywords):
             },
         }
     )
-    return net
+    return net, node_size, node_colors, edge_weights
 
-net = create_network(network_list, all_keywords)
+net, node_size, node_colors, edge_weights = create_network(network_list, all_keywords)
 net.show_buttons(filter_=["physics"])
 net.save_graph("/app/streamlit/pyvis_graph.html")
 
