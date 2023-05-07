@@ -101,6 +101,7 @@ def 네트워크(network_list, all_keywords):
 
 네트워크 = 네트워크(network_list, all_keywords)
 try:
+    st.set_page_config(layout="wide")
     net = 네트워크[0]
     net.save_graph(f'/app/streamlit/pyvis_graph.html')
     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
