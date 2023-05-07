@@ -4,6 +4,7 @@ from streamlit_tags import st_tags
 
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.subplots as sp
 
 # 기본 라이브러리
 import os
