@@ -239,7 +239,7 @@ def get_top_keywords(df):
         'URL': urls
     })
 
-    top_keywords = result_df.head(15)
+    top_keywords = result_df.head(150)
     return top_keywords
 
 def new_keyword(standard_df, new_df):
