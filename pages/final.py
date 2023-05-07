@@ -6,8 +6,11 @@ import plotly.graph_objects as go
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from pyvis.network import Network
 import networkx as nx
+import gensim
 from gensim.models import Word2Vec
+from PIL import Image
 
 import pandas as pd
 import ast
@@ -27,6 +30,7 @@ warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from collections import Counter
 from wordcloud import WordCloud
+
 
 # CSS 스타일 정의
 css_code = """
@@ -531,6 +535,7 @@ if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
         network_list = [eval(i) for i in df2['제목+내용(nng)']]
         네트워크 = 네트워크(network_list, all_keywords)
+
         try:
             net = 네트워크[0]
             net.save_graph(f'/app/streamlit/pyvis_graph.html')
