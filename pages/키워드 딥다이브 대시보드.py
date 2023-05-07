@@ -98,7 +98,6 @@ with col2:
         key = '2')
 
 def get_df(df, word1, args):
-    df['날짜'] = pd.to_datetime(df['날짜'])
     result = df[(df['매체'] == '식물갤러리') | (df['매체'] == '식물병원')]
     result = result[(result['날짜'] >= '2022-04-27') & (result['날짜'] <= '2023-04-26')]
     keywords = [word1] + (args)
