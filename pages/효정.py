@@ -94,7 +94,7 @@ def deepdive_lineplot(df, keywords):
                 y=impact.values,
                 name=keyword,
                 line_color=colors[i],
-                line=dict(dash='dot') if len(interpolated_idx) > 0 else None
+                line=dict(dash='dot') if len(interpolated_idx) > 0 else None,
                 mode = 'lines+markers'
             ),
             secondary_y=False
