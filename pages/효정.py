@@ -89,16 +89,13 @@ def deepdive_lineplot(df, keywords):
         # 영향도 데이터를 보간합니다.
         impact = impact.interpolate()
         fig.add_trace(
-        go.Scatter(
-            x=impact.index,
-            y=impact.values,
-            name=keyword,
-            line_color=colors[i],
-            mode='lines+markers',
-            line=dict(dash='dot') if len(interpolated_idx) > 0 else None,
-            marker=dict(symbol='circle-open', size=8),
-            connectgaps=True
-        ),
+            go.Scatter(
+                x=impact.index,
+                y=impact.values,
+                name=keyword,
+                line_color=colors[i],
+                line=dict(dash='dot') if len(interpolated_idx) > 0 else None
+            ),
             secondary_y=False
         )
         
