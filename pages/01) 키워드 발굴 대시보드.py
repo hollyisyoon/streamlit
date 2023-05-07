@@ -62,10 +62,11 @@ STYLE = """
 h3 {
     font-size: 1.5em;
     font-weight: bold;
-    padding: 20px;
     color: #143bff;
-    padding: 1em;
-    background-color: #cfd7ff;
+    padding: 0.3em;
+    margin: 0.3em;
+    background-color: #f5f5f5;
+    border-radius: 10px;
 }
 """
 
