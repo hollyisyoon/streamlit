@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 # CSS 스타일 정의
 css_code = """
@@ -9,6 +8,11 @@ css_code = """
         background-color: #f2f2f2;
         font-size: 18px;
         color: #333;
+    }
+    
+    .custom-sidebar a {
+        color: #333;
+        text-decoration: none;
     }
 </style>
 """
