@@ -188,22 +188,17 @@ def get_TOP_10(df, media, keyword):
     else:
         return None
 
-tabs = ["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트']
-active_tab = st_tags(
-    options=tabs,
-    selected=[tabs[0]],
-    key="tabs",
-)
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
-if "식물갤러리" in active_tab:
+with tab1:
     get_TOP_10(df, "식물갤러리", keyword1)
-elif "식물병원" in active_tab:
+with tab2:
     get_TOP_10(df, "식물병원", keyword1)
-elif "네이버카페" in active_tab:
+with tab3:
     get_TOP_10(df, "네이버카페", keyword1)
-elif "네이버블로그" in active_tab:
+with tab4:
     get_TOP_10(df, "네이버블로그", keyword1)
-elif "네이버포스트" in active_tab:
+with tab5:
     get_TOP_10(df, "네이버포스트", keyword1)
 
 #########Section5 - 키워드 deepdive(네트워크 분석)############
