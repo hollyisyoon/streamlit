@@ -85,15 +85,15 @@ STYLE = """
 """
 
 ############## 사이드바
-st.sidebar.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
-st.sidebar.markdown("""
-    <div class="custom-sidebar">
-        <h2><a href="#section1">🪄 키워트 발굴</a></h2>
-        <h2><a href="#section2">💎 키워드 큐레이션</a></h2>
-        <h2><a href="#section3">⏳ 시기별 키워드 영향도</a></h2>
-        <h2><a href="#section4">서브타이틀 4</a></h2>
-    </div>
-""", unsafe_allow_html=True)
+# st.sidebar.markdown(f"<style>{css_code}</style>", unsafe_allow_html=True)
+# st.sidebar.markdown("""
+#     <div class="custom-sidebar">
+#         <h2><a href="#section1">🪄 키워트 발굴</a></h2>
+#         <h2><a href="#section2">💎 키워드 큐레이션</a></h2>
+#         <h2><a href="#section3">⏳ 시기별 키워드 영향도</a></h2>
+#         <h2><a href="#section4">서브타이틀 4</a></h2>
+#     </div>
+# """, unsafe_allow_html=True)
 
 ##############메인 콘텐츠
 st.title("외부 트렌드 모니터링 대시보드")
