@@ -391,7 +391,7 @@ with col2:
     keyword2 = st_tags(
         label = '비교할 키워드',
         text = '직접 입력해보세요(최대 5개)',
-        value = ['응애'],
+        value = ['스킨답서스'],
         maxtags = 5,
         key = '2')
 
@@ -533,7 +533,7 @@ def 네트워크(network_list, all_keywords):
 #연관분석
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
-        # all_keywords = [keyword1] + keyword2
+        all_keywords = [keyword1] + keyword2
         network_list = [eval(i) for i in df2['제목+내용(nng)']]
         네트워크 = 네트워크(network_list, all_keywords)
         if 네트워크 is not None:
