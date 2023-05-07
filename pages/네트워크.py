@@ -42,8 +42,17 @@ keyword2 = st_tags(
     maxtags = 5,
     key = '2')
 
+expander = st.expander('연관분석 세부필터')
+with expander:
+    media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
+
+def extract_df(df, media):
+    standard_df = df[(df['매체'] == media)]
+    return standard_df
+
 all_keywords = [keyword1]+keyword2
-network_list = [eval(i) for i in df['제목+내용(nng)']]
+df2 = extract_df(df, media)
+network_list = [eval(i) for i in df2['제목+내용(nng)']]
 
 def 네트워크(network_list, all_keywords):
     networks = []
