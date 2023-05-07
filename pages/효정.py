@@ -60,7 +60,11 @@ def deepdive_lineplot(df, keywords):
     keyword_dfs = {}
     for keyword in keywords:
         keyword_dfs[keyword] = df[df['제목+내용(nng)'].str.contains(keyword)].copy()
-    
+
+    # 전체 기간을 기준으로 주차 단위로 resampling 하기 위해
+    # 날짜 범위를 생성합니다.
+    date_range = pd.date_range(start=df['날짜'].min(), end=df['날짜'].max(), freq='W')
+
     # 날짜별로 그룹핑하고 영향도 평균을 구합니다.
     impact_by_week = {}
     for keyword, keyword_df in keyword_dfs.items():
@@ -68,17 +72,29 @@ def deepdive_lineplot(df, keywords):
         keyword_df.set_index('날짜', inplace=True)
         impact_by_week[keyword] = keyword_df.resample('W')['영향도'].mean()
 
+    # 각 키워드별로 인덱스를 맞추어주고, 데이터가 없는 부분은 보간하여 채워줍니다.
+    for keyword in keywords:
+        impact = impact_by_week[keyword].reindex(date_range, fill_value=pd.NaT)
+        impact_by_week[keyword] = impact.interpolate()
+
     # 라인 그래프를 그립니다.
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     
-   # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
+    # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
+
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
-        if i == 0:
-            fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i]), secondary_y=False)
-        else:
-            fig.add_trace(go.Scatter(x=impact.index, y=impact.values, name=keyword, line_color=colors[i], connectgaps=True), secondary_y=False)
-    
+        fig.add_trace(
+            go.Scatter(
+                x=impact.index,
+                y=impact.values,
+                name=keyword,
+                line_color=colors[i],
+                line=dict(dash='dot' if pd.NaT in impact.values else 'solid')
+            ),
+            secondary_y=False
+        )
+        
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
 
