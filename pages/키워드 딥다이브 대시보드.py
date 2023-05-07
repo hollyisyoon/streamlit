@@ -181,27 +181,27 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네�
 
 with tab1:
     try:
-       get_TOP_10(deepdive_df, "식물갤러리", deepdive_keywords)
+       get_TOP_post(deepdive_df, "식물갤러리", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab2:
     try:
-        get_TOP_10(deepdive_df, "식물병원", deepdive_keywords)
+        get_TOP_post(deepdive_df, "식물병원", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab3:
     try:
-        get_TOP_10(deepdive_df, "네이버카페", deepdive_keywords)
+        get_TOP_post(deepdive_df, "네이버카페", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab4:
     try:
-        get_TOP_10(deepdive_df, "네이버블로그", deepdive_keywords)
+        get_TOP_post(deepdive_df, "네이버블로그", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab5:
     try:
-        get_TOP_10(deepdive_df, "네이버포스트", deepdive_keywords)
+        get_TOP_post(deepdive_df, "네이버포스트", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 
