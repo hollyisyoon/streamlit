@@ -305,14 +305,14 @@ def rising_keyword(standard_df, new_df):
 
 ##키워드##
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown("""<h3>신규 키워드⭐️</h3>""")
+st.markdown(f"""<h3>신규 키워드⭐️</h3>""", unsafe_allow_html=True)
 new_keyword = new_keyword(standard_df, new_df)
 grouped_new_keyword = new_keyword.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
 grouped_new_keyword = grouped_new_keyword[['평균 영향도', '키워드', 'URL']].sort_values(by='평균 영향도', ascending=False)
 st.dataframe(grouped_new_keyword)
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown("""<h3>급상승 키워드⭐️</h3>""")
+st.markdown(f"""<h3>급상승 키워드⭐️</h3>""", unsafe_allow_html=True)
 rising_keyword = rising_keyword(standard_df, new_df)
 grouped_rising_keyword = rising_keyword.groupby('URL').agg({'키워드': list, '상승률': 'first'}).reset_index()
 grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False)
