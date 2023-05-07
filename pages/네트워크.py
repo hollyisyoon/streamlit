@@ -77,6 +77,9 @@ def create_network(network_list, all_keywords):
     color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
     node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
 
+    # Determine edge weights
+    edge_weights = [d['weight'] for u, v, d in G.edges(data=True)]
+
     # Create the graph visualization
     net = Network(height="500px", width="100%", font_color="black")
     net.from_nx(G)
@@ -106,10 +109,11 @@ def create_network(network_list, all_keywords):
             },
         }
     )
+    return net
 
-    # Save the graph as HTML file
-    net.show_buttons(filter_=["physics"])
-    net.save_graph("/app/streamlit/pyvis_graph.html")
+# Save the graph as HTML file
+net.show_buttons(filter_=["physics"])
+net.save_graph("/app/streamlit/pyvis_graph.html")
 
 # Call the function to create the network
 create_network(network_list, all_keywords)
