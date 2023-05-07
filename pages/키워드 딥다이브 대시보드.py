@@ -133,7 +133,7 @@ def deepdive_lineplot(df, keywords):
         impact_by_week[keyword] = impact.interpolate()
 
     # 라인 그래프를 그립니다.
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    fig = sp.make_subplots(specs=[[{"secondary_y": True}]])
     
     # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
