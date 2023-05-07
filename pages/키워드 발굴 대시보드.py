@@ -108,8 +108,22 @@ with col1:
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 with col3:
-    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 83, help="각 매체별 콘텐츠의 영향도(조회수)를 점수화한 값입니다. 0에 가까울 수록 영향도가 높습니다.")
+    def format_temp_effect_size(value):
+    if value == 0:
+        return "인기"
+    elif value == 100:
+        return "전체"
+    else:
+        return str(value)
+    
+    temp_effect_size = st.slider(
+        '영향도 범위',
+        0, 100, 83,
+        format_func=format_temp_effect_size,
+        help="각 매체별 콘텐츠의 영향도(조회수)를 점수화한 값입니다. 0에 가까울 수록 영향도가 높습니다.")    
+    
     effect_size = (100-int(temp_effect_size))/100
+
 standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
 
 ##인풋 필터 - 워드클라우드용##
