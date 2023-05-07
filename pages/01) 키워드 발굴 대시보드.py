@@ -314,11 +314,12 @@ st.dataframe(grouped_new_keyword)
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""<h3>📈급상승 키워드</h3>""", unsafe_allow_html=True)
-rising_keywords = rising_keyword(standard_df, new_df)
+rising_keywords = rising_keywords(standard_df, new_df)
 grouped_rising_keyword = rising_keywords.groupby('URL').agg({'키워드': list, '상승률': 'first'})
 grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False)
 grouped_rising_keyword = grouped_rising_keyword.reset_index()
 st.dataframe(grouped_rising_keyword)
+
 
 
 # except:
