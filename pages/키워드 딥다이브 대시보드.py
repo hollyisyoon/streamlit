@@ -83,7 +83,7 @@ STYLE = """
 """
 
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
-st.title('🔎 트렌드 키워드 분석')
+# st.title('🔎 트렌드 키워드 분석')
 
 #########Section3 - 키워드 deepdive(시계열)############
 st.markdown("<h2 id='section4'>키워드 시계열 분석</h2>", unsafe_allow_html=True)
@@ -91,7 +91,9 @@ col1, col2 = st.beta_columns((0.3, 0.7))
 with col1:
     keyword1 = st.text_input('궁금한 키워드', value='제라늄')
 with col2:
-    keyword2 = st_tags(
+    st.write(' ')
+
+keyword2 = st_tags(
         label = '비교할 키워드',
         text = '직접 입력해보세요(최대 5개)',
         value = ['총채벌레','뿌리파리'],
@@ -164,42 +166,44 @@ except :
     st.warning("해당 키워드에 대한 결과가 존재하지 않습니다")
 
 #########Section4 - 키워드 deepdive(상위 게시글)############
-
-def get_TOP_10(df, media, keyword):
+def get_TOP_post(df, media, deepdive_keywords):
     df = df[df['매체'] == media]
-    temp_df = df[df['제목+내용(nng)'].str.contains(keyword)]
+    df['영향도'] *= 100  # 영향도를 퍼센트로 변환
     top10_list = []
-    for media_category in temp_df['매체'].unique():
-        df_category = temp_df[temp_df['매체'] == media_category]
-        if len(df_category) > 0:
-            try:
-                band_top10 = df_category.nlargest(10, '영향도')
-                band_top10['영향도'] *= 100  # 영향도를 퍼센트로 변환
-                band_top10 = band_top10.reset_index(drop=True)
-                band_top10 = band_top10[['매체', '작성자', '제목', 'URL', '영향도']]
-                top10_list.append(band_top10)
-            except ValueError:
-                df_category['영향도'] *= 100  # 영향도를 퍼센트로 변환
-                df_category = df_category.reset_index(drop=True)
-                df_category = df_category[['매체', '작성자', '제목', 'URL', '영향도']]
-                top10_list.append(df_category)
-    if len(top10_list) > 0:
-        return pd.concat(top10_list, ignore_index=False)
-    else:
-        return None
+    for deepdive_keyword in deepdive_keywords:
+        result = df[['영향도', '작성자', '제목', 'URL']]
+        df = df.reset_index(drop=True)
+        result['키워드'] = deepdive_keyword
+        top10_list.append(result)
+    return st.dataframe(top10_list)
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
 with tab1:
-    get_TOP_10(df, "식물갤러리", keyword1)
+    try:
+       get_TOP_10(deepdive_df, "식물갤러리", deepdive_keywords)
+    except:
+        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab2:
-    get_TOP_10(df, "식물병원", keyword1)
+    try:
+        get_TOP_10(deepdive_df, "식물병원", deepdive_keywords)
+    except:
+        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab3:
-    get_TOP_10(df, "네이버카페", keyword1)
+    try:
+        get_TOP_10(deepdive_df, "네이버카페", deepdive_keywords)
+    except:
+        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab4:
-    get_TOP_10(df, "네이버블로그", keyword1)
+    try:
+        get_TOP_10(deepdive_df, "네이버블로그", deepdive_keywords)
+    except:
+        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 with tab5:
-    get_TOP_10(df, "네이버포스트", keyword1)
+    try:
+        get_TOP_10(deepdive_df, "네이버포스트", deepdive_keywords)
+    except:
+        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
 
 #########Section5 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
