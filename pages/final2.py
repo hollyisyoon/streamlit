@@ -279,7 +279,7 @@ if st.button('분석을 시작하기'):
         test2 = ['제라늄', '해충', '응애']
         test1 = [eval(i) for i in df_연관분석['제목+내용(nng)']]
         try:
-            네트워크 = 네트워크(network_list, all_keywords)
+            네트워크 = 네트워크(test1, test2)
             net = 네트워크[0]
             net.save_graph(f'/app/streamlit/pyvis_graph.html')
             HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
