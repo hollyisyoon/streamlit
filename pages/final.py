@@ -95,7 +95,7 @@ with col1:
 with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 with col3:
-    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 83, help="영향도 볼륨이란 각 매체별 콘텐츠의 반응도를 점수화한 값입니다. 0에 가까울 수록 영향도가 높습니다.")
+    temp_effect_size = st.slider('영향도 볼륨', 0, 100, 83, help="각 매체별 콘텐츠의 반응도를 점수화한 값입니다. 0에 가까울 수록 영향도가 높습니다.")
     effect_size = (100-int(temp_effect_size))/100
 standard_df, new_df = extract_df(df, media, start_date, end_date, effect_size)
 
@@ -104,9 +104,12 @@ expander = st.expander('워드 클라우드 세부필터')
 with expander:
     col1, col2= st.beta_columns(2)    
     with col1:
-        type = st.selectbox('기준',('단순 빈도(Countvectorizer)','상대 빈도(TF-IDF)'), help="단순빈도란 문서 내 각 단어가 나타난 빈도 즉, 나타난 횟수를 세서 만든 값입니다. 상대빈도는 단어가 문서 내에서 얼마나 중요한지를 나타내는 지표입니다.")
+        type = st.selectbox('기준',('단순 빈도(Countvectorizer)','상대 빈도(TF-IDF)'), 
+                            help="""단순빈도란 문서 내 각 단어가 나타난 빈도 즉, 나타난 횟수를 세서 만든 값입니다. 
+                            상대빈도는 단어가 문서 내에서 얼마나 중요한지를 나타내는 지표입니다.""")
     with col2:
-        keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1)   
+        keyword_no = st.number_input("키워드 볼륨", value=100, min_value=1, step=1,
+                                     help="워드 클라우드를 통해 보고 싶은 단어의 갯수를 제어할 수 있습니다.")   
     stopwords = st_tags(
         label = '제거할 키워드',
         text = '직접 입력해보세요',
