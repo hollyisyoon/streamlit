@@ -9,14 +9,6 @@ html_code = '''
         <p class="introduction">안녕하세요오오옹.</p>
     </div>
 </div>
-
-# <div class="team-member">
-#   <div class="member-info">
-#     <h3 class="name">Jane Smith</h3>
-#     <p class="introduction">Praesent accumsan ligula nec mauris tincidunt, ac volutpat ex condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-#   </div>
-#   <img src="profile_image.jpg" alt="Profile Image" class="profile-image">
-# </div>
 '''
 
 css_code = '''
