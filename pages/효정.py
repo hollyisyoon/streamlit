@@ -75,7 +75,7 @@ def deepdive_lineplot(df, keywords):
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
 
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
-        fig.add_trace(go.Scattergl(x=impact.index, y=impact.values, name=keyword, line_color=colors[i], mode="lines+markers"), secondary_y=False)
+        fig.add_trace(go.Scattergl(x=impact.index, y=impact.values, name=keyword, line_color=colors[i], line=dict(dash='dot' if i>0 else 'solid')))
         
     fig.update_layout(yaxis_title="평균 영향도")
     st.plotly_chart(fig, use_container_width=True)
