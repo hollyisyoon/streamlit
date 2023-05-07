@@ -239,10 +239,33 @@ def 네트워크(network_list, all_keywords):
     return [net, similar_words]
 
 #연관분석
+expander = st.expander('연관분석 세부필터')
+with expander:
+    col1, col2= st.beta_columns(2)    
+    with col1:
+        start_date = st.date_input("시작 날짜",
+                                value=datetime(2022,6,1),
+                                min_value=min_date,
+                                max_value=max_date - timedelta(days=7))
+        # 끝 날짜를 선택할 때 최소 날짜는 시작 날짜이며, 최대 날짜는 90일 이전까지로 제한
+        end_date = st.date_input("끝 날짜",
+                                value=datetime(2022,6,15),
+                                min_value=start_date + timedelta(days=7),
+                                max_value=start_date + timedelta(days=60))
+    with col2:
+        media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
+
+def extract_df(df, media, start_date, end_date):
+    start_date = pd.Timestamp(start_date)
+    end_date = pd.Timestamp(end_date)
+    standard_df = df[(df['매체'] == media) & (df['날짜'] >= start_date) & (df['날짜'] <= end_date)]
+    return standard_df
+
+df_연관분석 = extract_df(df2, media, start_date, end_date)
 
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
-        network_list = [eval(i) for i in df2['제목+내용(nng)']]
+        network_list = [eval(i) for i in df_연관분석['제목+내용(nng)']]
         네트워크 = 네트워크(network_list, all_keywords)
         try:
             net = 네트워크[0]
