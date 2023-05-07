@@ -111,7 +111,7 @@ def create_network(network_list, all_keywords):
     )
     return net
 
-# Save the graph as HTML file
+net = create_network(network_list, all_keywords)
 net.show_buttons(filter_=["physics"])
 net.save_graph("/app/streamlit/pyvis_graph.html")
 
