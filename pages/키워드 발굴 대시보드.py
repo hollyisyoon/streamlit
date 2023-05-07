@@ -109,12 +109,12 @@ with col2:
     media = st.selectbox('매체',('식물갤러리', '식물병원', '네이버카페', '네이버블로그', '네이버포스트'), help="확인하고 싶은 외부 데이터의 매체를 선택할 수 있습니다.")
 with col3:
     def format_temp_effect_size(value):
-    if value == 0:
-        return "인기"
-    elif value == 100:
-        return "전체"
-    else:
-        return str(value)
+        if value == 0:
+            return "인기"
+        elif value == 100:
+            return "전체"
+        else:
+            return str(value)
     
     temp_effect_size = st.slider(
         '영향도 범위',
