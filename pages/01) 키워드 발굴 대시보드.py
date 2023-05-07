@@ -224,23 +224,26 @@ except :
 st.markdown("---")
 st.markdown("<h2 id='section2'>💎 키워드 큐레이션</h2>", unsafe_allow_html=True)
 def new_keyword(standard_df, new_df):
-    new_df['제목+내용(nng)'] = new_df['제목+내용(nng)'].map(ast.literal_eval)
+    df['제목+내용(nng)'] = df['제목+내용(nng)'].map(to_list)
     content_list_1 = []
-    content_list_1.extend(list(itertools.chain.from_iterable(standard_df['제목+내용(nng)'])))
+    content_list_1.extend(list(itertools.chain.from_iterable([eval(i) for i in standard_df['제목+내용(nng)']])))
     content_list_2 = []
-    content_list_2.extend(list(itertools.chain.from_iterable(new_df['제목+내용(nng)'])))
+    content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
 
     new_keywords = set(content_list_2) - set(content_list_1)   
     result_dict = {}
+    # 이번달에만 있는 
     for word in new_keywords:
         word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
         if len(word_df) > 0:
             avg_views = word_df['영향도'].mean()
             urls = word_df['URL'].tolist()
             result_dict[word] = {'평균 영향도': round(float(avg_views), 2), 'URL': urls}
-    
-    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))
-    
+            
+    # 조회수 높은순으로 정렬        
+    result_dict = dict(sorted(result_dict.items(), key=lambda item: item[1]['평균 영향도'], reverse=True))    
+
+    # 결과 딕셔너리를 데이터프레임으로 변환
     keywords = []
     avg_views = []
     urls = []
@@ -255,17 +258,16 @@ def new_keyword(standard_df, new_df):
         '키워드': keywords,
         'URL': urls
     })
-    
-    grouped_df = result_df.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
-    merged_df = new_df.merge(grouped_df, on='URL', how='left')
-    
-    return merged_df
+    return result_df
 
 ##키워드##
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""<h3>신규 키워드⭐️</h3>""")
 new_keyword = new_keyword(standard_df, new_df)
 st.dataframe(new_keyword)
+grouped_new_keyword = new_keyword.groupby('URL').agg({'키워드': list, '평균 영향도': 'first'}).reset_index()
+st.dataframe(grouped_new_keyword)
+
 # except:
 #     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
