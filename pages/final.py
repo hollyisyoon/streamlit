@@ -381,13 +381,15 @@ df2 = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 df2['날짜'] = pd.to_datetime(df2['날짜'])
 
 col1, col2 = st.beta_columns((0.2, 0.8))
-keyword1 = st.text_input('궁금한 키워드', value='제라늄')
-keyword2 = st_tags(
-    label = '비교할 키워드',
-    text = '직접 입력해보세요(최대 5개)',
-    value = ['식물영양제', '뿌리영양제'],
-    maxtags = 5,
-    key = '2')
+with col1:
+    keyword1 = st.text_input('궁금한 키워드', value='제라늄')
+with col2:
+    keyword2 = st_tags(
+        label = '비교할 키워드',
+        text = '직접 입력해보세요(최대 5개)',
+        value = ['식물영양제', '뿌리영양제'],
+        maxtags = 5,
+        key = '2')
 
 def get_df(df, word1, args):
     df['날짜'] = pd.to_datetime(df['날짜'])
@@ -450,8 +452,10 @@ def get_TOP_10(df, keyword):
         return None
     
 try :
+    st.markdown("""<h3>키워드별 영향도 그래프</h3>""")
     deepdive_df, deepdive_keywords = get_df(df2, keyword1, keyword2)
     deepdive_lineplot(deepdive_df, deepdive_keywords)
+    st.markdown("""<h3>매체별 Top10 게시글</h3>""")
     keyword_result = get_TOP_10(df2, keyword1)
     st.dataframe(keyword_result)
 
