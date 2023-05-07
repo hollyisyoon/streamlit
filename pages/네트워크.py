@@ -1,48 +1,25 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from streamlit_tags import st_tags
-
-import plotly.express as px
-import plotly.graph_objects as go
-
-# 기본 라이브러리
-import os
-import ast
-from datetime import datetime
-from datetime import timedelta
-
-import warnings
-warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
-
-from collections import Counter
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import koreanize_matplotlib
-
-from PIL import Image
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-
-from gensim.models import Word2Vec
 import networkx as nx
-import gensim
+from gensim.models import Word2Vec
 from pyvis.network import Network
-from wordcloud import WordCloud
 
+# Load data
 df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
 
+# Streamlit app title and input fields
 st.title('🔎 키워드 DeepDive')
 col1, col2 = st.beta_columns((0.2, 0.8))
 keyword1 = st.text_input('궁금한 키워드', value='제라늄')
 keyword2 = st_tags(
-    label = '비교할 키워드',
-    text = '직접 입력해보세요(최대 5개)',
-    value = ['스킨답서스'],
-    maxtags = 5,
-    key = '2')
+    label='비교할 키워드',
+    text='직접 입력해보세요(최대 5개)',
+    value=['스킨답서스'],
+    maxtags=5,
+    key='2')
 
-all_keywords = [keyword1]+keyword2
+all_keywords = [keyword1] + keyword2
 network_list = [eval(i) for i in df['제목+내용(nng)']]
 
 def create_network(network_list, all_keywords):
@@ -77,9 +54,6 @@ def create_network(network_list, all_keywords):
     color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
     node_colors = [color_palette[cluster_labels[node] % len(color_palette)] for node in G.nodes()]
 
-    # 노드 weight
-    edge_weights = [d["weight"] for _, _, d in G.edges(data=True)]
-
     # Create the graph visualization
     net = Network(height="500px", width="100%", font_color="black")
     net.from_nx(G)
@@ -111,9 +85,13 @@ def create_network(network_list, all_keywords):
     )
     return net
 
-net = create_network(network_list, all_keywords)
-net.show_buttons(filter_=["physics"])
-net.save_graph("/app/streamlit/pyvis_graph.html")
+def create_network_graph(network_list, all_keywords):
+    net = create_network(network_list, all_keywords)
+    net.show_buttons(filter_=["physics"])
+    net.save_graph("/app/streamlit/pyvis_graph.html")
+
+# Create the network graph
+create_network_graph(network_list, all_keywords)
 
 # Display the graph in Streamlit
 try:
