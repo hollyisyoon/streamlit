@@ -391,7 +391,7 @@ with col2:
     keyword2 = st_tags(
         label = '비교할 키워드',
         text = '직접 입력해보세요(최대 5개)',
-        value = ['응애', '해충제'],
+        value = ['응애'],
         maxtags = 5,
         key = '2')
 
@@ -535,10 +535,10 @@ if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
         # all_keywords = [keyword1] + keyword2
         network_list = [eval(i) for i in df2['제목+내용(nng)']]
-        network_result = get_network(network_list, all_keywords)
-        if network_result is not None:
+        네트워크 = 네트워크(network_list, all_keywords)
+        if 네트워크 is not None:
             try:
-                net = network_result[0]
+                net = 네트워크[0]
                 net.save_graph('/app/streamlit/pyvis_graph.html')
                 HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
                 components.html(HtmlFile.read(), height=600)
