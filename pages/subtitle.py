@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit import components
 
 # JavaScript 함수 정의 (클릭 이벤트 처리)
 js_code = """
