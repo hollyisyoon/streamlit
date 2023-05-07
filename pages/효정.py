@@ -83,10 +83,9 @@ def deepdive_lineplot(df, keywords):
     # 첫 번째 키워드는 파란색으로, 나머지는 회색으로 처리합니다.
     colors = ["grey"] * (len(keywords) - 1) + ["blue"]
 
-    # 데이터가 없는 부분은 점선으로 처리합니다.
-    line_dashes = ["dot"] * (len(keywords) - 1) + [None]
-
     for i, (keyword, impact) in enumerate(impact_by_week.items()):
+        # 보간된 데이터의 인덱스를 가져옵니다.
+        interpolated_idx = impact[impact.isna()].index
         # 영향도 데이터를 보간합니다.
         impact = impact.interpolate()
         fig.add_trace(
@@ -95,7 +94,7 @@ def deepdive_lineplot(df, keywords):
                 y=impact.values,
                 name=keyword,
                 line_color=colors[i],
-                line=dict(dash=line_dashes[i])  # line_dashes 변수를 사용합니다.
+                line=dict(dash='dot') if len(interpolated_idx) > 0 else None
             ),
             secondary_y=False
         )
