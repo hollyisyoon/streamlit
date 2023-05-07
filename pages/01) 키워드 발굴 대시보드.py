@@ -62,9 +62,9 @@ STYLE = """
 h3 {
     font-size: 1.5em;
     font-weight: bold;
-    margin-bottom: 0.5em;
-    text-decoration: underline;
+    padding: 20px;
     color: #143bff;
+    padding: 1em;
     background-color: #cfd7ff;
 }
 """
