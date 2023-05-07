@@ -276,13 +276,13 @@ df_연관분석 = extract_df(df2, media, start_date, end_date)
 
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
-        test2 = ['제라늄', '해충', '응애']
         test1 = [eval(i) for i in df_연관분석['제목+내용(nng)']]
-        try:
-            네트워크 = 네트워크(test1, test2)
-            net = 네트워크[0]
-            net.save_graph(f'/app/streamlit/pyvis_graph.html')
-            HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-            components.html(HtmlFile.read(), height=600)
-        except:
-            st.warning('존재하지 않는 키워드예요.')
+        test1
+        # try:
+        #     네트워크 = 네트워크(test1, test2)
+        #     net = 네트워크[0]
+        #     net.save_graph(f'/app/streamlit/pyvis_graph.html')
+        #     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+        #     components.html(HtmlFile.read(), height=600)
+        # except:
+        #     st.warning('존재하지 않는 키워드예요.')
