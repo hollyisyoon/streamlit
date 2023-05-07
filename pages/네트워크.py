@@ -100,11 +100,11 @@ def 네트워크(network_list, all_keywords):
     return [net, similar_words]
 
 네트워크 = 네트워크(network_list, all_keywords)
+
 try:
-    st.set_page_config(layout="wide")
     net = 네트워크[0]
     net.save_graph(f'/app/streamlit/pyvis_graph.html')
     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-    components.html(HtmlFile.read())
+    components.html(HtmlFile.read(), height=435)
 except:
     st.warning('존재하지 않는 키워드예요.')
