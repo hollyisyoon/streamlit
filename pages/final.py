@@ -167,31 +167,21 @@ try :
         y.append(i[1])
 
     # WordCloud 시각화를 위한 Scatter Plot 생성
+    hover_text = [f"{word} ({freq})" for word, freq in zip(word_list, freq_list)]
     fig = go.Figure(go.Scatter(
         x=x, y=y, mode="text",
-        text=word_list,
+        text=hover_text,
         textfont=dict(size=fontsize_list, color=color_list),
     ))
 
-    # 클릭 이벤트 처리
-    fig.update_traces(hoverinfo='skip')  # hover 정보 제거
     fig.update_layout(
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        hovermode='closest',
+        hovermode='closest'
     )
 
-    # 클릭한 단어의 정보 표시
-    def click_callback(trace, points, state):
-        if points.point_inds:
-            ind = points.point_inds[0]
-            word = word_list[ind]
-            freq = freq_list[ind]
-            st.info(f"Word: {word}<br>Count: {freq}")
+    st.plotly_chart(fig, use_container_width=True)
 
-    fig.on_click(click_callback)
-
-    st.plotly_chart(fig, use_container_width=True)  
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다 👻')    
 
