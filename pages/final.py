@@ -533,13 +533,16 @@ def 네트워크(network_list, all_keywords):
 #연관분석
 if st.button('분석을 시작하기'):
     with st.spinner('분석 중입니다...'):
+        # all_keywords = [keyword1] + keyword2
         network_list = [eval(i) for i in df2['제목+내용(nng)']]
-        네트워크 = 네트워크(network_list, all_keywords)
-
-        try:
-            net = 네트워크[0]
-            net.save_graph(f'/app/streamlit/pyvis_graph.html')
-            HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-            components.html(HtmlFile.read(), height=435)
-        except:
+        network_result = get_network(network_list, all_keywords)
+        if network_result is not None:
+            try:
+                net = network_result[0]
+                net.save_graph('/app/streamlit/pyvis_graph.html')
+                HtmlFile = open('/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+                components.html(HtmlFile.read(), height=600)
+            except:
+                st.warning('존재하지 않는 키워드예요.')
+        else:
             st.warning('존재하지 않는 키워드예요.')
