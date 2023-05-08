@@ -73,24 +73,15 @@ border-radius: 10px;
 overflow: hidden;
 aspect-ratio: 6/3;
 max-width: 100%;
-max-height: 400px;
+max-height: auto;
 }
-
-.rounded-image2 {
-border-radius: 10px;
-overflow: hidden;
-aspect-ratio: 10/3;
-max-width: 100%;
-max-height: 200px;
-}
-
 
 </style>
 """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown("""
-  <div class="rounded-image2">
+  <div class="rounded-image">
     <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20(1).png?raw=true" 
     alt="썸네일"></img>
   </div>
