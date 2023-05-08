@@ -74,7 +74,7 @@ st.markdown(f"""
 
 ####멤버 소개###
 st.markdown("---")
-st.markdown("""<h3>🙋🏻‍♂️ 만든 사람들</h3>""", unsafe_allow_html=True)
+st.markdown("""<h2>🙋🏻‍♂️ 만든 사람들</h2>""", unsafe_allow_html=True)
 
 st.markdown('''   
 <div class="team-member">
