@@ -25,3 +25,4 @@ st-annotated-text
 htbuilder
 markdownlit
 streamlit-tags
+pyperclip==1.8.2
