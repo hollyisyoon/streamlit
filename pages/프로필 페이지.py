@@ -34,12 +34,12 @@ STYLE = """
 .introduction {
   margin-top: 10px;
   font-size: 16px;
+}
 
 .highlight {
     color: #263cff;
     font-weight: bold;
     font-style: italic;
-    }
 }
 
 .cta-container-wrapper {
@@ -74,12 +74,13 @@ st.markdown('''
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
     <div class="member-info">
         <h3 class="name">윤훈영(Holly)</h3>
-        <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-        🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요! <p class="highlight">💙적극 구직 중입니다💙</p></p>
-        <detail>
-            <summary> <b>More Info!</b> </summary>
-            [Linkedin](https://linkedin.com/in/hoonyoungyoon/)
-        </detail>
+        <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.</p>
+        <p>🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요!</p> 
+        <p class="highlight">💙적극 구직 중입니다💙</p>
+        <details>
+            <summary><b>More Info!</b></summary>
+            <a href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a>
+        </details>
     </div>
 </div>
 
