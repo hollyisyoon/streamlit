@@ -187,7 +187,7 @@ st.markdown('''
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://blog.naver.com/common/util/imageZoom.jsp?url=https://blogpfthumb-phinf.pstatic.net/MjAyMzAzMjRfMTk0/MDAxNjc5NjU5NTY5MTU4.cTkkysdHNu7TxVaSnGM-WaFdYOKz-XlUYZHiqk9Y7Hkg.n_MJqADE_VCqT4AXrxnocLWp0hvS5xIeDieN5DRc2Ewg.PNG.kinghy00/profileImage.png&rClickYn=false&isOwner=true#" class="profile-image">
+    <img src="https://blogpfthumb-phinf.pstatic.net/MjAyMzAzMjRfMTk0/MDAxNjc5NjU5NTY5MTU4.cTkkysdHNu7TxVaSnGM-WaFdYOKz-XlUYZHiqk9Y7Hkg.n_MJqADE_VCqT4AXrxnocLWp0hvS5xIeDieN5DRc2Ewg.PNG.kinghy00/profileImage.png" class="profile-image">
     <div class="member-info">
         <h3> 김희연 </h3>
         <p><li>Goal: 바쁜 서비스 기획자되기</li>
