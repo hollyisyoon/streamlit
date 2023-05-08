@@ -11,6 +11,7 @@ STYLE = """
     color: #3B81F5;
     font-size: 24px;
     margin-top: 10px;
+    font-weight: bold;
 }
 
 .callout {
