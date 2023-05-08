@@ -70,7 +70,7 @@ with cta_container1:
     st.markdown(
         """
         <div class="cta-container-wrapper">
-            <div style='background-color: #f63366; padding: 10px; border-radius: 10px'>
+            <div>
                 <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
@@ -89,7 +89,7 @@ with cta_container2:
     st.markdown(
         """
         <div class="cta-container-wrapper">
-            <div style='background-color: #f63366; padding: 10px; border-radius: 10px'>
+            <div>
                 <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
