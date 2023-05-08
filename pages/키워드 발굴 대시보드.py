@@ -23,7 +23,7 @@ from markdownlit import mdlit
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
-from streamlit import clipboard
+import pyperclip
 import warnings
 warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
@@ -163,61 +163,75 @@ try :
     #워드클라우드
     wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
     wc.generate_from_frequencies(words)
+    plt.figure(figsize=(10, 6))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis('off')
+    st.pyplot(plt)
 
-    ## 동적 워드 클라우드 ##
-    # 컬러 팔레트 생성
-    word_list = []
-    freq_list = []
-    fontsize_list = []
-    position_list = []
-    orientation_list = []
-    color_list = []
+    ##동적 워드클라우드
+    # wc = WordCloud(background_color="white", colormap='Spectral', contour_color='steelblue', font_path="/app/streamlit/font/Pretendard-Bold.otf")
+    # wc.generate_from_frequencies(words)
 
-    for (word, freq), fontsize, position, orientation, color in wc.layout_:
-        word_list.append(word)
-        freq_list.append(freq)
-        fontsize_list.append(fontsize)
-        position_list.append(position)
-        orientation_list.append(orientation)
-        color_list.append(color)
+    # ## 동적 워드 클라우드 ##
+    # # 컬러 팔레트 생성
+    # word_list = []
+    # freq_list = []
+    # fontsize_list = []
+    # position_list = []
+    # orientation_list = []
+    # color_list = []
 
-    # get the positions
-    x = []
-    y = []
-    for i in position_list:
-        x.append(i[0])
-        y.append(i[1])
+    # for (word, freq), fontsize, position, orientation, color in wc.layout_:
+    #     word_list.append(word)
+    #     freq_list.append(freq)
+    #     fontsize_list.append(fontsize)
+    #     position_list.append(position)
+    #     orientation_list.append(orientation)
+    #     color_list.append(color)
 
-    # WordCloud 시각화를 위한 Scatter Plot 생성
-    hover_text = word_list  # 키워드만 포함한 텍스트 생성
+    # # get the positions
+    # x = []
+    # y = []
+    # for i in position_list:
+    #     x.append(i[0])
+    #     y.append(i[1])
 
-    # 숫자값을 원하는 형식으로 표시하기 위한 hovertemplate 설정
-    hover_template = "<b>%{text}</b><br>Count: %{customdata[0]}"
+    # # WordCloud 시각화를 위한 Scatter Plot 생성
+    # hover_text = word_list  # 키워드만 포함한 텍스트 생성
 
-    fig = go.Figure(go.Scatter(
-        x=x, y=y, mode="text",
-        text=hover_text,
-        customdata=list(zip(freq_list)),  # 숫자값을 customdata로 전달
-        hovertemplate=hover_template,  # hovertemplate 설정
-        textfont=dict(size=fontsize_list, color=color_list),
-    ))
+    # # 숫자값을 원하는 형식으로 표시하기 위한 hovertemplate 설정
+    # hover_template = "<b>%{text}</b><br>Count: %{customdata[0]}"
 
-    fig.update_layout(
-        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-        hovermode='closest'
-    )
+    # fig = go.Figure(go.Scatter(
+    #     x=x, y=y, mode="text",
+    #     text=hover_text,
+    #     customdata=list(zip(freq_list)),  # 숫자값을 customdata로 전달
+    #     hovertemplate=hover_template,  # hovertemplate 설정
+    #     textfont=dict(size=fontsize_list, color=color_list),
+    # ))
 
-    st.plotly_chart(fig, use_container_width=True)
+    # fig.update_layout(
+    #     xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+    #     yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+    #     hovermode='closest'
+    # )
+
+    # st.plotly_chart(fig, use_container_width=True)
     generate_treemap(words)
     
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
 
-if st.button('Copy Keywords'):
-    keyword_text = ', '.join(words.keys()[:top_n])  
-    clipboard.write_text(keyword_text)
-    st.success('Keywords copied to clipboard!')
+# if st.button('Copy Keywords'):
+#     keyword_text = ', '.join(words.keys()[:top_n])  
+#     clipboard.write_text(keyword_text)
+#     st.success('Keywords copied to clipboard!')
+
+text_to_copy = "Hello, Streamlit!"
+
+if st.button("Copy to Clipboard"):
+    pyperclip.copy(text_to_copy)
+    st.success("Text copied to clipboard!")
 
 #########Section2 - 키워드 큐레이팅############
 st.markdown("---")
