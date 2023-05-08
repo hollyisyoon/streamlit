@@ -1,4 +1,5 @@
 import streamlit as st
+from markdownlit import mdlit
 
 st.write('🙋🏻‍♂️ 바쁜 사람들 멤버를 소개합니다')
 html_code = '''
@@ -6,7 +7,7 @@ html_code = '''
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
     <div class="member-info">
         <h3 class="name">윤훈영</h3>
-        <p class="introduction">안녕하세요오오옹.</p>
+        <p class="introduction">mdlit("I just came to say [violet] hello [/violet]")</p>
     </div>
 </div>
 '''
@@ -55,9 +56,9 @@ st.markdown(
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{background_image}');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{background_image}');
             background-size: cover;
-            padding: 20px;
+            padding: 10px;
             height: flex;
             border-radius: 10px;
         }}
