@@ -57,6 +57,7 @@ STYLE = """
     padding: 10px;
     height: flex;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .cta-container-wrapper.cta-container1 {
