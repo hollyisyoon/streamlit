@@ -18,7 +18,7 @@ STYLE = """
     border-radius: 0.5em;
     background-color: #F8F8F8;
     border-left: 4px solid #3B81F5;
-    margin: 3em;
+    margin: 3em 0em;
     color: black;
 }
 
