@@ -107,9 +107,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(f"""
-    <h2>안녕하세요 👋🏻</h2>""",
+    <h2>안녕하세요 👋🏻 바쁜 사람들입니다</h2>""",
     unsafe_allow_html=True
 )
+
+
+st.markdown("""
+    <div class='callout'> 
+    👉🏻 바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다. 비즈니스 성장을 위해서는 다양한 비즈니스 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.
+    바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 <b>분석가 없이도 손쉽게 볼 수 있는 대시보드</b>를 제공합니다.
+    </div>""", unsafe_allow_html=True)
+
 
 st.markdown("""
   <div class="rounded-image-container2">
@@ -117,12 +125,6 @@ st.markdown("""
     alt="메인 이미지"></img>
   </div>
 """, unsafe_allow_html=True)
-
-st.markdown("""
-    <div class='callout'> 
-    👉🏻 바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다. 비즈니스 성장을 위해서는 다양한 비즈니스 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.
-    바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 <b>분석가 없이도 손쉽게 볼 수 있는 대시보드</b>를 제공합니다.
-    </div>""", unsafe_allow_html=True)
 
 ####CTA버튼####
 cta_container1, cta_container2 = st.beta_columns(2)
