@@ -235,7 +235,6 @@ with tab1:
 with tab2:
     try:
         fig2 = get_Top10_writer(df, "식물병원", deepdive_keywords)
-        fig2.update_traces(hovertemplate='작성자: %{x}<br>URL: %{customdata[0]}')
         st.plotly_chart(fig2)
     except:
         st.warning("해당 키워드의 식물병원 작성자가 없습니다")
@@ -248,7 +247,6 @@ with tab2:
 with tab3:
     try:
         fig3 = get_Top10_writer(df, "네이버카페", deepdive_keywords)
-        fig3.update_traces(hovertemplate='작성자: %{x}<br>URL: %{customdata[0]}')
         st.plotly_chart(fig3)
     except:
         st.warning("해당 키워드의 네이버카페 작성자가 없습니다")
@@ -261,7 +259,6 @@ with tab3:
 with tab4:
     try:
         fig4 = get_Top10_writer(df, "네이버블로그", deepdive_keywords)
-        fig4.update_traces(hovertemplate='작성자: %{x}<br>URL: %{customdata[0]}')
         st.plotly_chart(fig4)
     except:
         st.warning("해당 키워드의 네이버블로그 작성자가 없습니다")
