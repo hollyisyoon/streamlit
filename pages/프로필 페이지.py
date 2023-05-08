@@ -36,7 +36,7 @@ STYLE = """
   font-size: 16px;
 }
 
-.cta-container-wrapper {{
+.cta-container-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,7 +67,7 @@ st.markdown('''
         <p class="introduction">제 장점은 &lt;키워드1&gt; &lt;키워드2&gt; 입니다</p>
     </div>
 </div>
-''')
+''',unsafe_allow_html=True)
 
 ####CTA버튼####
 background_image = 'https://publy.imgix.net/images/2022/10/11/1665450720_u3EKEW15vxeIoz6TGBhVwDaFgrO9uMeW6v3BBmEc.png?fm=pjpg'
