@@ -22,7 +22,7 @@ STYLE = """
     margin-bottom: 20px;
     border-radius: 10px;
     background-color: #fcfcfc;
-    padding: 20px 10px;
+    padding: 10px 20px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
