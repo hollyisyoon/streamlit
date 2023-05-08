@@ -336,7 +336,7 @@ def rising_keyword(standard_df, new_df):
         # 영향도가 가장 높은 URL을 찾아서 출력
         url = max(url_list, key=lambda x: 이번주_df.loc[이번주_df['URL'] == x, '영향도'].iloc[0])
         increase_rate = (this_week_word_counts[word] - last_week_word_counts[word]) / this_week_word_counts[word]
-        result[word] = {'상승률': round(increase_rate, 2), 'URL': url}
+        result[word] = {'상승률': increase_rate, 'URL': url}
 
     # 상승률 기준 상위 10개 단어 출력
     keywords = []
@@ -346,7 +346,7 @@ def rising_keyword(standard_df, new_df):
     for word, data in sorted(result.items(), key=lambda x: x[1]['상승률'], reverse=True):
         if data['상승률']>0:
             keywords.append(word)
-            ups.append(f"{data['상승률']*100}%")
+            ups.append(data['상승률'])
             urls.append(data['URL'])
 
     result_df = pd.DataFrame({
@@ -380,6 +380,7 @@ st.markdown(f"""<h3>📈 급상승 키워드</h3>""", unsafe_allow_html=True)
 rising_keyword = rising_keyword(standard_df, new_df)
 grouped_rising_keyword = rising_keyword.groupby('URL').agg({'키워드': list, '상승률': 'first'}).reset_index()
 grouped_rising_keyword = grouped_rising_keyword[['상승률', '키워드', 'URL']].sort_values(by='상승률', ascending=False).reset_index(drop=True)
+grouped_rising_keyword['상승률'] = f'{round(grouped_rising_keyword["상승률"] * 100, 2)}%'
 st.dataframe(grouped_rising_keyword)
 
 
