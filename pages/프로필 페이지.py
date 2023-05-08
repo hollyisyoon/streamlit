@@ -7,6 +7,10 @@ STYLE = """
     text-decoration: none;
 }
 
+.name {
+    color: f74040;
+}
+
 .callout {
     padding: 1em;
     border-radius: 0.5em;
@@ -21,7 +25,7 @@ STYLE = """
     align-items: center;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: #c4d1ff;
+    background-color: #F8F8F8;
     padding: 10px 20px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
