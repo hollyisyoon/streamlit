@@ -96,6 +96,16 @@ STYLE = """
   border-radius: 10px;
 }
 
+.rounded-image2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 </style>
 """
 
@@ -113,7 +123,7 @@ st.markdown(f"""
 
 st.markdown("""
   <div class="rounded-image-container2">
-    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png?raw=true, class="rounded-image" 
+    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png?raw=true, class="rounded-image2" 
     alt="메인 이미지"></img>
   </div>
 """, unsafe_allow_html=True)
