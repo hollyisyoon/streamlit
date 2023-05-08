@@ -71,7 +71,7 @@ STYLE = """
 .rounded-image-container {
   width: 100%;
   height: 0;
-  padding-bottom: calc(100% * (3/6));
+  padding-bottom: calc(100% * (3/12));
   position: relative;
   overflow: hidden;
   border-radius: 10px;
