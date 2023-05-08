@@ -58,7 +58,8 @@ st.markdown(
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{background_image}');
             background-size: cover;
             padding: 20px;
-            height: 300px;
+            height: flex;
+            border-radius: 10px;
         }}
     </style>
     """,
