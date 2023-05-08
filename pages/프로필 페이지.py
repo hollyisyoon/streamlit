@@ -84,7 +84,7 @@ STYLE = """
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  margin : 1em 1em;
+  margin : 1em 0em;
 }
 
 .rounded-image {
