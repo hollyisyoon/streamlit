@@ -174,16 +174,24 @@ def get_TOP_post(df, media, deepdive_keywords):
     for deepdive_keyword in deepdive_keywords:
         keyword_df = df[df['제목+내용(nng)'].str.contains(deepdive_keyword)]
         keyword_df['키워드'] = deepdive_keyword
-        keyword_df = keyword_df.nlargest(10, '영향도')
-        top_list.append(keyword_df)
-
-    top_df = pd.concat(top_list)
-    return top_df
+        if len(keyword_df) >= 10:
+            keyword_df = keyword_df.nlargest(10, '영향도')
+            top_list.append(keyword_df)
+    if top_list:
+        top_df = pd.concat(top_list)
+        top_df = top_df[['키워드', '매체', '제목', 'URL', '영향도']]
+        top_df.sort_values(by=['키워드', '매체', '영향도'], inplace=True) 
+        return top_df
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
 with tab1:
-    get_TOP_post(df, "식물갤러리", deepdive_keywords)
+    top_식물갤러리 = get_TOP_post(df, "식물갤러리", deepdive_keywords)
+    if top_식물갤러리 is not None:
+        st.table(top_식물갤러리)
+    else:
+        st.write("해당 키워드의 식물갤러리 게시물이 없습니다.")
+    
 with tab2:
     try:
         get_TOP_post(df, "식물병원", deepdive_keywords)
