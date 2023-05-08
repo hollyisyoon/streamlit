@@ -82,26 +82,6 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
-
-####멤버 소개###
-st.markdown("---")
-st.markdown("""<h2>🙋🏻‍♂️ 만든 사람들</h2>""", unsafe_allow_html=True)
-
-st.markdown('''   
-<div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
-    <div class="member-info">
-        <h3> 윤훈영(Holly) </h3>
-        <p><code>Product</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-        🚀 매 순간, 끊임없이 성장을 즐기는 사람들과 챌린징한 과제가 있는 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
-        <details>
-            <summary><b>Feel Free..</b></summary>
-            <p>To Reach Me.. 💙적극 구직 중입니다💙 -> <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
-        </details>
-    </div>
-</div>
-''', unsafe_allow_html=True)
-
 ####CTA버튼####
 cta_container1, cta_container2 = st.beta_columns(2)
 
@@ -144,6 +124,98 @@ with cta_container2:
         """,
         unsafe_allow_html=True
     )
+
+ppt_url = "https://docs.google.com/presentation/d/15cUqztq9yXrbzor0rgyU6jXpH4puvrvY4ZSOcGz6S_s/edit#slide=id.g24035bb5175_0_8"
+st.markdown(f'<iframe src="{ppt_url}" width="800" height="600" frameborder="0" scrolling="no"></iframe>', unsafe_allow_html=True)
+
+####멤버 소개###
+st.markdown("---")
+st.markdown("""<h2>만든 사람들</h2>""", unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 윤훈영 </h3>
+        <p><code>Product</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
+        🚀 매 순간, 끊임없이 성장을 즐기는 사람들과 챌린징한 과제가 있는 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
+        <details>
+            <summary><b>Feel Free..</b></summary>
+            <p>To Reach Me.. 💙적극 구직 중입니다💙 -> <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 김희연 </h3>
+        <p>저는 누구냐면요~</p>
+        <details>
+            <summary><b>More Info</b></summary>
+            <p></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 서인혁 </h3>
+        <p>저는 누구냐면요~</p>
+        <details>
+            <summary><b>More Info</b></summary>
+            <p></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 김효정 </h3>
+        <p>저는 누구냐면요~</p>
+        <details>
+            <summary><b>More Info</b></summary>
+            <p></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 박민정 </h3>
+        <p>저는 누구냐면요~</p>
+        <details>
+            <summary><b>More Info</b></summary>
+            <p></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+st.markdown('''   
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <h3> 송준태 </h3>
+        <p>저는 누구냐면요~</p>
+        <details>
+            <summary><b>More Info</b></summary>
+            <p></p>
+        </details>
+    </div>
+</div>
+''', unsafe_allow_html=True)
 
 ####코멘트###
 st.markdown("---")
