@@ -58,13 +58,17 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
+
 ####멤버 소개###
+st.markdown("---")
+st.markdown("""<h3>🙋🏻‍♂️ 만든 사람들</h3>""")
 st.markdown('''
 <div class="team-member">
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
     <div class="member-info">
         <h3 class="name">윤훈영</h3>
-        <p class="introduction">제 장점은 &lt;키워드1&gt; &lt;키워드2&gt; 입니다</p>
+        <p class="introduction"><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI<code> 에 관심이 많습니다. 
+        비즈니스 임팩트가 크고, 챌린징한 환경에서 일해보고 싶어요! 💙적극 구직 중입니다💙</p>
     </div>
 </div>
 ''',unsafe_allow_html=True)
