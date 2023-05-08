@@ -226,11 +226,6 @@ except :
 #     clipboard.write_text(keyword_text)
 #     st.success('Keywords copied to clipboard!')
 
-text_to_copy = "Hello, Streamlit!"
-
-if st.button("Copy to Clipboard"):
-    pyperclip.copy(text_to_copy)
-    st.success("Text copied to clipboard!")
 
 #########Section2 - 키워드 큐레이팅############
 st.markdown("---")
