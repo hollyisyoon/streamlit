@@ -77,6 +77,15 @@ STYLE = """
   border-radius: 10px;
 }
 
+.rounded-image-container2 {
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(100% * (3/6));
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
 .rounded-image {
   position: absolute;
   top: 0;
@@ -98,12 +107,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown(f"""
-    <h2>바쁜 사람들 가이드</h2>""",
+    <h2>안녕하세요 👋🏻</h2>""",
     unsafe_allow_html=True
 )
 
 st.markdown("""
-  <div class="rounded-image">
+  <div class="rounded-image-container2">
     <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png?raw=true" 
     alt="메인 이미지"></img>
   </div>
