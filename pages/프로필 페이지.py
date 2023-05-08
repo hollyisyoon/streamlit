@@ -68,6 +68,15 @@ STYLE = """
     background-image: url('https://i.pinimg.com/564x/1f/87/d9/1f87d9f026f352bf2b662db576503186.jpg');
 }
 
+.rounded-image-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(100% * (3/6));
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
 .rounded-image {
   position: absolute;
   top: 0;
@@ -83,9 +92,8 @@ STYLE = """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown("""
-  <div class="rounded-image">
-    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20(1).png?raw=true" 
-    alt="썸네일"></img>
+  <div class="rounded-image-container">
+    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20(1).png?raw=true" class="rounded-image" alt="썸네일">
   </div>
 """, unsafe_allow_html=True)
 
