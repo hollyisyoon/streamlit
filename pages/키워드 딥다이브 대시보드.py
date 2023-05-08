@@ -168,9 +168,8 @@ except :
 #########Section4 - 키워드 deepdive(상위 게시글)############
 def get_TOP_post(df, media, deepdive_keywords):
     df = df[df['매체'] == media]
-    df['영향도'] *= 100  # Convert 영향도 to a percentage
-    df = df[df['제목+내용(nng)'].str.contains('|'.join(deepdive_keywords))]
-    
+    df['영향도'] *= 100 
+
     top_list = []
     for deepdive_keyword in deepdive_keywords:
         keyword_df = df[df['제목+내용(nng)'].str.contains(deepdive_keyword)]
@@ -178,7 +177,6 @@ def get_TOP_post(df, media, deepdive_keywords):
         keyword_df = keyword_df.nlargest(10, '영향도')
         top_list.append(keyword_df)
 
-    # Concatenate the individual DataFrames in top_list
     top_df = pd.concat(top_list)
     return top_df
 
