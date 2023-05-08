@@ -181,7 +181,7 @@ def get_TOP_post(df, media, deepdive_keywords):
             top_list.append(keyword_df)
     if top_list:
         top_df = pd.concat(top_list)
-        top_df = top_df[['키워드', '매체', '영향도', '제목', 'URL']]
+        top_df = top_df[['키워드', '영향도', '작성자', '제목', 'URL']]
         top_df.sort_values(by=['키워드', '매체', '영향도'], ascending=[True, True, False], inplace=True)
         top_df = top_df.reset_index(drop=True)
         return top_df
