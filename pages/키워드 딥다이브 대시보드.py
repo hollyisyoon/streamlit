@@ -185,6 +185,7 @@ def get_TOP_post(df, media, deepdive_keywords):
         top_df = top_df[['키워드', '영향도', '작성자', '제목', 'URL']]
         top_df.sort_values(by=['영향도'], ascending=[False], inplace=True)
         top_df = top_df.reset_index(drop=True)
+        top_df = round(top_df['영향도'],2)
         return top_df
     else:
         return None
