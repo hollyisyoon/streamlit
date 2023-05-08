@@ -236,4 +236,6 @@ st.markdown('''
 
 ####코멘트###
 st.markdown("---")
-st.markdown("""<h2>베타 테스터 모집 중</h2>""", unsafe_allow_html=True)
+st.markdown("""<h2>베타 테스터 모집 중</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVMkoqtFTniuMFjlRkC1ToQBSmu9esdYtiXQ3-4Lj0hvwrsA/viewform?embedded=true" width="640" height="1035" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+""", unsafe_allow_html=True)
