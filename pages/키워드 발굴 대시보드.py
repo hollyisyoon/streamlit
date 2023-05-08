@@ -23,6 +23,7 @@ from markdownlit import mdlit
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
+from streamlit import clipboard
 import warnings
 warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
@@ -212,6 +213,11 @@ try :
     
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
+
+if st.button('Copy Keywords'):
+    keyword_text = ', '.join(words.keys()[:top_n])  
+    clipboard.write_text(keyword_text)
+    st.success('Keywords copied to clipboard!')
 
 #########Section2 - 키워드 큐레이팅############
 st.markdown("---")
