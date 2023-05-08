@@ -199,56 +199,42 @@ st.markdown('''
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <img src="https://github.com/seoinhyeok96/mypage/blob/main/d80f4ece871ddb035af1c1dab314bcf8-sticker.png?raw=true" class="profile-image">
     <div class="member-info">
         <h3> 서인혁 </h3>
-        <p>저는 누구냐면요~</p>
-        <details>
-            <summary><b>More Info</b></summary>
-            <p></p>
-        </details>
+        <p><li>자기소개: 태블로 마스터가 되고싶은 그로스해커</li>
+        <li>꿈: 데이터 분석으로 숨겨진 인사이트 찾기</li>
+        <li>목표:  데이터를 활용할 수 있고 보수도 안정인 곳에 취업하기</li></p>
     </div>
 </div>
 ''', unsafe_allow_html=True)
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FEKyyU%2FbtsereKWyAc%2F923KaucLcqdl0X07gbPKs1%2Fimg.jpg" class="profile-image">
     <div class="member-info">
         <h3> 김효정 </h3>
-        <p>저는 누구냐면요~</p>
-        <details>
-            <summary><b>More Info</b></summary>
-            <p></p>
-        </details>
+        <p>데이터 분석 분야에 대한 지식과 경험을 갖춘 전문가를 꿈꾸고 있습니다. 다양한 팀원들과 함께 혹은 따로, 책임감 있게 일합니다.</p>
     </div>
 </div>
 ''', unsafe_allow_html=True)
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <img src="https://avatars.githubusercontent.com/u/94737255?v=4" class="profile-image">
     <div class="member-info">
         <h3> 박민정 </h3>
-        <p>저는 누구냐면요~</p>
-        <details>
-            <summary><b>More Info</b></summary>
-            <p></p>
-        </details>
+        <p>데이터 수집부터 모델링, 시각화까지의 과정을 전문적으로 수행하고 싶은 미래의 데이터 분석가입니다. <code>통계학</code>, <code>머신 러닝</code>, <code>데이터 시각화</code>등 다양한 분야에 관심을 가지고 있습니다.</p>
     </div>
 </div>
 ''', unsafe_allow_html=True)
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <img src="https://i.ytimg.com/vi/QgB10EW-KWc/maxresdefault.jpg" class="profile-image">
     <div class="member-info">
         <h3> 송준태 </h3>
-        <p>저는 누구냐면요~</p>
-        <details>
-            <summary><b>More Info</b></summary>
-            <p></p>
-        </details>
+        <p>팔 하나로 산을 움직일 수 있는 힘이 있으며 펀치를 맞은 상대는 지평선 끝까지 날아간다고 한다. 생각하는 것보다도 먼저 손이 나온다.... 이거 없다고?</p>
     </div>
 </div>
 ''', unsafe_allow_html=True)
