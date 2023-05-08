@@ -53,21 +53,26 @@ STYLE = """
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{background_image}');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)));
     background-size: cover;
     padding: 10px;
     height: flex;
     border-radius: 10px;
+}
+
+.cta-container-wrapper.cta-container1 {
+    background-image: url('https://i.pinimg.com/564x/7d/ef/e5/7defe5156cc72de1264011624e73e44c.jpg');
 }
 </style>
 """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
-    <h1>📌 바쁜 사람들을 위한 바쁜 사람들 가이드</h1>
-    <div class='callout'> 바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <code>데이터에 기반한 의사결정</code>을 내릴 수 있는 환경을 제공하기 위해 탄생한 툴입니다. 
-    <br>비즈니스 성장을 위해서는 운영하고 있는 채널에 대한 전반적인 데이터와 외부 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다. 
-    <br>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 분석가 없이도 한눈에 찾아 볼 수 있습니다.
+    <h2>📌 바쁜 사람들을 위한 바쁜 사람들 가이드</h2>
+    <div class='callout'> 
+    <li>바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다.</li> 
+    <li>비즈니스 성장을 위해서는 운영하고 있는 채널에 대한 전반적인 데이터와 외부 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.</li> 
+    <br>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 분석가 없이도 손쉽게 분석할 수 있습니다.
     </div>""",
     unsafe_allow_html=True
 )
@@ -82,28 +87,26 @@ st.markdown('''
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
     <div class="member-info">
         <h3> 윤훈영(Holly) </h3>
-        <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-        🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
+        <p><code>Product</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
+        🚀 매 순간, 끊임없이 성장을 즐기는 사람들과 챌린징한 과제가 있는 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
         <details>
             <summary><b>Feel Free..</b></summary>
-            <p>To Reach Me.. 💙적극 구직 중입니다💙 <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
+            <p>To Reach Me.. 💙적극 구직 중입니다💙 -> <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
         </details>
     </div>
 </div>
 ''', unsafe_allow_html=True)
 
 ####CTA버튼####
-background_image = 'https://publy.imgix.net/images/2022/10/11/1665450720_u3EKEW15vxeIoz6TGBhVwDaFgrO9uMeW6v3BBmEc.png?fm=pjpg'
-# Create two CTA containers
 cta_container1, cta_container2 = st.beta_columns(2)
 
 # CTA container 1
 with cta_container1:
     st.markdown(
         """
-        <div class="cta-container-wrapper">
+        <div class="cta-container-wrapper cta-container1">
             <div style='padding: 10px; border-radius: 10px'>
-                <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
+                <h2 style='color: white; text-align: center'>User Guide</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
                     <a href='https://notion.so' target='_blank'>
@@ -122,8 +125,8 @@ with cta_container2:
         """
         <div class="cta-container-wrapper">
             <div style='padding: 10px; border-radius: 10px'>
-                <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
-                <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
+                <h2 style='color: white; text-align: center'>Case Study</h2>
+                <p style='color: white; text-align: center'>비즈니스 시나리오에 적용해보자!</p>
                 <p style='text-align: center'>
                     <a href='https://notion.so' target='_blank'>
                         <button style='background-color: white; color: #3B81F5; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
@@ -136,3 +139,7 @@ with cta_container2:
         """,
         unsafe_allow_html=True
     )
+
+####코멘트###
+st.markdown("---")
+st.markdown("""<h2>🙋🏻‍♂️ 만든 사람들</h2>""", unsafe_allow_html=True)
