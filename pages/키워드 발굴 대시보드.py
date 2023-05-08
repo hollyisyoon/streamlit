@@ -146,6 +146,13 @@ def get_count_top_words(df, keyword_no):
     count_top_words = count_df.sum().sort_values(ascending=False).head(keyword_no).to_dict()
     return count_top_words
 
+def generate_treemap(words):
+    df = pd.DataFrame(list(words.items()), columns=['Word', 'Frequency'])
+    fig = px.treemap(df, path=['Word'], values='Frequency',
+                     color='Frequency', color_continuous_scale='Spectral')
+    fig.update_layout(margin=dict(t=0, l=0, r=0, b=0))
+    st.plotly_chart(fig, use_container_width=True)
+
 try :
     if type == '빈도(Count)' :
         words = get_count_top_words(standard_df, keyword_no)
@@ -201,7 +208,8 @@ try :
     )
 
     st.plotly_chart(fig, use_container_width=True)
-
+    generate_treemap(words)
+    
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
 
