@@ -1,7 +1,7 @@
 import streamlit as st
 
 STYLE = """
-.a#key {
+#key {
     color: #000;
     background-color: #FAF3DD;
     text-decoration: none;
@@ -40,12 +40,6 @@ STYLE = """
 .introduction {
   margin-top: 10px;
   font-size: 16px;
-}
-
-.highlight {
-    color: #263cff;
-    font-weight: bold;
-    font-style: italic;
 }
 
 .cta-container-wrapper {
@@ -88,7 +82,6 @@ st.markdown('''
         </details>
     </div>
 </div>
-
 ''', unsafe_allow_html=True)
 
 ####CTA버튼####
