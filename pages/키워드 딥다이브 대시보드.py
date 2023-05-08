@@ -212,7 +212,7 @@ def get_Top10_writer(df, media, deepdive_keywords):
                 title='상위 20위 작성자의 평균 영향도', color=writer_names, hover_data={'URL': urls})
     fig.update_layout(xaxis_tickangle=-45)
 
-    return fig
+    return st.plotly_chart(fig)
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", "네이버블로그", "네이버포스트"])
 
