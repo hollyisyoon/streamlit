@@ -270,11 +270,11 @@ def new_keyword(standard_df, new_df):
     content_list_2 = []
     content_list_2.extend(list(itertools.chain.from_iterable([eval(i) for i in new_df['제목+내용(nng)']])))
 
-    new_keywords = set(content_list_2) - set(content_list_1)   
+    new_keywords = set(content_list_1) - set(content_list_2)   
     result_dict = {}
     # 이번달에만 있는 
     for word in new_keywords:
-        word_df = new_df[new_df['제목+내용(nng)'].str.contains(word)]
+        word_df = standard_df[standard_df['제목+내용(nng)'].str.contains(word)]
         if len(word_df) > 0:
             avg_views = word_df['영향도'].mean()
             urls = word_df['URL'].tolist()
