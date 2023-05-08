@@ -264,5 +264,5 @@ st.markdown("""
   </div>
 """, unsafe_allow_html=True)
 st.markdown("""
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVMkoqtFTniuMFjlRkC1ToQBSmu9esdYtiXQ3-4Lj0hvwrsA/viewform?embedded=true" width="640" height="1035" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVMkoqtFTniuMFjlRkC1ToQBSmu9esdYtiXQ3-4Lj0hvwrsA/viewform?embedded=true" width="100%" height="1035" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 """, unsafe_allow_html=True)
