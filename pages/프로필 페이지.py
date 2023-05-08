@@ -86,12 +86,12 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
-st.markdown("""
-  <div class="rounded-image">
-    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-05-08%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.11.14.png?raw=true" 
-    alt="메인 이미지"></img>
-  </div>
-""", unsafe_allow_html=True)
+# st.markdown("""
+#   <div class="rounded-image">
+#     <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-05-08%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.11.14.png?raw=true" 
+#     alt="메인 이미지"></img>
+#   </div>
+# """, unsafe_allow_html=True)
 
 st.markdown("""
     <div class='callout'> 
@@ -112,7 +112,7 @@ with cta_container1:
                 <h2 style='color: white; text-align: center'>User Guide</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
-                    <a href='https://notion.so' target='_blank'>
+                    <a href='https://flowerbloomingtime.notion.site/e79013461ccb4f75bcb051a8b49f14a2' target='_blank'>
                         <button style='background-color: white; color: #3B81F5; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
                             살펴보기
                         </button>
@@ -131,7 +131,7 @@ with cta_container2:
                 <h2 style='color: white; text-align: center'>Case Study</h2>
                 <p style='color: white; text-align: center'>비즈니스 시나리오에 적용해보자!</p>
                 <p style='text-align: center'>
-                    <a href='https://notion.so' target='_blank'>
+                    <a href='https://flowerbloomingtime.notion.site/Case-Study-ec47f93c2eb94327afd950cb197fb970' target='_blank'>
                         <button style='background-color: white; color: #3B81F5; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
                             시작하기
                         </button>
