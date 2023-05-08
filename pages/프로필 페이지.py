@@ -34,6 +34,12 @@ STYLE = """
 .introduction {
   margin-top: 10px;
   font-size: 16px;
+
+.highlight {
+    color: #263cff;
+    font-weight: bold;
+    font-style: italic;
+    }
 }
 
 .cta-container-wrapper {
@@ -63,18 +69,20 @@ st.markdown(f"""
 st.markdown("---")
 st.markdown("""<h3>🙋🏻‍♂️ 만든 사람들</h3>""", unsafe_allow_html=True)
 
-st.markdown('''
-<details>
-    <summary>윤훈영(Holly)</summary>
-    <div class="team-member">
+st.markdown('''   
+<div class="team-member">
+    <h3 class="name">윤훈영(Holly)</h3>
         <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
         <div class="member-info">
             <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-            🚀끊임없이 성장하는 사람들과 비즈니스 임팩트가 크고, 챌린징한 환경에서 일해보고 싶어요! 💙적극 구직 중입니다💙</p>
-            [LinkedIn Profile](https://linkedin.com/in/hoonyoungyoon/)
+            🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요! <p class="highlight">💙적극 구직 중입니다💙</p></p>
+            <detail>
+                <summary> <b>More Info!</b> </summary>
+                [Linkedin](https://linkedin.com/in/hoonyoungyoon/)
+            </detail>
         </div>
-    </div>
-</details>
+</div>
+
 ''', unsafe_allow_html=True)
 
 ####CTA버튼####
