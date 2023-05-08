@@ -25,8 +25,8 @@ STYLE = """
     align-items: center;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: #F8F8F8;
-    padding: 10px 20px;
+    background-color: #fafafa;
+    padding: 30px 10px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
