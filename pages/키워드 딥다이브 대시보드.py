@@ -186,7 +186,7 @@ def get_TOP_post(df, media, deepdive_keywords):
         top_df = top_df.reset_index(drop=True)
         return top_df
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'], help="선택한 키워드가 포함된 게시글을 영향도가 높은 순으로 살펴보세요!")
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
 with tab1:
     top_식물갤러리 = get_TOP_post(df, "식물갤러리", deepdive_keywords)
