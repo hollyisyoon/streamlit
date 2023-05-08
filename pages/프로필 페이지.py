@@ -82,10 +82,10 @@ st.markdown('''
     <div class="member-info">
         <h3 class="name"> 윤훈영(Holly) </h3>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-        🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요! 💙적극 구직 중입니다💙</p>
+        🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요!</p>
         <details>
-            <summary><b>More Info!</b></summary>
-            <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">링크드인</a>
+            <summary><b>Feel Free..</b></summary>
+            <p>To Reach Me..💙적극 구직 중입니다💙</p><a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">링크드인</a>
         </details>
     </div>
 </div>
