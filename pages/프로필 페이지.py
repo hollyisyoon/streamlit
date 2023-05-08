@@ -7,7 +7,7 @@ STYLE = """
     text-decoration: none;
 }
 
-.name {
+h3 .name {
     color: f74040;
 }
 
