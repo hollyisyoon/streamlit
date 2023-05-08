@@ -53,10 +53,12 @@ st.markdown(
     <style>
         .cta-container-wrapper {{
             display: flex;
-            justify-content: space-between;
-            background-image: url('{background_image}');
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{background_image}');
             background-size: cover;
             padding: 20px;
+            height: 300px;
         }}
     </style>
     """,
@@ -70,7 +72,7 @@ with cta_container1:
     st.markdown(
         """
         <div class="cta-container-wrapper">
-            <div>
+            <div style='padding: 10px; border-radius: 10px'>
                 <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
@@ -89,7 +91,7 @@ with cta_container2:
     st.markdown(
         """
         <div class="cta-container-wrapper">
-            <div>
+            <div style='padding: 10px; border-radius: 10px'>
                 <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
                 <p style='text-align: center'>
