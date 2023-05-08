@@ -21,7 +21,7 @@ STYLE = """
     align-items: center;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: #fcfcfc;
+    background-color: #c4d1ff;
     padding: 10px 20px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -37,29 +37,6 @@ STYLE = """
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    transition: none; /* Remove transition effect */
-}
-
-.team-member details {
-    margin-top: 10px;
-}
-
-.team-member summary {
-    cursor: pointer;
-}
-
-.team-member details[open] summary::after {
-    content: "▲";
-}
-
-.team-member details summary::after {
-    content: "▼";
-    margin-left: 5px;
-}
-
-.name {
-  margin-top: 10px;
-  font-size: 20px;
 }
 
 .introduction {
@@ -100,10 +77,10 @@ st.markdown('''
     <div class="member-info">
         <h3 class="name"> 윤훈영(Holly) </h3>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-        🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요!</p>
+        🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
         <details>
             <summary><b>Feel Free..</b></summary>
-            <p>To Reach Me..💙적극 구직 중입니다💙<a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">링크드인</a></p>
+            <p>To Reach Me.. 💙적극 구직 중입니다💙 <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
         </details>
     </div>
 </div>
