@@ -71,7 +71,7 @@ STYLE = """
 .rounded-image {
 border-radius: 10px;
 overflow: hidden;
-max-width: 100%;
+width: 100%;
 max-height: auto;
 }
 
