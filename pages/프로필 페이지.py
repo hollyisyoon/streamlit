@@ -7,8 +7,10 @@ STYLE = """
     text-decoration: none;
 }
 
-h3 .name {
+.name {
     color: f74040;
+    font-size: 24px;
+    margin-top: 10px;
 }
 
 .callout {
@@ -79,7 +81,7 @@ st.markdown('''
 <div class="team-member">
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
     <div class="member-info">
-        <h3 class="name"> 윤훈영(Holly) </h3>
+        <span class="name"> 윤훈영(Holly) </span>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
         🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
         <details>
