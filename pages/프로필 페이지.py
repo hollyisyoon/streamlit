@@ -21,7 +21,8 @@ STYLE = """
     margin-bottom: 20px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    background-color: #ebe8e8;
+    background-color: #fcfcfc;
+    padding: 10px;
 }
 
 .member-info {
