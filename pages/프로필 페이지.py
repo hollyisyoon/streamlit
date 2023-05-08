@@ -69,10 +69,11 @@ STYLE = """
 }
 
 .rounded-image {
-border-radius: 10px;
-overflow: hidden;
-width: 100%;
-max-height: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 </style>
