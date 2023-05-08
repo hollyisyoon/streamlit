@@ -15,14 +15,16 @@ STYLE = """
     margin-bottom: 1em;
     color: black;
 }
+
 .team-member {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     border-radius: 10px;
-    border: 1px solid #ccc;
     background-color: #fcfcfc;
-    padding: 10px;
+    padding: 20px 10px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .member-info {
@@ -48,15 +50,15 @@ STYLE = """
 }
 
 .cta-container-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{background_image}');
-            background-size: cover;
-            padding: 10px;
-            height: flex;
-            border-radius: 10px;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('{background_image}');
+    background-size: cover;
+    padding: 10px;
+    height: flex;
+    border-radius: 10px;
+}
 </style>
 """
 
@@ -78,7 +80,7 @@ st.markdown('''
 <div class="team-member">
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
     <div class="member-info">
-        <h3 class="name">윤훈영(Holly)</h3>
+        <h3 class="name"> 윤훈영(Holly) </h3>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
         🚀 매순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 도전적으로 일해보고 싶어요! 💙적극 구직 중입니다💙</p>
         <details>
