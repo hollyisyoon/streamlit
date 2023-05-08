@@ -186,6 +186,34 @@ def get_TOP_post(df, media, deepdive_keywords):
         top_df = top_df.reset_index(drop=True)
         return top_df
 
+def get_Top10_writer(df, media, deepdive_keywords):
+    df = df[df['매체'] == media]
+    df['영향도'] *= 100 
+
+    writer_scores = {}
+    for deepdive_keyword in deepdive_keywords:
+        keyword_df = df[df['제목+내용(nng)'].str.contains(deepdive_keyword)]
+        if len(keyword_df) > 0:
+            grouped = keyword_df.groupby('작성자')['영향도'].mean()
+            writer_scores.update(grouped)
+
+    if len(writer_scores) == 0:
+        return None
+
+    top_writers = sorted(writer_scores.items(), key=lambda x: x[1], reverse=True)[:20]
+    writer_names, scores = zip(*top_writers)
+
+    urls = []
+    for writer_name in writer_names:
+        url = df[df['작성자'] == writer_name]['URL'].iloc[0]
+        urls.append(url)
+
+    fig = px.bar(x=writer_names, y=scores, labels={'x': '작성자', 'y': '평균 영향도'},
+                title='상위 20위 작성자의 평균 영향도', color=writer_names, hover_data={'URL': urls})
+    fig.update_layout(xaxis_tickangle=-45)
+
+    return fig
+
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", "네이버블로그", "네이버포스트"])
 
 with tab1:
@@ -196,6 +224,10 @@ with tab1:
         st.warning("해당 키워드의 식물갤러리 게시물이 없습니다.")
     
 with tab2:
+    try:
+        get_Top10_writer(df, "식물병원", deepdive_keywords)
+    else:
+        st.warning("해당 키워드의 식물병원 작성자가 없습니다")
     top_식물병원 = get_TOP_post(df, "식물병원", deepdive_keywords)
     if top_식물병원 is not None:
         st.dataframe(top_식물병원)
@@ -203,6 +235,10 @@ with tab2:
         st.warning("해당 키워드의 식물병원 게시물이 없습니다.")
 
 with tab3:
+    try:
+        get_Top10_writer(df, "네이버카페", deepdive_keywords)
+    else:
+        st.warning("해당 키워드의 네이버카페 작성자가 없습니다")
     top_네이버카페 = get_TOP_post(df, "네이버카페", deepdive_keywords)
     if top_네이버카페 is not None:
         st.dataframe(top_네이버카페)
@@ -210,6 +246,10 @@ with tab3:
         st.warning("해당 키워드의 네이버카페 게시물이 없습니다.")
 
 with tab4:
+    try:
+        get_Top10_writer(df, "네이버블로그", deepdive_keywords)
+    else:
+        st.warning("해당 키워드의 네이버블로그 작성자가 없습니다")
     top_네이버블로그 = get_TOP_post(df, "네이버블로그", deepdive_keywords)
     if top_네이버블로그 is not None:
         st.dataframe(top_네이버블로그)
@@ -217,6 +257,10 @@ with tab4:
         st.warning("해당 키워드의 네이버블로그 게시물이 없습니다.")
 
 with tab5:
+    try:
+        get_Top10_writer(df, "네이버포스트", deepdive_keywords)
+    else:
+        st.warning("해당 키워드의 네이버포스트 작성자가 없습니다")
     top_네이버포스트 = get_TOP_post(df, "네이버포스트", deepdive_keywords)
     if top_네이버포스트 is not None:
         st.dataframe(top_네이버포스트)
