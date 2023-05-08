@@ -68,25 +68,37 @@ STYLE = """
     background-image: url('https://i.pinimg.com/564x/1f/87/d9/1f87d9f026f352bf2b662db576503186.jpg');
 }
 
+  .rounded-image {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 6/3;
+    max-width: 100%;
+    max-height: 400px;
+  }
+
 </style>
 """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+
+st.markdown(f"""
+    <h2>바쁜 사람들 가이드</h2>""",
+    unsafe_allow_html=True
+)
+
 st.markdown("""
-  <div style="border-radius: 10px; overflow: hidden;">
+  <div class="rounded-image">
     <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-05-08%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.11.14.png?raw=true" 
     alt="메인 이미지"></img>
   </div>
 """, unsafe_allow_html=True)
-st.markdown(f"""
-    <h2>바쁜 사람들 가이드</h2>
+
+st.markdown("""
     <div class='callout'> 
     <li>바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다.</li> 
     <li>비즈니스 성장을 위해서는 운영하고 있는 채널에 대한 전반적인 데이터와 외부 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.</li> 
     <li>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 분석가 없이도 손쉽게 분석할 수 있습니다.</li>
-    </div>""",
-    unsafe_allow_html=True
-)
+    </div>""", unsafe_allow_html=True)
 
 ####CTA버튼####
 cta_container1, cta_container2 = st.beta_columns(2)
