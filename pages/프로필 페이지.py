@@ -73,11 +73,11 @@ STYLE = """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
 st.markdown(f"""
-    <h2>📌 바쁜 사람들을 위한 바쁜 사람들 가이드</h2>
+    <h2>바쁜 사람들 가이드</h2>
     <div class='callout'> 
     <li>바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다.</li> 
     <li>비즈니스 성장을 위해서는 운영하고 있는 채널에 대한 전반적인 데이터와 외부 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.</li> 
-    <br>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 분석가 없이도 손쉽게 분석할 수 있습니다.
+    <li>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 분석가 없이도 손쉽게 분석할 수 있습니다.</li>
     </div>""",
     unsafe_allow_html=True
 )
@@ -135,7 +135,7 @@ with cta_container2:
                 <p style='text-align: center'>
                     <a href='https://notion.so' target='_blank'>
                         <button style='background-color: white; color: #3B81F5; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
-                            살펴보기
+                            시작하기
                         </button>
                     </a>
                 </p>
@@ -147,4 +147,4 @@ with cta_container2:
 
 ####코멘트###
 st.markdown("---")
-st.markdown("""<h2>🙋🏻‍♂️ 만든 사람들</h2>""", unsafe_allow_html=True)
+st.markdown("""<h2>베타 테스터 모집 중</h2>""", unsafe_allow_html=True)
