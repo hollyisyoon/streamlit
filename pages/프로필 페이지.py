@@ -16,8 +16,12 @@ STYLE = """
     color: black;
 }
 .team-member {
-  display: flex;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #ebe8e8;
 }
 
 .member-info {
@@ -71,7 +75,7 @@ st.markdown("""<h3>🙋🏻‍♂️ 만든 사람들</h3>""", unsafe_allow_html
 
 st.markdown('''   
 <div class="team-member">
-    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
     <div class="member-info">
         <h3 class="name">윤훈영(Holly)</h3>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
