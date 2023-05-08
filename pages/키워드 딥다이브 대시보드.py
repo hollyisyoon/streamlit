@@ -181,12 +181,12 @@ def get_TOP_post(df, media, deepdive_keywords):
             top_list.append(keyword_df)
     if top_list:
         top_df = pd.concat(top_list)
-        top_df = top_df[['키워드', '매체', '제목', 'URL', '영향도']]
+        top_df = top_df[['키워드', '매체', '제목', '제목+내용(nng)', 'URL', '영향도']]
         top_df.sort_values(by=['키워드', '매체', '영향도'], ascending=[True, True, False], inplace=True)
         top_df = top_df.reset_index(drop=True)
         return top_df
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'], help="선택한 키워드가 포함된 게시글을 영향도가 높은 순으로 살펴보세요!")
 
 with tab1:
     top_식물갤러리 = get_TOP_post(df, "식물갤러리", deepdive_keywords)
