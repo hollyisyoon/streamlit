@@ -80,7 +80,7 @@ st.markdown('''
 <div class="team-member">
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
     <div class="member-info">
-        <span class="title"> 윤훈영(Holly) </span>
+        <h2> 윤훈영(Holly) </h2>
         <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
         🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
         <details>
@@ -121,10 +121,11 @@ with cta_container2:
         """
         <div class="cta-container-wrapper">
             <div style='padding: 10px; border-radius: 10px'>
-                <span class='title' style='color: white; text-align: center'>사용자 매뉴얼</span>
+                <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
                 <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
+                <p style='text-align: center'>
                     <a href='https://notion.so' target='_blank'>
-                        <button style='background-color: white; color: #f63366; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
+                        <button style='background-color: white; color: #3B81F5; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
                             살펴보기
                         </button>
                     </a>
