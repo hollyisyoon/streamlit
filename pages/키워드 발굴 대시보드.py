@@ -216,7 +216,7 @@ try :
     # )
 
     # st.plotly_chart(fig, use_container_width=True)
-    generate_treemap(words)
+    # generate_treemap(words)
     
 except :
     st.warning('영향도 범위를 조정해주세요! 데이터가 부족합니다')    
