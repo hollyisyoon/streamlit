@@ -112,21 +112,12 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
-
 st.markdown("""
     <div class='callout'> 
     <li>바쁜 사람들은 1인 셀러들이 사업의 규모와 관계없이 <b>데이터에 기반한 의사결정</b>을 내릴 수 있는 환경을 제공하기 위해 제작되었습니다.</li> 
     <li>비즈니스 성장을 위해서는 다양한 비즈니스 데이터를 통해 문제점을 파악하고 알맞은 액션 플랜을 설계하는 것이 중요합니다.</li>
     <li>바쁜 사람들은 유통 채널별 리뷰 데이터는 물론 경쟁사 리뷰 데이터에 대한 분석, 외부 데이터를 통한 트렌드 및 키워드 분석 결과를 <b>분석가 없이도 손쉽게 볼 수 있는 대시보드</b>를 제공합니다.</li>
     </div>""", unsafe_allow_html=True)
-
-
-st.markdown("""
-  <div class="rounded-image-container2">
-    <img src="https://raw.githubusercontent.com/hollyisyoon/streamlit/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png" class="rounded-image" 
-    alt="메인 이미지"></img>
-  </div>
-""", unsafe_allow_html=True)
 
 ####CTA버튼####
 cta_container1, cta_container2 = st.beta_columns(2)
@@ -266,5 +257,11 @@ st.markdown('''
 ####코멘트###
 st.markdown("---")
 st.markdown("""<h2>베타 테스터 모집 중</h2>
+st.markdown("""
+  <div class="rounded-image-container2">
+    <img src="https://raw.githubusercontent.com/hollyisyoon/streamlit/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png" class="rounded-image" 
+    alt="메인 이미지"></img>
+  </div>
+""", unsafe_allow_html=True)
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVMkoqtFTniuMFjlRkC1ToQBSmu9esdYtiXQ3-4Lj0hvwrsA/viewform?embedded=true" width="640" height="1035" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 """, unsafe_allow_html=True)
