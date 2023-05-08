@@ -214,10 +214,11 @@ def get_Top10_writer(df, media, deepdive_keywords):
         hover_text.append(f'작성자: {writer_name}<br>URL: {url}')
 
     truncated_writer_names = [name[:7] + '...' if len(name) > 7 else name for name in writer_names]
+    hover_text = [f'{name} ({url})' for name, url in zip(writer_names, urls)]
 
     fig = px.bar(x=truncated_writer_names, y=scores,
                 title='상위 20위 작성자의 평균 영향도', color=writer_names,
-                hover_data={'URL': False, 'hover_text': hover_text})
+                hover_data={'URL': urls, 'hover_text': hover_text})
 
     fig.update_layout(xaxis_tickangle=-45)
 
@@ -271,7 +272,6 @@ with tab4:
 with tab5:
     try:
         fig5 = get_Top10_writer(df, "네이버포스트", deepdive_keywords)
-        fig5.update_traces(hovertemplate='작성자: %{x}<br>URL: %{customdata[0]}')
         st.plotly_chart(fig5)
     except:
         st.warning("해당 키워드의 네이버포스트 작성자가 없습니다")
