@@ -256,12 +256,13 @@ st.markdown('''
 
 ####코멘트###
 st.markdown("---")
-st.markdown("""<h2>베타 테스터 모집 중</h2>
 st.markdown("""
+<h2>베타 테스터 모집 중</h2>
   <div class="rounded-image-container2">
     <img src="https://raw.githubusercontent.com/hollyisyoon/streamlit/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png" class="rounded-image" 
     alt="메인 이미지"></img>
   </div>
 """, unsafe_allow_html=True)
+st.markdown("""
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVMkoqtFTniuMFjlRkC1ToQBSmu9esdYtiXQ3-4Lj0hvwrsA/viewform?embedded=true" width="640" height="1035" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 """, unsafe_allow_html=True)
