@@ -8,10 +8,9 @@ STYLE = """
 }
 
 .title {
-    color: #3B81F5;
     font-size: 24px;
     margin-top: 10px;
-    font-weight: bold;
+    font-weight: medium;
 }
 
 .callout {
