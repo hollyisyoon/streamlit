@@ -215,11 +215,12 @@ with tab4:
         st.warning("해당 키워드의 네이버블로그 게시물이 없습니다.")
 
 with tab5:
-    top_네이버블로그 = get_TOP_post(df, "네이버포스트", deepdive_keywords)
+    top_네이버포스트 = get_TOP_post(df, "네이버포스트", deepdive_keywords)
     if top_네이버포스트 is not None:
         st.dataframe(top_네이버포스트)
     else:
         st.warning("해당 키워드의 네이버포스트 게시물이 없습니다.")
+
 
 #########Section5 - 키워드 deepdive(네트워크 분석)############
 st.markdown("---")
