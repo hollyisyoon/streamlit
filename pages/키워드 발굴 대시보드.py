@@ -23,7 +23,6 @@ from markdownlit import mdlit
 import streamlit as st
 from streamlit_extras.let_it_rain import rain
 from streamlit_tags import st_tags
-import pyperclip
 import warnings
 warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 
