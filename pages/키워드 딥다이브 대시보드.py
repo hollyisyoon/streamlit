@@ -220,7 +220,7 @@ def get_Top10_writer(df, media, deepdive_keywords):
                 title='상위 20위 작성자의 평균 영향도', 
                 hover_data={'URL': urls, 'hover_text': hover_text})
 
-    fig.update_layout(xaxis_tickangle=-45)
+    fig.update_layout(xaxis_tickangle=-45, yaxis_title='평균 영향도', xaxis_visible=False)
 
     return fig
 
