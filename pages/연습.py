@@ -46,20 +46,61 @@ css_code = '''
 st.markdown(css_code, unsafe_allow_html=True)
 st.markdown(html_code, unsafe_allow_html=True)
 
-cta_container = st.beta_container()
-cta_container.markdown(
-    """
-    <div style='background-color: #f63366; padding: 10px; border-radius: 10px'>
-        <h2 style='color: white; text-align: center'>Welcome to my App!</h2>
-        <p style='color: white; text-align: center'>Click the button below to get started.</p>
-        <p style='text-align: center'>
-            <a href='https://your-action-url.com' target='_blank'>
-                <button style='background-color: white; color: #f63366; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
-                    Get Started
-                </button>
-            </a>
-        </p>
-    </div>
+background_image = 'https://publy.imgix.net/images/2022/10/11/1665450720_u3EKEW15vxeIoz6TGBhVwDaFgrO9uMeW6v3BBmEc.png?fm=pjpg'
+# Apply background image to parent container
+st.markdown(
+    f"""
+    <style>
+        .cta-container-wrapper {{
+            display: flex;
+            justify-content: space-between;
+            background-image: url('{background_image}');
+            background-size: cover;
+            padding: 20px;
+        }}
+    </style>
     """,
     unsafe_allow_html=True
 )
+# Create two CTA containers
+cta_container1, cta_container2 = st.beta_columns(2)
+
+# CTA container 1
+with cta_container1:
+    st.markdown(
+        """
+        <div class="cta-container-wrapper">
+            <div style='background-color: #f63366; padding: 10px; border-radius: 10px'>
+                <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
+                <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
+                <p style='text-align: center'>
+                    <a href='https://notion.so' target='_blank'>
+                        <button style='background-color: white; color: #f63366; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
+                            살펴보기
+                        </button>
+                    </a>
+                </p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+with cta_container2:
+    st.markdown(
+        """
+        <div class="cta-container-wrapper">
+            <div style='background-color: #f63366; padding: 10px; border-radius: 10px'>
+                <h2 style='color: white; text-align: center'>사용자 매뉴얼</h2>
+                <p style='color: white; text-align: center'>바쁜 사람들이 처음이라면?</p>
+                <p style='text-align: center'>
+                    <a href='https://notion.so' target='_blank'>
+                        <button style='background-color: white; color: #f63366; padding: 8px 16px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer'>
+                            살펴보기
+                        </button>
+                    </a>
+                </p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )

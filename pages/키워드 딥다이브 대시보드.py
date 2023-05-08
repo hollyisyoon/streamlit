@@ -217,7 +217,7 @@ def get_Top10_writer(df, media, deepdive_keywords):
     hover_text = [f'{name} ({url})' for name, url in zip(writer_names, urls)]
 
     fig = px.bar(x=truncated_writer_names, y=scores,
-                title='상위 20위 작성자의 평균 영향도', color=writer_names,
+                title='상위 20위 작성자의 평균 영향도', 
                 hover_data={'URL': urls, 'hover_text': hover_text})
 
     fig.update_layout(xaxis_tickangle=-45)
