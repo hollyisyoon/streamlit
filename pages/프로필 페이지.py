@@ -69,8 +69,8 @@ STYLE = """
 }
 
 .rounded-image-container {
-  width: 0;
-  height: 100%;
+  width: 100%;
+  height: 0;
   padding-bottom: calc(100% * (3/6));
   position: relative;
   overflow: hidden;
