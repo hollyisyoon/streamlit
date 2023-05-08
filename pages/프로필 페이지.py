@@ -27,11 +27,7 @@ STYLE = """
     align-items: center;
     margin-bottom: 20px;
     border-radius: 10px;
-}
-
-.team-member-background {
     padding: 10px 35px;
-    filter: blur(5px);
     background-color: #fafafa;
     -webkit-backdrop-filter: blur(5px);
 }
@@ -81,20 +77,20 @@ st.markdown("---")
 st.markdown("""<h3>🙋🏻‍♂️ 만든 사람들</h3>""", unsafe_allow_html=True)
 
 st.markdown('''   
-<div class="team-member-background">
-    <div class="team-member">
-        <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
-        <div class="member-info">
-            <span class="name"> 윤훈영(Holly) </span>
-            <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
-            🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
-            <details>
-                <summary><b>Feel Free..</b></summary>
-                <p>To Reach Me.. 💙적극 구직 중입니다💙 <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
-            </details>
-        </div>
+
+<div class="team-member">
+    <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" class="profile-image">
+    <div class="member-info">
+        <span class="name"> 윤훈영(Holly) </span>
+        <p><code>B2B</code> <code>SaaS</code> <code>광고</code> <code>BI</code> 에 관심이 많습니다.
+        🚀 매 순간, 끊임없이 성장하는 사람들과 챌린징한 환경에서 재밌고 도전적으로 일해보고 싶어요!</p>
+        <details>
+            <summary><b>Feel Free..</b></summary>
+            <p>To Reach Me.. 💙적극 구직 중입니다💙 <a id="key" href="https://linkedin.com/in/hoonyoungyoon/" target="_blank">Linkedin</a></p>
+        </details>
     </div>
 </div>
+
 ''', unsafe_allow_html=True)
 
 ####CTA버튼####
