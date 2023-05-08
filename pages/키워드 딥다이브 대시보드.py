@@ -215,10 +215,11 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네�
 with tab1:
     top_식물갤러리 = get_TOP_post(df, "식물갤러리", deepdive_keywords)
     if top_식물갤러리 is not None:
-        st.dataframe(top_식물갤러리, unsafe_allow_html=True)
+        html_table = top_식물갤러리.to_html(escape=False)
+        st.markdown(html_table, unsafe_allow_html=True)
     else:
         st.warning("해당 키워드의 식물갤러리 게시물이 없습니다.")
-        
+
 # with tab1:
 #     top_식물갤러리 = get_TOP_post(df, "식물갤러리", deepdive_keywords)
 #     if top_식물갤러리 is not None:
