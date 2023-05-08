@@ -17,7 +17,7 @@ STYLE = """
     padding: 10px 35px;
     background-color: #F8F8F8;
     border-left: 4px solid #3B81F5;
-    margin: 0em;
+    margin: 1em 0em;
     color: black;
 }
 
@@ -74,6 +74,7 @@ STYLE = """
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  margin : 1em 0em;
 }
 
 .rounded-image-container2 {
@@ -83,6 +84,7 @@ STYLE = """
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  margin : 1em 0em;
 }
 
 .rounded-image {
