@@ -184,6 +184,10 @@ def get_TOP_post(df, media, deepdive_keywords):
         top_df = top_df[['키워드', '매체', '제목', '제목+내용(nng)', 'URL', '영향도']]
         top_df.sort_values(by=['키워드', '매체', '영향도'], ascending=[True, True, False], inplace=True)
         top_df = top_df.reset_index(drop=True)
+        
+        # 키워드를 함수들과 동일한 형식으로 변환
+        top_df['키워드'] = "'" + top_df['키워드'] + "'"
+
         return top_df
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", "네이버블로그", "네이버포스트"])
