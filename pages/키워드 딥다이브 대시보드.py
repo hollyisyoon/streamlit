@@ -181,7 +181,8 @@ def get_TOP_post(df, media, deepdive_keywords):
         top_df = pd.concat(top_list)
         top_df = top_df[['키워드', '매체', '제목', 'URL', '영향도']]
         top_df.sort_values(by=['키워드', '매체', '영향도'], inplace=True)
-        return top_df.reset_index(drop=True, inplace=True)
+        top_df = top_df.reset_index(drop=True)
+        return top_df
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["식물갤러리", "식물병원", "네이버카페", '네이버블로그', '네이버포스트'])
 
@@ -193,20 +194,25 @@ with tab1:
         st.warning("해당 키워드의 식물갤러리 게시물이 없습니다.")
     
 with tab2:
-    try:
-        get_TOP_post(df, "식물병원", deepdive_keywords)
-    except:
-        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
+    top_식물병원 = get_TOP_post(df, "식물병원", deepdive_keywords)
+    if top_식물병원 is not None:
+        st.dataframe(top_식물병원)
+    else:
+        st.warning("해당 키워드의 식물병원 게시물이 없습니다.")
+
 with tab3:
-    try:
-        get_TOP_post(df, "네이버카페", deepdive_keywords)
-    except:
-        st.warning('해당하는 키워드에 대한 데이터가 없습니다')
+    top_네이버카페 = get_TOP_post(df, "네이버카페", deepdive_keywords)
+    if top_네이버카페 is not None:
+        st.dataframe(top_네이버카페)
+    else:
+        st.warning("해당 키워드의 네이버카페 게시물이 없습니다.")
+
 with tab4:
     try:
         get_TOP_post(df, "네이버블로그", deepdive_keywords)
     except:
         st.warning('해당하는 키워드에 대한 데이터가 없습니다')
+
 with tab5:
     try:
         get_TOP_post(df, "네이버포스트", deepdive_keywords)
