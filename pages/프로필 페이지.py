@@ -17,7 +17,7 @@ STYLE = """
     padding: 1em;
     border-radius: 0.5em;
     background-color: #F8F8F8;
-    border-left: 4px solid #f74040;
+    border-left: 4px solid #3B81F5;
     margin-bottom: 1em;
     color: black;
 }
@@ -63,6 +63,11 @@ STYLE = """
 .cta-container-wrapper.cta-container1 {
     background-image: url('https://i.pinimg.com/564x/7d/ef/e5/7defe5156cc72de1264011624e73e44c.jpg');
 }
+
+.cta-container-wrapper.cta-container2 {
+    background-image: url('https://i.pinimg.com/564x/1f/87/d9/1f87d9f026f352bf2b662db576503186.jpg');
+}
+
 </style>
 """
 
@@ -123,7 +128,7 @@ with cta_container1:
 with cta_container2:
     st.markdown(
         """
-        <div class="cta-container-wrapper">
+        <div class="cta-container-wrapper cta-container2">
             <div style='padding: 10px; border-radius: 10px'>
                 <h2 style='color: white; text-align: center'>Case Study</h2>
                 <p style='color: white; text-align: center'>비즈니스 시나리오에 적용해보자!</p>
