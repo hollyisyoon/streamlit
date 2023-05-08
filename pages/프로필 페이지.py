@@ -14,8 +14,7 @@ STYLE = """
 }
 
 .callout {
-    padding: 1em;
-    border-radius: 0.5em;
+    padding: 10px 35px;
     background-color: #F8F8F8;
     border-left: 4px solid #3B81F5;
     margin: 1.5em 0em;
