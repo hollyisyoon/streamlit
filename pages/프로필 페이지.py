@@ -68,30 +68,45 @@ STYLE = """
     background-image: url('https://i.pinimg.com/564x/1f/87/d9/1f87d9f026f352bf2b662db576503186.jpg');
 }
 
-  .rounded-image {
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 6/3;
-    max-width: 100%;
-    max-height: 400px;
-  }
+.rounded-image {
+border-radius: 10px;
+overflow: hidden;
+aspect-ratio: 6/3;
+max-width: 100%;
+max-height: 400px;
+}
+
+.rounded-image2 {
+border-radius: 10px;
+overflow: hidden;
+aspect-ratio: 10/3;
+max-width: 100%;
+max-height: 200px;
+}
+
 
 </style>
 """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
+st.markdown("""
+  <div class="rounded-image2">
+    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%8A%E1%85%A5%E1%86%B7%E1%84%82%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20(1).png" 
+    alt="썸네일"></img>
+  </div>
+""", unsafe_allow_html=True)
 
 st.markdown(f"""
     <h2>바쁜 사람들 가이드</h2>""",
     unsafe_allow_html=True
 )
 
-# st.markdown("""
-#   <div class="rounded-image">
-#     <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-05-08%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.11.14.png?raw=true" 
-#     alt="메인 이미지"></img>
-#   </div>
-# """, unsafe_allow_html=True)
+st.markdown("""
+  <div class="rounded-image">
+    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%83%E1%85%A2%E1%84%89%E1%85%B5%E1%84%87%E1%85%A9%E1%84%83%E1%85%B3%20(1).png" 
+    alt="메인 이미지"></img>
+  </div>
+""", unsafe_allow_html=True)
 
 st.markdown("""
     <div class='callout'> 
