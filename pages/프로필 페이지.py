@@ -26,7 +26,7 @@ STYLE = """
     margin-bottom: 20px;
     border-radius: 10px;
     background-color: #fafafa;
-    padding: 30px 10px;
+    padding: 10px 35px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
