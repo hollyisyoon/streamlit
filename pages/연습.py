@@ -1,13 +1,16 @@
 import streamlit as st
 from markdownlit import mdlit
 
-st.write('🙋🏻‍♂️ 바쁜 사람들 멤버를 소개합니다')
+# Display Markdown text
+st.markdown('🙋🏻‍♂️ 바쁜 사람들 멤버를 소개합니다')
+
+# HTML code snippet
 html_code = '''
 <div class="team-member">
     <img src="https://media.licdn.com/dms/image/D5603AQGLWfWNmVBIYQ/profile-displayphoto-shrink_800_800/0/1665667362702?e=1689206400&v=beta&t=2RzA1JP0qxRbKImCayGJqEMuFZwZqbTR8QYGLAyz5Rg" alt="Profile Image" class="profile-image">
     <div class="member-info">
         <h3 class="name">윤훈영</h3>
-        <p class="introduction">mdlit("I just came to say [violet] hello [/violet]")</p>
+        <p class="introduction">제 장점은 &lt;키워드1&gt; &lt;키워드2&gt; 입니다</p>
     </div>
 </div>
 '''
