@@ -29,7 +29,7 @@ STYLE = """
     border-radius: 10px;
     background-color: #fafafa;
     padding: 10px 35px;
-    backdrop-filter: blur(5px);
+    filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
 
