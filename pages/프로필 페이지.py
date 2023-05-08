@@ -80,7 +80,7 @@ STYLE = """
 .rounded-image-container2 {
   width: 100%;
   height: 0;
-  padding-bottom: calc(100% * (3/9));
+  padding-bottom: calc(100% * (3/7));
   position: relative;
   overflow: hidden;
   border-radius: 10px;
