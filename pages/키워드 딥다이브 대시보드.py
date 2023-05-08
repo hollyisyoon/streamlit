@@ -226,7 +226,7 @@ with tab1:
 with tab2:
     try:
         get_Top10_writer(df, "식물병원", deepdive_keywords)
-    else:
+    except:
         st.warning("해당 키워드의 식물병원 작성자가 없습니다")
     top_식물병원 = get_TOP_post(df, "식물병원", deepdive_keywords)
     if top_식물병원 is not None:
@@ -237,7 +237,7 @@ with tab2:
 with tab3:
     try:
         get_Top10_writer(df, "네이버카페", deepdive_keywords)
-    else:
+    except:
         st.warning("해당 키워드의 네이버카페 작성자가 없습니다")
     top_네이버카페 = get_TOP_post(df, "네이버카페", deepdive_keywords)
     if top_네이버카페 is not None:
@@ -248,7 +248,7 @@ with tab3:
 with tab4:
     try:
         get_Top10_writer(df, "네이버블로그", deepdive_keywords)
-    else:
+    except:
         st.warning("해당 키워드의 네이버블로그 작성자가 없습니다")
     top_네이버블로그 = get_TOP_post(df, "네이버블로그", deepdive_keywords)
     if top_네이버블로그 is not None:
@@ -259,7 +259,7 @@ with tab4:
 with tab5:
     try:
         get_Top10_writer(df, "네이버포스트", deepdive_keywords)
-    else:
+    except:
         st.warning("해당 키워드의 네이버포스트 작성자가 없습니다")
     top_네이버포스트 = get_TOP_post(df, "네이버포스트", deepdive_keywords)
     if top_네이버포스트 is not None:
