@@ -72,12 +72,6 @@ STYLE = """
 """
 
 st.markdown(f"<style>{STYLE}</style>", unsafe_allow_html=True)
-st.markdown("""
-  <div style="border-radius: 10px; overflow: hidden;">
-    <img src="https://github.com/hollyisyoon/streamlit/blob/main/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202023-05-08%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.11.14.png?raw=true" 
-    alt="메인 이미지"></img>
-  </div>
-""", unsafe_allow_html=True)
 
 st.markdown(f"""
     <h2>바쁜 사람들 가이드</h2>
