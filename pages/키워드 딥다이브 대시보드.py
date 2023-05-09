@@ -82,7 +82,7 @@ STYLE = """
 }
 """
 
-df = pd.read_csv('/app/streamlit/data/df_트렌드_github.csv')
+df = pd.read_csv('/app/streamlit/data/df_트렌드_github_.csv')
 # st.title('🔎 트렌드 키워드 분석')
 
 #########Section3 - 키워드 deepdive(시계열)############
